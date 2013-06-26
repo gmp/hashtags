@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- CSS -->
+  <title>Hashtags Against Humantiy</title>
 
-  <!-- Dependent Libraries -->
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+  <!-- Libraries -->
   <script src="javascripts/lib/underscore.js"></script>
   <script src="javascripts/lib/jquery.js"></script>
   <script src="javascripts/lib/Backbone.js"></script>
 
   <!-- Hashtags namespace -->
-  <script src="javascripts/hashtags.js"></script>
+  <script src="javascripts/app/hashtags.js"></script>
 
   <!-- Routes -->
+  <script src="javascripts/app/routes/router.js"></script>
 
   <!-- Models -->
+  <script src="javascripts/app/models/game.js"></script>
+  <script src="javascripts/app/models/user.js"></script>
 
   <!-- Collections -->
+  <script src="javascripts/app/collections/games.js"></script>
+  <script src="javascripts/app/collections/users.js"></script>
 
   <!-- Views -->
+  <script src="javascripts/app/views/login.js"></script>
+  <script src="javascripts/app/views/error.js"></script>
+  <script src="javascripts/app/views/lobby.js"></script>
+  <script src="javascripts/app/views/createGame.js"></script>
+  <script src="javascripts/app/views/gameWaiting.js"></script>
+  <script src="javascripts/app/views/gameImageSelect.js"></script>
+  <script src="javascripts/app/views/gameHeader.js"></script>
+  <script src="javascripts/app/views/gameHashtagSelect.js"></script>
+  <script src="javascripts/app/views/gameEnd.js"></script>
+  <script src="javascripts/app/views/game.js"></script>
 
   <!-- Templates -->
 
-  <title>Hashtags Against Humantiy</title>
 </head>
 <body>
   <a href="/auth/instagram">Login with Instagram</a>
