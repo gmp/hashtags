@@ -10,11 +10,14 @@ var express = require('express')
   , mongoose = require('mongoose')
   , path = require('path')
   , passport = require('passport')
-  , InstagramStrategy = require('passport-instagram').Strategy;
+  , InstagramStrategy = require('passport-instagram').Strategy
+  , database = require('./database.js');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
+
+database.setUpDatabase();
 
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
@@ -60,40 +63,6 @@ app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// var config = {
-//     // MongoDB endpoint
-//     mongoDb: 'mongodb://ericrius1:fffarg695@ds031968.mongolab.com:31968/hashers',
-// };
-
-// mongoose.connect(config.mongoDb);
-
-// var Schema = mongoose.Schema;
-// var Player = {
-//   //Or selected hash tag, waiting, judge, ended
-//   status: 'isFresh',
-//   imageURL : undefined,
-
-
-// }
-// var Game = new Schema({
-//    title  : String,
-//    players : []
-// })
-
-// var User = new Schema({
-//   username: String,
-//   accessToken: String,
-//   looking: false,
-//   avatarURL: null
-// });
-
-// var MyGame = mongoose.model('GameModel', Game);
-// var game = new MyGame();
-// game.title = "hello world";
-// game.save(function(err){
-//     if(err)console.log("error");
-//     else console.log('success!');
-// });
 
 
 
