@@ -13,7 +13,7 @@ var express = require('express')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -27,7 +27,6 @@ app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var config = {
-
     // MongoDB endpoint
     mongoDb: 'mongodb://ericrius1:fffarg695@ds031968.mongolab.com:31968/hashers',
 
@@ -35,6 +34,21 @@ var config = {
 
 mongoose.connect(config.mongoDb);
 
+var Schema = mongoose.Schema;
+var Game = new Schema({
+   title  : String
+   players : []
+})
+
+
+
+var MyGame = mongoose.model('GameModel', Game);
+var game = new MyGame();
+game.title = "hello world";
+game.save(function(err){
+    if(err)console.log("error");
+    else console.log('success!');
+});
 
 
 
