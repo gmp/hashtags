@@ -7,7 +7,7 @@ module.exports = function() {
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.use(express.favicon(__dirname + '/public/images/hashtag.png'));
+  app.use(express.favicon(__dirname + '/../public/images/hashtag.png'));
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -17,5 +17,6 @@ module.exports = function() {
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
 
+  console.log(__dirname + '/../public/images/hashtag.png');
   return app;
 };
