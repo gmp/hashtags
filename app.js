@@ -36,11 +36,15 @@ mongoose.connect(config.mongoDb);
 
 var Schema = mongoose.Schema;
 var Game = new Schema({
-   title  : String
+   title  : String,
    players : []
 })
 
+var User = new Schema({
+  username: String,
+  accessToken: String 
 
+})
 
 var MyGame = mongoose.model('GameModel', Game);
 var game = new MyGame();
