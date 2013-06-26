@@ -1,14 +1,15 @@
 
-/**
- * Module dependencies.
- */
-
 var controller = require('./routes/controller.js'), 
-    http = require('http'), 
+    http = require('http'),
+    database = require('./database.js'),
     config = require('./config/initialize.js');
 
 
 var app = config();
+
+database.setUpDatabase();
+
+
 
 controller(app);
 
