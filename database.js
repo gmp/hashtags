@@ -1,6 +1,5 @@
 exports.setUpDatabase = function(){
 
-  console.log("shnur");
 
   var mongoose = require('mongoose');
 
@@ -9,8 +8,6 @@ exports.setUpDatabase = function(){
       mongoDb: process.env.HASH_MONGO_URI,
   };
 
-  console.log(process.env.HASH_MONGO_URI);
-
   mongoose.connect(config.mongoDb);
 
   var Schema = mongoose.Schema;
@@ -18,7 +15,6 @@ exports.setUpDatabase = function(){
     //Or selected hash tag, waiting, judge, ended
     status: 'isFresh',
     imageURL : undefined,
-
 
   }
   var Game = new Schema({
@@ -35,7 +31,7 @@ exports.setUpDatabase = function(){
 
   var MyGame = mongoose.model('GameModel', Game);
   var game = new MyGame();
-  game.title = "hSHNUURSJISJ";
+  game.title = "Test Title";
   game.save(function(err){
       if(err)console.log(err);
       else console.log('success!');
