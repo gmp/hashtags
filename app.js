@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
+  , mongoose = require('mongoose')
   , path = require('path');
 
 var app = express();
@@ -24,6 +25,18 @@ app.use(express.session());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var config = {
+
+    // MongoDB endpoint
+    mongoDb: 'mongodb://ericrius1:fffarg695@ds031968.mongolab.com:31968/hashers',
+
+};
+
+mongoose.connect(config.mongoDb);
+
+
+
 
 // development only
 if ('development' == app.get('env')) {
