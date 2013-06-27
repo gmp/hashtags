@@ -9,6 +9,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   login: function() {
+    console.log('login');
     // create login view
     new ht.Views.Login({
       el: '#hashtags'
