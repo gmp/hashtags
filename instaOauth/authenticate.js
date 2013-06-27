@@ -28,7 +28,11 @@ passport.use(new InstagramStrategy({
           user.looking = false;
           user.avatarURL = profile._json.data.profile_picture;
           user.save(function(err){
-            if(err) console.log(err); 
+            if(err) {
+              console.log(err)
+            }else{
+              console.log("success");
+            }
           });
         } else {
           user = obj;
