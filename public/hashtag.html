@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hashtags Against Humantiy</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+  <!-- Libraries -->
+  <script src="javascripts/lib/underscore.js"></script>
+  <script src="javascripts/lib/jquery.js"></script>
+  <script src="javascripts/lib/Backbone.js"></script>
+
+  <!-- Hashtags namespace -->
+  <script src="javascripts/app/hashtags.js"></script>
+
+  <!-- Routes -->
+  <script src="javascripts/app/routes/router.js"></script>
+
+  <!-- Templates -->
+
+  <!-- Models -->
+  <script src="javascripts/app/models/game.js"></script>
+  <script src="javascripts/app/models/user.js"></script>
+
+  <!-- Collections -->
+  <script src="javascripts/app/collections/games.js"></script>
+  <script src="javascripts/app/collections/users.js"></script>
+
+  <!-- Views -->
+  <script src="javascripts/app/views/login.js"></script>
+  <script src="javascripts/app/views/error.js"></script>
+  <script src="javascripts/app/views/lobby.js"></script>
+  <script src="javascripts/app/views/createGame.js"></script>
+  <script src="javascripts/app/views/gameWaiting.js"></script>
+  <script src="javascripts/app/views/gameImageSelect.js"></script>
+  <script src="javascripts/app/views/gameHeader.js"></script>
+  <script src="javascripts/app/views/gameHashtagSelect.js"></script>
+  <script src="javascripts/app/views/gameEnd.js"></script>
+  <script src="javascripts/app/views/game.js"></script>
+
+
+</head>
+<body id="hashtags">
+  <a href="#error">Error redirect</a><br>
+  <script>
+    $(function() {
+      new ht.Routes.Router();
+      Backbone.history.start();
+    });
+  </script>
+</body>
+</html>

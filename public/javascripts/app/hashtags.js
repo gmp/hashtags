@@ -5,8 +5,5 @@ var ht = {
   Views: {},
   Models: {},
   Collections: {},
-  Data: {},
-  init: function() {
-    //TBD
-  }
+  Data: {}
 };

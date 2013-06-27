@@ -1,3 +1,3 @@
-ht.Views.Lobby = Backbone.Views.extend({
+ht.Views.Lobby = Backbone.View.extend({
 
 });

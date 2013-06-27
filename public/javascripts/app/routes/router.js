@@ -1,21 +1,25 @@
 ht.Routes.Router = Backbone.Router.extend({
 
   routes: {
-    "/": "login",
-    "error": "error",
-    "lobby/:userId": "lobby",
-    "lobby/:userId/search": "newGame",
-    "game/:gameId": "game"
+    '': 'login',
+    'error': 'error',
+    'lobby/:userId': 'lobby',
+    'lobby/:userId/new': 'newGame',
+    'game/:gameId': 'game'
   },
 
   login: function() {
     // create login view
-    new ht.Views.Login();
+    new ht.Views.Login({
+      el: '#hashtags'
+    });
   },
 
   error: function() {
     // if login fails, create error view with option to try login again
-    new ht.Views.Error();
+    new ht.Views.Error({
+      el: '#hashtags'
+    });
   },
 
   lobby: function(userId) {

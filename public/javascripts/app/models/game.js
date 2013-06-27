@@ -1,3 +1,3 @@
-ht.Models.Game = Backbone.Model.Extend({
+ht.Models.Game = Backbone.Model.extend({
 
 });
