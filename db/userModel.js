@@ -5,7 +5,8 @@ var UserSchema = new Schema({
   username: String,
   accessToken: String,
   looking: false,
-  avatarURL: String
+  avatarURL: String,
+  games: []
 });
 
-module.exports = mongoose.model('UserModel', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);
