@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var UserSchema = new Schema({
   username: String,
   accessToken: String,
-  looking: false,
+  looking: {type:Boolean, default: false},
   avatarURL: String,
   games: []
 });
