@@ -5,7 +5,8 @@ ht.Routes.Router = Backbone.Router.extend({
     'error': 'error',
     'lobby/:id': 'lobby',
     'lobby/:userId/new': 'newGame',
-    'game/:gameId': 'game'
+    'game/:gameId': 'game',
+    'game': 'game'
   },
 
   login: function() {
@@ -46,7 +47,11 @@ ht.Routes.Router = Backbone.Router.extend({
 
   game: function(gameId) {
     // find game in db and create model
-    new ht.Views.GameView({model: game});
+    var game = {};
+    new ht.Views.GameView({
+      el: '#hashtags',
+      model: game
+    });
   }
 
 });

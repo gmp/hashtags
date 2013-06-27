@@ -7,7 +7,7 @@ var ht = {
   Collections: {},
   Data: {},
   init: function() {
-    new ht.Routes.Router();
+    app = new ht.Routes.Router();
     Backbone.history.start();
   }
 };
