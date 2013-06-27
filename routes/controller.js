@@ -19,9 +19,10 @@ module.exports = function (app) {
 	//   login page.  Otherwise, the primary route function function will be called,
 	//   which, in this example, will redirect the user to the home page.
 	app.get('/auth/instagram/callback', 
-	  passport.authenticate('instagram', { failureRedirect: '/login' }),
+	  passport.authenticate('instagram', { failureRedirect: '/#error' }),
 	  function(req, res) {
-	    res.redirect('/');
+	  	console.log(req.user.username);
+	    res.redirect('/#lobby/'+req.user.username);
 	  });
 
 	app.get('/logout', function(req, res){
