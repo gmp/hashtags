@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var Player = new Schema({
 	id: String, 
@@ -23,7 +24,7 @@ var GameSchema = new Schema({
    title  : String,
    prompt : String,
    round  : Number,
-   players : [Player],
+   players : [{ type: ObjectId, ref: 'Player' }],
    previousRound : [PrevRound]
 });
 

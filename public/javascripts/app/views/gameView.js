@@ -7,8 +7,10 @@ ht.Views.GameView = Backbone.View.extend({
   },
 
   events: {
-    'click button' : function(){
-    }
+    'click button' : 'handleClick'
+  },
+
+  handleClick: function(){
   },
 
   render: function() {

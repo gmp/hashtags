@@ -11,5 +11,14 @@ exports.findById = function(req, res){
 exports.findAll = function(req, res){
   User.find({}, function(err, obj){
     res.send(obj);
-  })
-}
+  });
+};
+
+exports.findByUsername = function(req, res){
+  var username = req.params.username;
+  console.log('Retrieving user: '+ username);
+  var query = {'username': username};
+  User.findOne(query, function(err, obj){
+    res.send(obj);
+  });
+};
