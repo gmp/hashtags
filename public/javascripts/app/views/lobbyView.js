@@ -8,8 +8,7 @@ ht.Views.LobbyView = Backbone.View.extend({
 
   events: {
     'click button' : function(){
-      app.navigate('/game');
-      
+      app.navigate('game/' + this.model.attributes.games[0]);
     }
   },
 
