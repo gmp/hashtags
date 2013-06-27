@@ -1,4 +1,5 @@
 var passport = require('passport'),
+    User = require('../db/UserModel.js'),
     InstagramStrategy = require('passport-instagram').Strategy;
 
 passport.serializeUser(function(user, done) {
@@ -18,12 +19,24 @@ passport.use(new InstagramStrategy({
     // asynchronous verification, for effect...
     console.log('login', profile);
     process.nextTick(function () {
-      
-      // To keep the example simple, the user's Instagram profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Instagram account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+      var query = {'username': profile.username};
+      User.findOne(query, function(err, obj){
+        var user;
+        if(!obj){
+          user = new User();
+          user.username = profile.username;
+          user.accessToken = accessToken;
+          user.looking = false;
+          user.avatarURL = profile._json.data.profile_picture;
+          user.save(function(err){
+            if(err) console.log(err); 
+          });
+        } else {
+          user = obj;
+        }
+        console.log(user);
+      });
+      return done (null, profile);
     });
   }
 ));

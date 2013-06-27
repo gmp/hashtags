@@ -3,6 +3,9 @@
 <head>
   <title>Hashtags Against Humantiy</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
@@ -14,8 +17,10 @@
   <!-- Hashtags namespace -->
   <script src="javascripts/app/hashtags.js"></script>
 
-  <!-- Routes -->
+  <!-- Router -->
   <script src="javascripts/app/routes/router.js"></script>
+
+  <!-- Templates -->
 
   <!-- Models -->
   <script src="javascripts/app/models/game.js"></script>
@@ -37,10 +42,13 @@
   <script src="javascripts/app/views/gameEnd.js"></script>
   <script src="javascripts/app/views/game.js"></script>
 
-  <!-- Templates -->
+  <script>
+    $(function() {
+      ht.init();
+    });
+  </script>
 
 </head>
-<body>
-  <a href="/auth/instagram">Login with Instagram</a>
+<body id="hashtags">
 </body>
 </html>
