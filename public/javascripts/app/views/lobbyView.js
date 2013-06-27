@@ -1,11 +1,14 @@
 ht.Views.LobbyView = Backbone.View.extend({
 
+  template: ht.Templates.LobbyTemplate,
+
   initialize: function() {
     this.render();
   },
 
   render: function() {
+    console.log(this.model);
     this.$el.empty();
-    this.$el.html('In the lobby with User'+this.options.userId+'<br><a href="">Login</a><br>Error');
+    this.$el.append(this.template());
   }
 });

@@ -3,12 +3,13 @@ ht.Routes.Router = Backbone.Router.extend({
   routes: {
     '': 'login',
     'error': 'error',
-    'lobby/:userId': 'lobby',
+    'lobby/:id': 'lobby',
     'lobby/:userId/new': 'newGame',
     'game/:gameId': 'game'
   },
 
   login: function() {
+    console.log('login');
     // create login view
     new ht.Views.LoginView({
       el: '#hashtags'
@@ -22,13 +23,20 @@ ht.Routes.Router = Backbone.Router.extend({
     });
   },
 
-  lobby: function(userId) {
-    console.log('in the lobby with ', userId);
-    // if login is successful, user is created in DB on server
-    // client finds user in DB based on ID and creates model to display lobby view
-    new ht.Views.LobbyView({
-      el: '#hashtags',
-      userId: userId
+  lobby: function(id) {
+    console.log('in the lobby with userID: ', id);
+
+    var user = new ht.Models.UserModel({id: id});
+    user.fetch({
+      success: function(user, res) {
+        new ht.Views.LobbyView({
+          el: '#hashtags',
+          model: user
+        });
+      },
+      error: function(user, res) {
+        console.log('error: ', res);
+      }
     });
   },
 
