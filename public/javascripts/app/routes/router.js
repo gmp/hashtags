@@ -53,7 +53,12 @@ ht.Routes.Router = Backbone.Router.extend({
 
   game: function(gameId) {
     // find game in db and create model
-    new ht.Views.GameView({model: game});
+    var game = {};
+    debugger;
+    new ht.Views.GameView({
+      el: '#hashtags',
+      model: game
+    });
   }
 
 });

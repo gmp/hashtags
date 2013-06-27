@@ -1,6 +1,10 @@
 
 var mongoose = require('mongoose');
+<<<<<<< HEAD
 
+
+=======
+>>>>>>> ecc9c12400558882eafef126dcb4f17039a83c46
 var config = {
     // MongoDB endpoint
     mongoDb: process.env.HASH_MONGO_URI,

@@ -1,5 +1,6 @@
 var passport = require('passport'),
-    user = require('./userController.js');
+    user = require('./userController.js'),
+    game = require('./gameController.js');
 
 module.exports = function (app) {
   // GET /auth/instagram
@@ -8,7 +9,9 @@ module.exports = function (app) {
   //   redirecting the user to instagram.com.  After authorization, Instagram
   //   will redirect the user back to this application at /auth/instagram/callback
 
+  app.get('/users', user.findAll);
   app.get('/users/:id', user.findById);
+  app.get('/games/:id', game.findById);
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
