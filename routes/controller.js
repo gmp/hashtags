@@ -1,5 +1,5 @@
 var passport = require('passport'),
-var user = require('./userController.js')
+    user = require('./userController.js')
 
 module.exports = function (app) {
 	// GET /auth/instagram
@@ -8,7 +8,7 @@ module.exports = function (app) {
 	//   redirecting the user to instagram.com.  After authorization, Instagram
 	//   will redirect the user back to this application at /auth/instagram/callback
 	
-  app.get('/users/:id', users.findById);
+  app.get('/users/:id', user.findById);
 
 	app.get('/auth/instagram',
 	  passport.authenticate('instagram'),
@@ -25,8 +25,8 @@ module.exports = function (app) {
 	app.get('/auth/instagram/callback', 
 	  passport.authenticate('instagram', { failureRedirect: '/#error' }),
 	  function(req, res) {
-	  	console.log(req.user.username);
-	    res.redirect('/#lobby/'+req.user.username);
+	  	console.log(req.user._id);
+	    res.redirect('/#lobby/'+req.user._id);
 	  });
 
 	app.get('/logout', function(req, res){
