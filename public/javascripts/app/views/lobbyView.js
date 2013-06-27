@@ -34,6 +34,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   createGame: function() {
     this.modalHide();
     console.log('create game clicked');
-    ht.router.navigate('/lobby/'+this.model.id+'/new');
+    ht.router.navigate('/lobby/'+this.model.id+'/new', {trigger: true});
   }
 });

@@ -4,8 +4,12 @@ ht.Routes.Router = Backbone.Router.extend({
     '': 'login',
     'error': 'error',
     'lobby/:id': 'lobby',
-    'lobby/:userId/new': 'newGame',
+    'lobby/:id/new': 'newGame',
     'game/:gameId': 'game'
+  },
+
+  initialize: function() {
+
   },
 
   login: function() {
@@ -24,8 +28,9 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   lobby: function(id) {
-    var user = new ht.Models.UserModel({id: id});
-    user.fetch({
+    console.log(this);
+    this.user = new ht.Models.UserModel({id: id});
+    this.user.fetch({
       success: function(user, res) {
         new ht.Views.LobbyView({
           el: '#hashtags',
@@ -38,10 +43,12 @@ ht.Routes.Router = Backbone.Router.extend({
     });
   },
 
-  newGame: function(userId) {
-    // client syncs/downloads users collection to allow for searching
-    // start create game
-    new ht.Views.CreateGameView({model: user});
+  newGame: function() {
+    console.log('new game in router');
+    new ht.Views.CreateGameView({
+      el: '#hashtags',
+      model: this.user
+    });
   },
 
   game: function(gameId) {
