@@ -8,4 +8,4 @@ var UserSchema = new Schema({
   avatarURL: String
 });
 
-module.exports = mongoose.model('UserModel', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);

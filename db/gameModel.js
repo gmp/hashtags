@@ -6,4 +6,4 @@ var GameSchema = new Schema({
    players : []
 })
 
-module.exports = mongoose.model('GameModel', GameSchema);
+module.exports = mongoose.model('Games', GameSchema);
