@@ -11,8 +11,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new InstagramStrategy({
-    clientID: '5a8d22e45917474eba522ab5ed6b8141',
-    clientSecret: '6eb265ab2ae649759d8bf62bb0620061',
+    clientID: 'd37dfbd483674207b72a447e1b63b6bc',
+    clientSecret: '5e0d4975780a4e36a59d78cb01c74868',
     callbackURL: "/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {
