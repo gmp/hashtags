@@ -7,10 +7,6 @@ var controller = require('./routes/controller.js'),
 
 var app = config();
 
-database.setUpDatabase();
-
-
-
 controller(app);
 
 http.createServer(app).listen(app.get('port'), function(){
