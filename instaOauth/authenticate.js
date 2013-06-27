@@ -1,5 +1,5 @@
 var passport = require('passport'),
-    User = require('../db/UserModel.js'),
+    User = require('../db/userModel.js'),
     InstagramStrategy = require('passport-instagram').Strategy;
 
 passport.serializeUser(function(user, done) {
