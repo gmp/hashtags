@@ -11,14 +11,14 @@ ht.Routes.Router = Backbone.Router.extend({
   login: function() {
     console.log('login');
     // create login view
-    new ht.Views.Login({
+    new ht.Views.LoginView({
       el: '#hashtags'
     });
   },
 
   error: function() {
     // if login fails, create error view with option to try login again
-    new ht.Views.Error({
+    new ht.Views.ErrorView({
       el: '#hashtags'
     });
   },
@@ -27,7 +27,7 @@ ht.Routes.Router = Backbone.Router.extend({
     console.log('in the lobby with ', userId);
     // if login is successful, user is created in DB on server
     // client finds user in DB based on ID and creates model to display lobby view
-    new ht.Views.Lobby({
+    new ht.Views.LobbyView({
       el: '#hashtags',
       userId: userId
     });
@@ -36,12 +36,12 @@ ht.Routes.Router = Backbone.Router.extend({
   newGame: function(userId) {
     // client syncs/downloads users collection to allow for searching
     // start create game
-    new ht.Views.CreateGame({model: user});
+    new ht.Views.CreateGameView({model: user});
   },
 
   game: function(gameId) {
     // find game in db and create model
-    new ht.Views.Game({model: game});
+    new ht.Views.GameView({model: game});
   }
 
 });
