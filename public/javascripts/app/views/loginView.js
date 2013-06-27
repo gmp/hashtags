@@ -1,4 +1,4 @@
-ht.Views.Login = Backbone.View.extend({
+ht.Views.LoginView = Backbone.View.extend({
 
   initialize: function() {
     this.render();

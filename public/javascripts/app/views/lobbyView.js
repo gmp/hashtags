@@ -1,4 +1,4 @@
-ht.Views.Lobby = Backbone.View.extend({
+ht.Views.LobbyView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
