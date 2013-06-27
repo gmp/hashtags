@@ -26,18 +26,18 @@ ht.Routes.Router = Backbone.Router.extend({
   lobby: function(id) {
     console.log('in the lobby with userID: ', id);
 
-    // var user = new ht.Models.User({id: id});
-    // user.fetch({
-    //   success: function(user, res) {
-    //     new ht.Views.LobbyView({
-    //       el: '#hashtags',
-    //       model: user
-    //     });
-    //   },
-    //   error: function(user, res) {
-    //     console.log('error: ', res);
-    //   }
-    // });
+    var user = new ht.Models.UserModel({id: id});
+    user.fetch({
+      success: function(user, res) {
+        new ht.Views.LobbyView({
+          el: '#hashtags',
+          model: user
+        });
+      },
+      error: function(user, res) {
+        console.log('error: ', res);
+      }
+    });
   },
 
   newGame: function(userId) {

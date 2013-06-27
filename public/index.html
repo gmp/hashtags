@@ -3,6 +3,9 @@
 <head>
   <title>Hashtags Against Humantiy</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
@@ -14,34 +17,41 @@
   <!-- Hashtags namespace -->
   <script src="javascripts/app/hashtags.js"></script>
 
-  <!-- Routes -->
-  <script src="javascripts/app/routes/router.js"></script>
-
   <!-- Templates -->
   <script src="javascripts/app/templates/lobbyTemplate.js"></script>
 
+  <!-- Router -->
+  <script src="javascripts/app/routes/router.js"></script>
+
+  <!-- Templates -->
+
   <!-- Models -->
-  <script src="javascripts/app/models/game.js"></script>
-  <script src="javascripts/app/models/user.js"></script>
+  <script src="javascripts/app/models/gameModel.js"></script>
+  <script src="javascripts/app/models/userModel.js"></script>
 
   <!-- Collections -->
-  <script src="javascripts/app/collections/games.js"></script>
-  <script src="javascripts/app/collections/users.js"></script>
+  <script src="javascripts/app/collections/gamesColl.js"></script>
+  <script src="javascripts/app/collections/usersColl.js"></script>
 
   <!-- Views -->
-  <script src="javascripts/app/views/login.js"></script>
-  <script src="javascripts/app/views/error.js"></script>
-  <script src="javascripts/app/views/lobby.js"></script>
-  <script src="javascripts/app/views/createGame.js"></script>
-  <script src="javascripts/app/views/gameWaiting.js"></script>
-  <script src="javascripts/app/views/gameImageSelect.js"></script>
-  <script src="javascripts/app/views/gameHeader.js"></script>
-  <script src="javascripts/app/views/gameHashtagSelect.js"></script>
-  <script src="javascripts/app/views/gameEnd.js"></script>
-  <script src="javascripts/app/views/game.js"></script>
+  <script src="javascripts/app/views/loginView.js"></script>
+  <script src="javascripts/app/views/errorView.js"></script>
+  <script src="javascripts/app/views/lobbyView.js"></script>
+  <script src="javascripts/app/views/createGameView.js"></script>
+  <script src="javascripts/app/views/gameWaitingView.js"></script>
+  <script src="javascripts/app/views/gameImageSelectView.js"></script>
+  <script src="javascripts/app/views/gameHeaderView.js"></script>
+  <script src="javascripts/app/views/gameHashtagSelectView.js"></script>
+  <script src="javascripts/app/views/gameEndView.js"></script>
+  <script src="javascripts/app/views/gameView.js"></script>
+
+  <script>
+    $(function() {
+      ht.init();
+    });
+  </script>
 
 </head>
-<body>
-  <a href="/auth/instagram">Login with Instagram</a>
+<body id="hashtags">
 </body>
 </html>
