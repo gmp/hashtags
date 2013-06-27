@@ -9,6 +9,7 @@ module.exports = function (app) {
   //   redirecting the user to instagram.com.  After authorization, Instagram
   //   will redirect the user back to this application at /auth/instagram/callback
 
+  app.get('/users', user.findAll);
   app.get('/users/:id', user.findById);
   app.get('/games/:id', game.findById);
 
