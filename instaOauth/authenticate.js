@@ -17,11 +17,10 @@ passport.use(new InstagramStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
-    console.log('login', profile);
     process.nextTick(function () {
       var query = {'username': profile.username};
+      var user;
       User.findOne(query, function(err, obj){
-        var user;
         if(!obj){
           user = new User();
           user.username = profile.username;
@@ -34,9 +33,8 @@ passport.use(new InstagramStrategy({
         } else {
           user = obj;
         }
-        console.log(user);
+        return done (null, user);
       });
-      return done (null, profile);
     });
   }
 ));

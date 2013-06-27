@@ -21,7 +21,8 @@ module.exports = function (app) {
   app.get('/auth/instagram/callback',
     passport.authenticate('instagram', { failureRedirect: '/#error' }),
     function(req, res) {
-      res.redirect('/#lobby/123');
+      console.log(req.user.username);
+      res.redirect('/#lobby/'+req.user.username);
     });
 
   app.get('/logout', function(req, res){
