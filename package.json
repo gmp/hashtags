@@ -11,7 +11,8 @@
     "stylus": "*",
     "passport": "*",
     "passport-instagram": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "underscore": "*"
   },
   "subdomain": "ericrius1-hashtags",
   "engines": {
