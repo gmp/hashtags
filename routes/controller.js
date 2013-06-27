@@ -1,4 +1,5 @@
-var passport = require('passport');
+var passport = require('passport'),
+    user = require('./userController.js');
 
 module.exports = function (app) {
   // GET /auth/instagram
@@ -6,6 +7,9 @@ module.exports = function (app) {
   //   request.  The first step in Instagram authentication will involve
   //   redirecting the user to instagram.com.  After authorization, Instagram
   //   will redirect the user back to this application at /auth/instagram/callback
+
+  app.get('/users/:id', user.findById);
+
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
     function(req, res){
@@ -21,8 +25,8 @@ module.exports = function (app) {
   app.get('/auth/instagram/callback',
     passport.authenticate('instagram', { failureRedirect: '/#error' }),
     function(req, res) {
-      console.log(req.user.username);
-      res.redirect('/#lobby/'+req.user.username);
+      console.log(req.user._id);
+      res.redirect('/#lobby/'+req.user._id);
     });
 
   app.get('/logout', function(req, res){
