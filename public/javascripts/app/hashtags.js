@@ -5,5 +5,9 @@ var ht = {
   Views: {},
   Models: {},
   Collections: {},
-  Data: {}
+  Data: {},
+  init: function() {
+    new ht.Routes.Router();
+    Backbone.history.start();
+  }
 };

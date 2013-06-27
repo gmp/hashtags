@@ -23,9 +23,13 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   lobby: function(userId) {
+    console.log('in the lobby with ', userId);
     // if login is successful, user is created in DB on server
     // client finds user in DB based on ID and creates model to display lobby view
-    new ht.Views.Lobby({model: user});
+    new ht.Views.Lobby({
+      el: '#hashtags',
+      userId: userId
+    });
   },
 
   newGame: function(userId) {

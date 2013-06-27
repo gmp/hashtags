@@ -17,7 +17,7 @@
   <!-- Hashtags namespace -->
   <script src="javascripts/app/hashtags.js"></script>
 
-  <!-- Routes -->
+  <!-- Router -->
   <script src="javascripts/app/routes/router.js"></script>
 
   <!-- Templates -->
@@ -42,15 +42,13 @@
   <script src="javascripts/app/views/gameEnd.js"></script>
   <script src="javascripts/app/views/game.js"></script>
 
+  <script>
+    $(function() {
+      ht.init();
+    });
+  </script>
 
 </head>
 <body id="hashtags">
-  <a href="#error">Error redirect</a><br>
-  <script>
-    $(function() {
-      new ht.Routes.Router();
-      Backbone.history.start();
-    });
-  </script>
 </body>
 </html>
