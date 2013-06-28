@@ -30,10 +30,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   error: function() {
-    // if login fails, create error view with option to try login again
-    new ht.Views.ErrorView({
-      el: '#hashtags'
-    });
+    this.app.error();
   },
 
   lobby: function(id) {
@@ -45,21 +42,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   game: function(gameId) {
-    var game = new ht.Models.GameModel({
-      id: gameId
-    });
-    game.fetch({
-      success: function(game, res){
-        new ht.Views.GameView({
-          el: '#hashtags',
-          model: game
-        });
-      },
-
-      error: function(game, res){
-        console.log("error: ", res);
-      }
-    });
+    this.app.game(gameId);
   }
 
 });

@@ -6,6 +6,7 @@ var GameSchema = new Schema({
   title  : String,
   prompt : String,
   round  : Number,
+  judge  : String,
   players : [{
   	hand: [String],
   	score: Number,
