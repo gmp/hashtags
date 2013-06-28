@@ -32,3 +32,19 @@ a {
   opacity: 0.8;
   z-index: 999;
 }
+
+.avatar-row {
+  display: inline-block;
+}
+
+.avatar-contain {
+  float: left;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+}
