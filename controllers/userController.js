@@ -2,7 +2,7 @@ var User = require('../models/userModel.js');
 
 exports.findById = function(req, res){
 	var id = req.params.id;
-  console.log('Retrieving user: ' + id);
+  console.log('Retrieving user by ID: ' + id);
   User.findById(id, function(err, obj){
     if(err) console.log(err);
     res.send(obj);

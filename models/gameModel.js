@@ -14,7 +14,7 @@ var GameSchema = new Schema({
     isJ: {type: Boolean, default: false}, 
     submitted: {type: Boolean, default: false}, 
     submission: String,
-  	user: { type: ObjectId, ref: 'User' }
+  	userGlobalId: { type: ObjectId, ref: 'User' }
   }],
   previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
 });

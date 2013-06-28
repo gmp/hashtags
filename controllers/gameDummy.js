@@ -12,7 +12,7 @@ module.exports = function(){
       flag = true;
       _.each(obj, function(item){
         player = {};
-        player.user = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -44,7 +44,7 @@ module.exports = function(){
       flag = true;
       _.each(obj, function(item){
         player = {};
-        player.user = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -76,7 +76,7 @@ module.exports = function(){
       flag = true;
       _.each(obj, function(item){
         player = {};
-        player.user = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -108,7 +108,7 @@ module.exports = function(){
       flag = true;
       _.each(obj, function(item){
         player = {};
-        player.user = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
