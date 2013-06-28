@@ -12,7 +12,7 @@ module.exports = function(){
     user.games = [];
     user.__v = 0;
     user.save(function(err){
-      if(err) console.log(err); 
+      if(err) console.log(err);
     });
     user = new User();
     user.username = 'ericrius1';
@@ -23,7 +23,7 @@ module.exports = function(){
     user.games = [];
     user.__v = 0;
     user.save(function(err){
-      if(err) console.log(err); 
+      if(err) console.log(err);
     });
     user = new User();
     user.username = 'banjolina_jolie';
@@ -34,7 +34,7 @@ module.exports = function(){
     user.games = [];
     user.__v = 0;
     user.save(function(err){
-      if(err) console.log(err); 
+      if(err) console.log(err);
     });
     user = new User();
     user.username = 'gmp5';
@@ -45,7 +45,7 @@ module.exports = function(){
     user.games = [];
     user.__v = 0;
     user.save(function(err){
-      if(err) console.log(err); 
+      if(err) console.log(err);
     });
   });
 }
