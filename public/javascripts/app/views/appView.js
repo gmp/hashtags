@@ -17,7 +17,7 @@ ht.Views.AppView = Backbone.View.extend({
 
   lobby: function(id) {
     var self = this;
-    this.user = new ht.Models.UserModel({id: id});
+    this.user = this.user || new ht.Models.UserModel({id: id});
     this.user.fetch({
       success: function(user) {
         self.$el.empty();
