@@ -1,16 +1,17 @@
-var User = require('../db/userModel.js'),
-    games = require('../db/gameModel.js'),
+var User = require('../models/userModel.js'),
+    Game = require('../models/gameModel.js'),
+    Player = require('../models/playerModel.js'),
     _ = require('underscore');
 
 
 module.exports = function(){
   var player, game, game1, game2, game3, query;
   var flag = true;
-  games.Game.remove({}, function(){
-    game = new games.Game();
+  Game.remove({}, function(){
+    game = new Game();
     User.find({}, function(err, obj){
       _.each(obj, function(item){
-        player = new games.Player();
+        player = new Player();
         player.id = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
@@ -38,10 +39,10 @@ module.exports = function(){
         if(err) console.log(err); 
       });
     });
-    game1 = new games.Game();
+    game1 = new Game();
     User.find({}, function(err, obj){
       _.each(obj, function(item){
-        player = new games.Player();
+        player = new Player();
         player.id = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
@@ -69,10 +70,10 @@ module.exports = function(){
         if(err) console.log(err); 
       });
     });
-    game2 = new games.Game();
+    game2 = new Game();
     User.find({}, function(err, obj){
       _.each(obj, function(item){
-        player = new games.Player();
+        player = new Player();
         player.id = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
@@ -100,10 +101,10 @@ module.exports = function(){
         if(err) console.log(err); 
       });
     });
-    game3 = new games.Game();
+    game3 = new Game();
     User.find({}, function(err, obj){
       _.each(obj, function(item){
-        player = new games.Player();
+        player = new Player();
         player.id = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){

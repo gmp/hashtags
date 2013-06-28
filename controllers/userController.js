@@ -1,4 +1,4 @@
-var User = require('../db/userModel.js');
+var User = require('../models/userModel.js');
 
 exports.findById = function(req, res){
 	var id = req.params.id;

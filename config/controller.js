@@ -1,6 +1,6 @@
 var passport = require('passport'),
-    user = require('./userController.js'),
-    game = require('./gameController.js');
+    user = require('../controllers/userController.js'),
+    game = require('../controllers/gameController.js');
 
 module.exports = function (app) {
   // GET /auth/instagram
