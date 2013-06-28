@@ -1,5 +1,7 @@
 ht.Views.LoginView = Backbone.View.extend({
 
+  className: 'login',
+
   initialize: function() {
     this.render();
   },

@@ -1,5 +1,7 @@
 ht.Views.LobbyView = Backbone.View.extend({
 
+  className: 'lobby',
+
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
@@ -18,9 +20,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   modalShow: function(event) {
-    var modalId = $(event.target).data('modal-id'),
-        $modal = $('#'+modalId);
-    $modal.fadeIn(300);
+    $('#new-game-modal').fadeIn(300);
     this.$el.append('<div id="mask" class="mask"></div>');
     $('#mask').fadeIn(300);
   },
