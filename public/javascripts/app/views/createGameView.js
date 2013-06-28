@@ -25,12 +25,18 @@ ht.Views.CreateGameView = Backbone.View.extend({
     ht.router.back();
   },
 
-  addInvited: function(){
-    console.log('dispatched');
+  addInvited: function(data, player){
+    console.log('dispatched', data, player);
+    this[player] = data;
+    $('#'+player).css('background-image', "url("+data.avatarURL+")");
+    if(this.player2 && this.player3 && this.player4){
+      console.log(this.player2, this.player3, this.player4);
+    }
   },
 
   searchStart: function() {
-    this.$el.append(new ht.Views.CreateGameSearchView({dispatcher: ht.dispatcher}).el);
+    console.log(event.target.id);
+    this.$el.append(new ht.Views.CreateGameSearchView({player: event.target.id, dispatcher: ht.dispatcher}).el);
   }
 
 });
