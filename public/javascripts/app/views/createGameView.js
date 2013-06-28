@@ -4,7 +4,9 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   template: ht.Templates.CreateGameTemplate,
 
-  initialize: function() {
+  initialize: function(options) {
+    _.bindAll(this, 'addInvited');
+    options.dispatcher.bind('addInvited', this.addInvited)
     this.render();
   },
 
@@ -23,10 +25,12 @@ ht.Views.CreateGameView = Backbone.View.extend({
     ht.router.back();
   },
 
-  search:,
+  addInvited: function(){
+    console.log('dispatched');
+  },
 
   searchStart: function() {
-    this.$el.append(new ht.Views.CreateGameSearchView().el);
+    this.$el.append(new ht.Views.CreateGameSearchView({dispatcher: ht.dispatcher}).el);
   }
 
 });
