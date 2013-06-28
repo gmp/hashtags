@@ -15,6 +15,11 @@ ht.Views.AppView = Backbone.View.extend({
     this.$el.append(new ht.Views.LoginView().el);
   },
 
+  error: function() {
+    this.$el.empty();
+    this.$el.append(new ht.Views.ErrorView().el);
+  },
+
   lobby: function(id) {
     var self = this;
     this.user = this.user || new ht.Models.UserModel({id: id});
