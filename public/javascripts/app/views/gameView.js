@@ -3,6 +3,7 @@ ht.Views.GameView = Backbone.View.extend({
   template: ht.Templates.GameTemplate,
 
   initialize: function() {
+    this.gameHeaderView = new ht.Views.GameHeaderView({ model: this.model });
     this.render();
   },
 
@@ -14,9 +15,13 @@ ht.Views.GameView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log("(this) in GameView: ", this);
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
+
+    // tell sub-view where to render.
+    this.gameHeaderView.setElement(this.$el.find('.game-header'));
+
+    this.gameHeaderView.render();
   }
 
 });
