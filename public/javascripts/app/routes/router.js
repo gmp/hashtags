@@ -12,6 +12,11 @@ ht.Routes.Router = Backbone.Router.extend({
 
   },
 
+  back: function() {
+    // add support for native app http://stackoverflow.com/questions/14860461/selective-history-back-using-backbone-js
+    window.history.back();
+  },
+
   login: function() {
     console.log('login');
     // create login view
@@ -46,7 +51,6 @@ ht.Routes.Router = Backbone.Router.extend({
   newGame: function() {
     console.log('new game in router');
     new ht.Views.CreateGameView({
-      el: '#hashtags',
       model: this.user
     });
   },
@@ -54,7 +58,6 @@ ht.Routes.Router = Backbone.Router.extend({
   game: function(gameId) {
     // find game in db and create model
     var game = {};
-    debugger;
     new ht.Views.GameView({
       el: '#hashtags',
       model: game
