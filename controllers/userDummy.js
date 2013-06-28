@@ -1,5 +1,5 @@
 //make the development db
-var User = require('../db/userModel.js');
+var User = require('../models/userModel.js');
 
 module.exports = function(){
   User.remove({}, function(){
