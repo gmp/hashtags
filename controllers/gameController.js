@@ -1,3 +1,4 @@
+
 var Game = require('../models/gameModel.js');
 
 exports.findById = function(req, res){

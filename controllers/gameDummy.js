@@ -36,7 +36,7 @@ module.exports = function(){
       game.prompt = 'I\'m building up an army of _______';
       game.round = 1;
       game.save(function(err){
-        if(err) console.log(err); 
+        if(err) console.log(err);
       });
     });
     game1 = new Game();
@@ -68,7 +68,7 @@ module.exports = function(){
       game1.prompt = 'I\'m building up an army of _______';
       game1.round = 1;
       game1.save(function(err){
-        if(err) console.log(err); 
+        if(err) console.log(err);
       });
     });
     game2 = new Game();
@@ -100,7 +100,7 @@ module.exports = function(){
       game2.prompt = 'I\'m building up an army of _______';
       game2.round = 1;
       game2.save(function(err){
-        if(err) console.log(err); 
+        if(err) console.log(err);
       });
     });
     game3 = new Game();
@@ -132,7 +132,7 @@ module.exports = function(){
       game3.prompt = 'I\'m building up an army of _______';
       game3.round = 1;
       game3.save(function(err){
-        if(err) console.log(err); 
+        if(err) console.log(err);
       });
     });
   });
