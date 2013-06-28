@@ -1,5 +1,5 @@
 
-var controller = require('./routes/controller.js'), 
+var controller = require('./routes/controller.js'),
     http = require('http'),
     database = require('./db/database.js'),
     config = require('./config/initialize.js');

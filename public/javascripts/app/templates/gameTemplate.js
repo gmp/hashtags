@@ -4,7 +4,7 @@ ht.Templates.GameTemplate = _.template(''+
       '<h1>#Game</h1>'+
       '<% for(var i = 0; i < players.length; i++) { %>'+
         '<% if (players[i].isJ) { %>'+
-          '<h1><%= players[i].username %></h1>'+
+          '<div style="color:blue;"><%= players[i].username %></div>'+
         '<% } else { %>'+
           '<div><%= players[i].username %></div>'+
         '<% } %>'+
