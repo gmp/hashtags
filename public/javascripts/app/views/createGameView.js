@@ -24,6 +24,8 @@ ht.Views.CreateGameView = Backbone.View.extend({
     ht.router.back();
   },
 
+  search:,
+
   searchStart: function() {
     this.$el.append(new ht.Views.CreateGameSearchView().el);
   }
