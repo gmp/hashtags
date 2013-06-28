@@ -59,11 +59,14 @@ ht.Routes.Router = Backbone.Router.extend({
     var game = new ht.Models.GameModel({
       id: gameId
     });
+    var model = new Backbone.Model();
+    model.set({game: game, user: this.model});
+    var view = new GridView({model: model});
     game.fetch({
       success: function(game, res){
         new ht.Views.GameView({
           el: '#hashtags',
-          model: game
+          model: model
         });
       },
 
