@@ -1,15 +1,23 @@
 ht.Routes.Router = Backbone.Router.extend({
 
   routes: {
-    '': 'login',
+    '': 'checkState',
+    'login': 'login',
     'error': 'error',
     'lobby/:id': 'lobby',
-    'lobby/:id/new': 'newGame',
+    'lobby/:id/new': 'createGame',
     'game/:gameId': 'game'
   },
 
   initialize: function() {
+    this.app = new ht.Views.AppView();
+    this.app.render();
+  },
 
+  checkState: function() {
+    // insert logic around checking if user is logged in from last time (cookies??)
+    // if loggedIn navigate to lobby, else navigate to login
+    this.navigate('/login', {trigger: true});
   },
 
   back: function() {
@@ -18,11 +26,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   login: function() {
-    console.log('login');
-    // create login view
-    new ht.Views.LoginView({
-      el: '#hashtags'
-    });
+    this.app.login();
   },
 
   error: function() {
@@ -33,26 +37,11 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   lobby: function(id) {
-    console.log(this);
-    this.user = new ht.Models.UserModel({id: id});
-    this.user.fetch({
-      success: function(user, res) {
-        new ht.Views.LobbyView({
-          el: '#hashtags',
-          model: user
-        });
-      },
-      error: function(user, res) {
-        console.log('error: ', res);
-      }
-    });
+    this.app.lobby(id);
   },
 
-  newGame: function() {
-    console.log('new game in router');
-    new ht.Views.CreateGameView({
-      model: this.user
-    });
+  createGame: function() {
+    this.app.createGame();
   },
 
   game: function(gameId) {
