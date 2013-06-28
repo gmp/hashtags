@@ -7,6 +7,13 @@ ht.Templates.LobbyTemplate = _.template(''+
     '</div>'+
     '<% if (games.length) { %>'+
       '<div class="games-container">Some games should go here. Possibly a gamesListView??</div>'+
+
+
+      '<% for(var i = 0; i < games.length; i++) { %>'+
+        '<a href="/#game/<%= games[i] %>"> game <%=[i] %></a>'+
+      '<% } %>'+
+
+
     '<% } else { %>'+
       '<div class="intro"><p>To get the party started, begin  a new game or join a random game</div>'+
     '<% } %>'+
