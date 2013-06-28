@@ -6,13 +6,14 @@ var User = require('../models/userModel.js'),
 
 module.exports = function(){
   var player, game, game1, game2, game3, query;
-  var flag = true;
+  var flag;
   Game.remove({}, function(){
     game = new Game();
     User.find({}, function(err, obj){
+      flag = true;
       _.each(obj, function(item){
         player = new Player();
-        player.id = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -41,9 +42,10 @@ module.exports = function(){
     });
     game1 = new Game();
     User.find({}, function(err, obj){
+      flag = true;
       _.each(obj, function(item){
         player = new Player();
-        player.id = item._id;
+        player.userGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -72,9 +74,10 @@ module.exports = function(){
     });
     game2 = new Game();
     User.find({}, function(err, obj){
+      flag = true;
       _.each(obj, function(item){
         player = new Player();
-        player.id = item._id;
+        player.UserGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;
@@ -103,9 +106,10 @@ module.exports = function(){
     });
     game3 = new Game();
     User.find({}, function(err, obj){
+      flag = true;
       _.each(obj, function(item){
         player = new Player();
-        player.id = item._id;
+        player.UserGlobalId = item._id;
         player.hand = ['#yolo', '#yolo', '#yolo', '#yolo', '#yolo'];
         if(flag){
           player.isJ = true;

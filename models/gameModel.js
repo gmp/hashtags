@@ -6,7 +6,14 @@ var GameSchema = new Schema({
   title  : String,
   prompt : String,
   round  : Number,
-  players : [{ type: ObjectId, ref: 'Player' }],
+  players : [{
+  	state: {
+	  	ammo: Number,
+	  	room: String,
+	  	isCow: Boolean,
+  	},
+  	user: { type: ObjectId, ref: 'Player' }
+  }],
   previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
 });
 

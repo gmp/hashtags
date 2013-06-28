@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 var Player = new Schema({
-	id: String, 
+	userGlobalId: String, 
 	hand: [String], 
 	isJ: {type: Boolean, default: false}, 
 	submitted: {type: Boolean, default: false}, 
