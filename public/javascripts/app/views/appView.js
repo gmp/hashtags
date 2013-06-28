@@ -54,7 +54,6 @@ ht.Views.AppView = Backbone.View.extend({
     });
     var model = new Backbone.Model();
     model.set({game: game, user: self.user})
-    debugger;
     game.fetch({
       success: function(game, res){
         self.$el.empty();
