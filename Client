@@ -1,0 +1,13 @@
+Client
+1. Precompile templates wit Grun or someting else
+2. Don't do any logic/view creation inside of router
+3. Use stylus for CSS (express middleware or precompile with grunt)
+4. Don't put raw HTML in your JS, only in templates
+5. No functions in your backbone event's hash, use string of method name instead
+6. You might find .toJSON() gives you more flexibility when rendering templates vs model.atributes
+7. Put fadeout/fadein times as some option variable somewhere so you dont have constants hardcoded in your JS
+
+Server
+1. Rename shit so it makes sense (db->models/schemas, routes/controller.js -> config/routes.js, routes/ -> controllers/)
+2. Could use MongoDB 2.4 beta feature full text search if you need to find people by email/name/etc
+3. Chat-roulette style matching, or friendslist click to join (green LED if already online)
