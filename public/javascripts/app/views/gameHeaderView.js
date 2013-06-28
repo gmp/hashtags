@@ -6,7 +6,7 @@ ht.Views.GameHeaderView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template(this.model.attributes));
+    this.$el.prepend(this.template(this.model.attributes));
   }
 
 });

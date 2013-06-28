@@ -1,5 +1,5 @@
 ht.Templates.GameHeaderTemplate = _.template(''+
-  '<header>boobs'+
+  '<header>'+
     '<span><%= prompt %></span>'+
   '</header>'+
 '');
