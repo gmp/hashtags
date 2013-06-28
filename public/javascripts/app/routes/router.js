@@ -30,10 +30,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   error: function() {
-    // if login fails, create error view with option to try login again
-    new ht.Views.ErrorView({
-      el: '#hashtags'
-    });
+    this.app.error();
   },
 
   lobby: function(id) {
