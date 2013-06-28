@@ -15,7 +15,6 @@ ht.Views.GameView = Backbone.View.extend({
 
   render: function() {
     console.log(this.model);
-    debugger;
     this.$el.empty();
     this.$el.append(this.template());
   }
