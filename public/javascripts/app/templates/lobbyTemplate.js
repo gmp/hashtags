@@ -6,13 +6,10 @@ ht.Templates.LobbyTemplate = _.template(''+
       '<button data-modal-id="new-game-modal" class="new-game-button">+</button><br>'+
     '</div>'+
     '<% if (games.length) { %>'+
-      '<div class="games-container">Some games should go here. Possibly a gamesListView??</div>'+
-
 
       '<% for(var i = 0; i < games.length; i++) { %>'+
-        '<a href="/#game/<%= games[i] %>"> game <%=[i] %></a>'+
+        '<div><a href="/#game/<%= games[i] %>"> game <%=[i] %></a></div>'+
       '<% } %>'+
-
 
     '<% } else { %>'+
       '<div class="intro"><p>To get the party started, begin  a new game or join a random game</div>'+
