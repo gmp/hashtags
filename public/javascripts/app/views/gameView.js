@@ -1,5 +1,7 @@
 ht.Views.GameView = Backbone.View.extend({
 
+  className: 'game',
+
   template: ht.Templates.GameTemplate,
 
   initialize: function() {

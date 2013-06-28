@@ -40,6 +40,27 @@ ht.Views.AppView = Backbone.View.extend({
         model: this.user
       }).el
     );
+  },
+
+  game: function(gameId) {
+    var self = this;
+    var game = new ht.Models.GameModel({
+      id: gameId
+    });
+    game.fetch({
+      success: function(game, res){
+        self.$el.empty();
+        self.$el.append(
+          new ht.Views.GameView({
+            model: game,
+            user: self.user
+          }).el
+        );
+      },
+      error: function(game, res){
+        console.log("error: ", res);
+      }
+    });
   }
 
 });

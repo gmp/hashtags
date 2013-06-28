@@ -45,21 +45,7 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   game: function(gameId) {
-    var game = new ht.Models.GameModel({
-      id: gameId
-    });
-    game.fetch({
-      success: function(game, res){
-        new ht.Views.GameView({
-          el: '#hashtags',
-          model: game
-        });
-      },
-
-      error: function(game, res){
-        console.log("error: ", res);
-      }
-    });
+    this.app.game(gameId);
   }
 
 });
