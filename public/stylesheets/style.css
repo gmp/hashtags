@@ -6,6 +6,16 @@ a {
   color: #00b7ff;
 }
 
+.instagram-login {
+  width: 200px;
+  height: 29px;
+  background: url('/images/Instagram_normal.png');
+}
+
+.instagram-login:hover {
+  background: url('/images/Instagram_hover.png');
+}
+
 .new-game-modal {
   display: none;
   height: 150px;

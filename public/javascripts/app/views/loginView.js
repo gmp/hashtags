@@ -8,7 +8,7 @@ ht.Views.LoginView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.html('<a href="/auth/instagram">Login with Instagram</a>');
+    this.$el.html('<a href="/auth/instagram"><div class="instagram-login"></div></a>');
   }
 
 });
