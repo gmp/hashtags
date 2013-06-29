@@ -6,7 +6,8 @@ var GameSchema = new Schema({
   title  : String,
   prompt : String,
   round  : Number,
-  judge  : String,
+  gameEnd : {type:Boolean, default: false},
+  judge  : {avatarURL: String, userGlobalId: String},
   players : [{
     hand: [String],
     score: Number,
@@ -15,7 +16,8 @@ var GameSchema = new Schema({
     isJ: {type: Boolean, default: false},
     submitted: {type: Boolean, default: false},
     submission: {url: String, hashtag: String},
-    userGlobalId: { type: ObjectId, ref: 'User' }
+    userGlobalId: { type: ObjectId, ref: 'User' },
+    continued: {type: Boolean, default: false}
   }],
   previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
 });

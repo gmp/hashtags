@@ -12,7 +12,8 @@
     "passport": "*",
     "passport-instagram": "*",
     "mongoose": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "socket.io": "*"
   },
   "subdomain": "ericrius1-hashtags",
   "engines": {
