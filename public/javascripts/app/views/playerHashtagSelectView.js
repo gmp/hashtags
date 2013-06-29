@@ -1,6 +1,6 @@
-ht.Views.GameHashtagSelectView = Backbone.View.extend({
+ht.Views.PlayerHashtagSelectView = Backbone.View.extend({
 
-  template: ht.Templates.GameHashtagSelectTemplate,
+  template: ht.Templates.PlayerHashtagSelectTemplate,
 
   initialize: function(){
     this.render();
