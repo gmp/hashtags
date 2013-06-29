@@ -27,9 +27,14 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   sendInvitations: function(){
-    console.log('triggered sending');w
-    //$.ajax.post
-  }
+    console.log('triggered sending', this.user);
+    var obj = {};
+    obj.gameAdmin = this.user;
+    // $.ajax({
+    //   url: '/search/'
+    //   type:'Post'
+    // })
+  },
 
   addInvited: function(data, player){
     this[player] = data;
