@@ -3,6 +3,7 @@ ht.Views.AppView = Backbone.View.extend({
   id: '#hashtags',
 
   initialize: function() {
+    this.socket = io.connect();
 
   },
 
@@ -48,6 +49,8 @@ ht.Views.AppView = Backbone.View.extend({
       }).el
     );
   },
+  
+
 
   game: function(gameId) {
     var self = this;
