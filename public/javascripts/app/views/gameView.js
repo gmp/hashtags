@@ -8,7 +8,6 @@ ht.Views.GameView = Backbone.View.extend({
     this.gameHeaderView = new ht.Views.GameHeaderView({ model: this.model });
     this.playerView = new ht.Views.PlayerView({ model: this.model, user: this.options.user });
     this.judgeView = new ht.Views.JudgeView({ model: this.model, user: this.options.user });
-    console.log(this);
     this.render();
   },
 

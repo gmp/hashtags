@@ -10,9 +10,10 @@ ht.Views.PlayerView = Backbone.View.extend({
   // hashtag select, image selct, waiting for everyone else, game end.
 
   render: function() {
-    this.gameHashtagSelectView.setElement(this.$el.find('.stuff-and-things'));
-    this.gameHashtagSelectView.render();
     this.$el.append(this.template(this.model.attributes, this.options.user));
+    this.gameHashtagSelectView.setElement(this.$el.find('#stuff-and-things'));
+    this.gameHashtagSelectView.render();
+   
   }
 
 });

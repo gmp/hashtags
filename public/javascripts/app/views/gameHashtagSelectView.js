@@ -17,8 +17,8 @@ ht.Views.GameHashtagSelectView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template(this.getHand()));
-    console.log(this.getHand());
+    var hands = this.getHand();
+    this.$el.append(this.template({hands: hands}));
   }
 
 });
