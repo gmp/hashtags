@@ -29,13 +29,22 @@ passport.use(new InstagramStrategy({
           user.avatarURL = profile._json.data.profile_picture;
           user.save(function(err){
             if(err) {
-              console.log(err)
+              console.log(err);
             }else{
               console.log("success");
             }
           });
         } else {
           user = obj;
+          user.accessToken = accessToken;
+          user.avatarURL = profile._json.data.profile_picture;
+          user.save(function(err){
+            if(err) {
+              console.log(err);
+            } else {
+              console.log('success');
+            }
+          });
         }
         return done (null, user);
       });
