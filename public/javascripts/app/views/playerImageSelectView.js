@@ -55,8 +55,7 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   submit: function(e) {
     var submissionUrl = $(e.target).data('url');
     var hashtag = this.options.hashtag;
-    console.log('hashtag:', hashtag, '    url:', submissionUrl);
-    // ht.dispatcher.trigger('media-select', submissionUrl, hashtag);
+    ht.dispatcher.trigger('mediaSelect', submissionUrl, hashtag);
   }
 
 });

@@ -5,7 +5,7 @@ ht.Views.PlayerView = Backbone.View.extend({
   initialize: function() {
     this.hashtagSelected = false;
     _.bindAll(this, 'hashtagClick');
-    ht.dispatcher.bind('hashtagClick', this.hashtagClick);
+    ht.dispatcher.on('hashtagClick', this.hashtagClick);
     this.render();
   },
 

@@ -4,6 +4,8 @@ ht.Views.GameView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
+    _.bindAll(this, 'mediaSelect');
+    ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
   events: {
@@ -22,6 +24,10 @@ ht.Views.GameView = Backbone.View.extend({
     } else {
       this.$el.append(new ht.Views.PlayerView({ model: this.model, user: this.options.user }).el);
     }
+  },
+
+  mediaSelect: function(submissionUrl, hashtag) {
+    console.log(this.model, submissionUrl, hashtag);
   }
 
 });
