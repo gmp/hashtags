@@ -3,7 +3,7 @@ ht.Views.GameView = Backbone.View.extend({
   className: 'game',
 
   initialize: function() {
-    console.log('gameview:', this);
+    this.myPlayer = ht.helpers.getMyPlayer(this.model, this.options.user.id);
     this.render();
     _.bindAll(this, 'mediaSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
@@ -20,9 +20,9 @@ ht.Views.GameView = Backbone.View.extend({
     this.$el.empty();
     this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
     if(this.model.attributes.judge === this.options.user.attributes.id){
-      this.$el.append(new ht.Views.JudgeView({ model: this.model, user: this.options.user }).el);
+      this.$el.append(new ht.Views.JudgeView({ model: this.model, myPlayer: this.myPlayer }).el);
     } else {
-      this.$el.append(new ht.Views.PlayerView({ model: this.model, user: this.options.user }).el);
+      this.$el.append(new ht.Views.PlayerView({ model: this.model, myPlayer: this.myPlayer }).el);
     }
   },
 

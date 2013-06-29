@@ -12,12 +12,15 @@ ht.Views.PlayerView = Backbone.View.extend({
   // hashtag select, image select, waiting for everyone else, game end.
 
   render: function() {
-    if (!this.hashtagSelected) {
+    if (!this.options.myPlayer.submitted && !this.hashtagSelected) {
       this.$el.empty();
       this.$el.append(new ht.Views.GameHashtagSelectView({ model: this.model, user: this.options.user }).el);
-    } else if (this.hashtagSelected) {
+    } else if (!this.options.myPlayer.submitted && this.hashtagSelected) {
       this.$el.empty();
       this.$el.append(new ht.Views.PlayerImageSelectView({ model: this.model, user: this.options.user, hashtag: this.hashtagSelected }).el);
+    } else if (this.options.myPlayer.submitted) {
+      this.$el.empty();
+      this.$el.append(new ht.Views.GameWaitingView({}));
     }
   },
 
@@ -25,5 +28,4 @@ ht.Views.PlayerView = Backbone.View.extend({
     this.hashtagSelected = hashtag;
     this.render();
   }
-
 });
