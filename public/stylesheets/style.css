@@ -7,9 +7,10 @@ a {
 }
 
 .instagram-login {
+  display: block;
   width: 200px;
   height: 29px;
-  background: url('/images/Instagram_normal.png');
+  background: transparent url('/images/Instagram_normal.png') center top no-repeat;
 }
 
 .instagram-login:hover {
