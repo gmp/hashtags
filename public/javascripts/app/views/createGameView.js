@@ -12,7 +12,8 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   events: {
     'click #cancel': 'cancel',
-    'click .avatar-contain': 'searchStart'
+    'click .avatar-contain': 'searchStart',
+    'click #start': 'sendInvitations'
   },
 
   render: function () {
@@ -25,12 +26,16 @@ ht.Views.CreateGameView = Backbone.View.extend({
     ht.router.back();
   },
 
+  sendInvitations: function(){
+    console.log('triggered sending');
+    //$.ajax.post
+  }
+
   addInvited: function(data, player){
-    console.log('dispatched', data, player);
     this[player] = data;
     $('#'+player).css('background-image', "url("+data.avatarURL+")");
     if(this.player2 && this.player3 && this.player4){
-      console.log(this.player2, this.player3, this.player4);
+      this.$el.append('<div><button id="start">Start The Game!</button></div>');
     }
   },
 
