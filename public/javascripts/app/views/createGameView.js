@@ -27,9 +27,9 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   sendInvitations: function(){
-    console.log('triggered sending');w
+    console.log('triggered sending');
     //$.ajax.post
-  }
+  },
 
   addInvited: function(data, player){
     this[player] = data;
