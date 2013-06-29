@@ -30,7 +30,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
       error: function(){
         console.log('error');
       }
-    })
+    });
   }
 
 });

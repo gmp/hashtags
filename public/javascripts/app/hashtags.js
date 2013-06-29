@@ -22,3 +22,8 @@ ht.Helpers.getMyPlayer = function(gameModel, userId){
     }
   }
 };
+
+
+
+
+
