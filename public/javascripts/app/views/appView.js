@@ -43,7 +43,8 @@ ht.Views.AppView = Backbone.View.extend({
     this.$el.empty();
     this.$el.append(
       new ht.Views.CreateGameView({
-        model: this.user
+        model: this.user,
+        dispatcher: ht.dispatcher
       }).el
     );
   },
@@ -53,6 +54,8 @@ ht.Views.AppView = Backbone.View.extend({
     var game = new ht.Models.GameModel({
       id: gameId
     });
+    var model = new Backbone.Model();
+    model.set({game: game, user: self.user})
     game.fetch({
       success: function(game, res){
         self.$el.empty();
