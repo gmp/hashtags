@@ -13,6 +13,7 @@ module.exports = function (app) {
   app.get('/users/search/:username', user.findByUsername);
   app.get('/users/:id', user.findById);
   app.get('/games/:id', game.findById);
+  app.put('/games/:id', game.updateById);
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
