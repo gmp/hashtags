@@ -54,8 +54,6 @@ ht.Views.AppView = Backbone.View.extend({
     var game = new ht.Models.GameModel({
       id: gameId
     });
-    var model = new Backbone.Model();
-    model.set({game: game, user: self.user})
     game.fetch({
       success: function(game, res){
         self.$el.empty();

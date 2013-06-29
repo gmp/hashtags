@@ -15,15 +15,17 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template());
+    this.$el.append(this.template({hashtag: this.options.hashtag}));
   },
 
   getMedia: function() {
     var self = this;
-    var hashtagQuery = this.hashtag;
-    var accessToken = this.model.accessToken;
+    var hashtagQuery = this.options.hashtag;
+    var accessToken = this.options.user.attributes.accessToken;
+    hashtagQuery = hashtagQuery.slice(1);
+    console.log(hashtagQuery);
     $.ajax({
-      url: 'https://api.instagram.com/v1/tags/'+hashtagQuery+'/media/recent?access_token='+accessToken,
+      url: 'https://api.instagram.com/v1/tags/'+hashtagQuery+'/media/recent?access_token='+accessToken+'',
       dataType: 'jsonp',
       success: function(response) {
         console.log('get images response', response);
@@ -44,16 +46,17 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
         htmlChunk += '<div class="media-container"><img src="'+image.images.standard_resolution.url+'"><button data-url="'+image.images.standard_resolution.url+'" class="media-select">Select</button></div>';
       } else if (media[i].type === "video") {
         var video = media[i];
-        htmlChunk += '<div class="media-container"><video src="'+video.videos.standard_resolution.url+'"><button data-url"'+video.videos.standard_resolution.url+' class="media-select">Select</button></div>';
+        htmlChunk += '<div class="media-container"><video src="'+video.videos.standard_resolution.url+'"></video><button data-url"'+video.videos.standard_resolution.url+' class="media-select">Select</button></div>';
       }
     }
     this.$el.append(htmlChunk);
   },
 
   submit: function(e) {
-    var submissionUrl = e.target.data('url');
-    var hashtag = this.hashtag;
-    ht.dispatcher.trigger('media-select', submissionUrl, hashtag);
+    var submissionUrl = $(e.target).data('url');
+    var hashtag = this.options.hashtag;
+    console.log('hashtag:', hashtag, '    url:', submissionUrl);
+    // ht.dispatcher.trigger('media-select', submissionUrl, hashtag);
   }
 
 });
