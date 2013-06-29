@@ -1,13 +1,33 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #dc3983;
+  background: #f2e0ea;
 }
+
 a {
   color: #00b7ff;
 }
 
+h1 {
+  margin: 0;
+  font-size: 22em;
+  text-shadow: 0.03em 0 whitesmoke;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin: -75px 0 0 0;
+}
+
+.login {
+  font-family: 'Permanent Marker';
+  text-align: center;
+}
+
 .instagram-login {
-  display: block;
+  margin-top: 15px;
+  display: inline-block;
   width: 200px;
   height: 29px;
   background: transparent url('/images/Instagram_normal.png') center top no-repeat;
