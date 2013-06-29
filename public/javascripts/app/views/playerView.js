@@ -9,15 +9,25 @@ ht.Views.PlayerView = Backbone.View.extend({
     this.render();
   },
 
-  // hashtag select, image select, waiting for everyone else, game end.
-
   render: function() {
+    // if player has not submitted image and not selected hashtag
     if (!this.options.myPlayer.submitted && !this.hashtagSelected) {
       this.$el.empty();
-      this.$el.append(new ht.Views.GameHashtagSelectView({ model: this.model, user: this.options.user }).el);
+      this.$el.append(new ht.Views.GameHashtagSelectView({
+        model: this.model,
+        hand: this.options.myPlayer.hand
+      }).el);
+
+    // if player has not submitted image, but selected hashtag
     } else if (!this.options.myPlayer.submitted && this.hashtagSelected) {
       this.$el.empty();
-      this.$el.append(new ht.Views.PlayerImageSelectView({ model: this.model, user: this.options.user, hashtag: this.hashtagSelected }).el);
+      this.$el.append(new ht.Views.PlayerImageSelectView({
+        model: this.model,
+        accessToken: this.options.user.attributes.accessToken,
+        hashtag: this.hashtagSelected
+      }).el);
+
+    // if player has submitted, but game has not ended
     } else if (this.options.myPlayer.submitted) {
       this.$el.empty();
       this.$el.append(new ht.Views.GameWaitingView({}));

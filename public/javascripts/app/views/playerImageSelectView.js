@@ -10,7 +10,7 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   events: {
-    'click .media-select': 'submit'
+    'click .media-select': 'submitMedia'
   },
 
   render: function() {
@@ -21,7 +21,7 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   getMedia: function() {
     var self = this;
     var hashtagQuery = this.options.hashtag;
-    var accessToken = this.options.user.attributes.accessToken;
+    var accessToken = this.options.accessToken;
     hashtagQuery = hashtagQuery.slice(1);
     console.log(hashtagQuery);
     $.ajax({
@@ -43,19 +43,17 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     for (var i = 0, l = media.length; i < l; i++) {
       if (media[i].type === "image") {
         var image = media[i];
-        htmlChunk += '<div class="media-container"><img src="'+image.images.standard_resolution.url+'"><button data-url="'+image.images.standard_resolution.url+'" class="media-select">Select</button></div>';
+        htmlChunk += '<div class="media-container"><img src="'+image.images.standard_resolution.url+'"><button data-url="'+image.images.standard_resolution.url+'" class="media-select">Submit Image</button></div><hr>';
       } else if (media[i].type === "video") {
         var video = media[i];
-        htmlChunk += '<div class="media-container"><video src="'+video.videos.standard_resolution.url+'"></video><button data-url"'+video.videos.standard_resolution.url+' class="media-select">Select</button></div>';
+        htmlChunk += '<div class="media-container"><video src="'+video.videos.standard_resolution.url+'"></video><button data-url="'+video.videos.standard_resolution.url+'" class="media-select">Submit Video</button></div><hr>';
       }
     }
     this.$el.append(htmlChunk);
   },
 
-  submit: function(e) {
-    var submissionUrl = $(e.target).data('url');
-    var hashtag = this.options.hashtag;
-    ht.dispatcher.trigger('mediaSelect', submissionUrl, hashtag);
+  submitMedia: function(e) {
+    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), this.options.hashtag);
   }
 
 });
