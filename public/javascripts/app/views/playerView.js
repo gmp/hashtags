@@ -1,19 +1,29 @@
 ht.Views.PlayerView = Backbone.View.extend({
 
-  template: ht.Templates.PlayerTemplate,
+  className: 'player',
 
   initialize: function() {
-    this.gameHashtagSelectView = new ht.Views.GameHashtagSelectView({ model: this.model, user: this.options.user });
+    this.hashtagSelected = false;
+    _.bindAll(this, 'hashtagClick');
+    ht.dispatcher.on('hashtagClick', this.hashtagClick);
     this.render();
   },
 
-  // hashtag select, image selct, waiting for everyone else, game end.
+  // hashtag select, image select, waiting for everyone else, game end.
 
   render: function() {
-    this.$el.append(this.template(this.model.attributes, this.options.user));
-    this.gameHashtagSelectView.setElement(this.$el.find('#stuff-and-things'));
-    this.gameHashtagSelectView.render();
-   
+    if (!this.hashtagSelected) {
+      this.$el.empty();
+      this.$el.append(new ht.Views.GameHashtagSelectView({ model: this.model, user: this.options.user }).el);
+    } else if (this.hashtagSelected) {
+      this.$el.empty();
+      this.$el.append(new ht.Views.PlayerImageSelectView({ model: this.model, user: this.options.user, hashtag: this.hashtagSelected }).el);
+    }
+  },
+
+  hashtagClick: function(hashtag) {
+    this.hashtagSelected = hashtag;
+    this.render();
   }
 
 });

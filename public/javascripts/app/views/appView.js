@@ -25,6 +25,7 @@ ht.Views.AppView = Backbone.View.extend({
     this.user = this.user || new ht.Models.UserModel({id: id});
     this.user.fetch({
       success: function(user) {
+        console.log(self.user);
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
@@ -53,8 +54,6 @@ ht.Views.AppView = Backbone.View.extend({
     var game = new ht.Models.GameModel({
       id: gameId
     });
-    var model = new Backbone.Model();
-    model.set({game: game, user: self.user})
     game.fetch({
       success: function(game, res){
         self.$el.empty();

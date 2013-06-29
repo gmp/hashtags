@@ -1,4 +1,2 @@
 hashtags
 ========
-
-hashtags against humanity

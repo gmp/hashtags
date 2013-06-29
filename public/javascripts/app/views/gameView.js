@@ -2,13 +2,11 @@ ht.Views.GameView = Backbone.View.extend({
 
   className: 'game',
 
-  template: ht.Templates.GameTemplate,
-
   initialize: function() {
-    this.gameHeaderView = new ht.Views.GameHeaderView({ model: this.model });
-    this.playerView = new ht.Views.PlayerView({ model: this.model, user: this.options.user });
-    this.judgeView = new ht.Views.JudgeView({ model: this.model, user: this.options.user });
+    console.log('gameview:', this);
     this.render();
+    _.bindAll(this, 'mediaSelect');
+    ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
   events: {
@@ -20,18 +18,24 @@ ht.Views.GameView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template(this.model.attributes));
-    this.gameHeaderView.setElement(this.$el.find('.game-header'));
-    this.gameHeaderView.render();
+    this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
     if(this.model.attributes.judge === this.options.user.attributes.id){
-      this.judgeView.setElement(this.$el.find('.play-or-judge'));
-      this.judgeView.render();
+      this.$el.append(new ht.Views.JudgeView({ model: this.model, user: this.options.user }).el);
     } else {
-      this.playerView.setElement(this.$el.find('.play-or-judge'));
-      this.playerView.render();
+      this.$el.append(new ht.Views.PlayerView({ model: this.model, user: this.options.user }).el);
     }
+  },
 
-    // tell sub-view where to render.
+  mediaSelect: function(submissionUrl, hashtag) {
+    var players = this.model.get('players');
+    for (var i = 0; i < players.length; i++) {
+      if (players[i].username === this.options.user.attributes.username) {
+        players[i].submitted = true;
+        players[i].submission = {url: submissionUrl, hashtag: hashtag};
+      }
+    }
+    this.model.set('players', players);
+    this.model.save();
   }
 
 });
