@@ -1,18 +1,21 @@
 var socketio = require('socket.io'),
-        io, clients = {};
+    io,
+    socketCont = require('../controllers/socketController.js'), 
+    clients = {};
 
 
 exports.socketStart= function (server){
       io = socketio.listen(server);
 
       io.sockets.on('connection', function (socket) {
+        socket.emit('giveClient');
 
-        socket.emit('message', { hello: 'world' });
-
-        socket.on('event', function (data) {
+        socket.on('setUpClients', function (data) {
           console.log(data);
+          clients[data.user] = socket;
         });
 
-      });
+        socket.on('joinGame', socketCont.joinGame(socket, data));
 
+      });
 };

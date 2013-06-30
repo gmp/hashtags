@@ -5,6 +5,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
+    ht.dispatcher.trigger('createSockets');
     this.render();
   },
 
