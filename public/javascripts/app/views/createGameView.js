@@ -7,6 +7,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   initialize: function(options) {
     _.bindAll(this, 'addInvited');
     options.dispatcher.bind('addInvited', this.addInvited);
+
     this.render();
   },
 

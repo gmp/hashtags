@@ -3,10 +3,16 @@ ht.Views.GameView = Backbone.View.extend({
   className: 'game',
 
   initialize: function() {
+    this.joinGame();
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
     this.render();
     _.bindAll(this, 'mediaSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
+  },
+
+  joinGame: function(){
+    debugger;
+    ht.dispatcher.trigger('joinGame', this.model.attributes.id);
   },
 
   events: {
