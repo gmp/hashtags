@@ -3,9 +3,11 @@ ht.Views.AppView = Backbone.View.extend({
   id: '#hashtags',
 
   socket_events: {
-
+<<<<<<< HEAD
+    "message": "got_message",
+=======
     "giveClient": "giveClient"
-
+>>>>>>> a985233efc3768d8ec462d59ed8c2b15c188b28c
   },
 
 

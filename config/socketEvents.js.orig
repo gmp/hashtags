@@ -15,10 +15,13 @@ exports.socketStart= function (server){
           clients[data.user] = socket;
         });
 
+<<<<<<< HEAD
+      
 
-        socket.on('joinGame', function (data){
-          socketCont.joinGame(socket, data);
-        });
+      });
+=======
+        socket.on('joinGame', socketCont.joinGame(socket, data));
+>>>>>>> a985233efc3768d8ec462d59ed8c2b15c188b28c
 
       });
 };

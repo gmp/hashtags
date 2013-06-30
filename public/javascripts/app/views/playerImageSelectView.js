@@ -43,17 +43,17 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     for (var i = 0, l = media.length; i < l; i++) {
       if (media[i].type === "image") {
         var image = media[i];
-        htmlChunk += '<div class="media-container"><img src="'+image.images.standard_resolution.url+'"><button data-url="'+image.images.standard_resolution.url+'" class="media-select">Submit Image</button></div><hr>';
+        htmlChunk += '<div class="media-container"><img src="'+image.images.low_resolution.url+'"><button data-type ="'+image.type+'" data-url="'+image.images.low_resolution.url+'" class="media-select">Submit Image</button></div><hr>';
       } else if (media[i].type === "video") {
         var video = media[i];
-        htmlChunk += '<div class="media-container"><video src="'+video.videos.standard_resolution.url+'"></video><button data-url="'+video.videos.standard_resolution.url+'" class="media-select">Submit Video</button></div><hr>';
+        htmlChunk += '<div class="media-container"><video src="'+video.videos.low_resolution.url+'"></video><button data-type ="'+video.type+'" data-url="'+video.videos.low_resolution.url+'" class="media-select">Submit Video</button></div><hr>';
       }
     }
     this.$el.append(htmlChunk);
   },
 
   submitMedia: function(e) {
-    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), this.options.hashtag);
+    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.options.hashtag);
   }
 
 });
