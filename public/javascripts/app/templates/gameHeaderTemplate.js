@@ -1,12 +1,12 @@
 ht.Templates.GameHeaderTemplate = _.template(''+
   '<header>'+
     '<span><%= prompt %></span>'+
-    '<% for(var i = 0; i < players.length; i++) { %>'+
-      '<% if (players[i].isJ) { %>'+
-        '<div style="color:blue;"><%= players[i].username %></div>'+
+    '<% _.each(players, function(player) { %>'+
+      '<% if (player.isJ) { %>'+
+        '<div style="color:blue;"><%= player.username %></div>'+
       '<% } else { %>'+
-        '<div><%= players[i].username %></div>'+
+        '<div><%= player.username %></div>'+
       '<% } %>'+
-    '<% } %>'+
+    '<% }); %>'+
   '</header>'+
 '');
