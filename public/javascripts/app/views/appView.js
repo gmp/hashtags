@@ -98,7 +98,6 @@ ht.Views.AppView = Backbone.View.extend({
 
 
   game: function(gameId) {
-    debugger;
     var self = this;
     var game = new ht.Models.GameModel({
       id: gameId
