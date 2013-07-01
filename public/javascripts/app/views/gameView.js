@@ -53,7 +53,9 @@ ht.Views.GameView = Backbone.View.extend({
       }
     }
     this.model.set('players', players);
-    this.model.save();
+    var sendPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
+    console.log('sendPlayer', sendPlayer);
+    this.model.update();
     this.subView.render();
   }
 

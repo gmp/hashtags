@@ -3,15 +3,20 @@ var io = require('../config/socketEvents.js');
 
 exports.findById = function(req, res){
   var id = req.params.id;
-    console.log('Retrieving game: ' + id);
-    Game.findById(id, function(err, obj){
-      res.send(obj);
-    });
+  console.log('Retrieving game: ' + id);
+  Game.findById(id, function(err, obj){
+    res.send(obj);
+  });
 };
 
 exports.updateById = function(req, res){
-  console.log('thisworked');
-  console.log(req.body._id);
-  console.log('io!!!!!', io);
-  io.alertRoom(req.body._id);
+  var id = req.params.id;
+  console.log("req.body", req.body);
+  Game.findById(id, function(err, obj){
+    console.log(obj);
+    obj.save(function(err){
+      if(err)(console.error(err));
+      io.alertRoom(req.body._id);
+    });
+  });
 };

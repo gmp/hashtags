@@ -1,11 +1,11 @@
 ht.Templates.GameWaitingTemplate = _.template(''+
-  '<% for(var i = 0; i < players.length; i++) { %>'+
-    '<% if(players[i].submitted) { %>'+
-      '<% if(players[i].submission.type === "image") { %>'+
-        '<img src="<%= players[i].submission.url %>">'+
+  '<% _.each(players, function(player) { %>'+
+    '<% if(player.submitted) { %>'+
+      '<% if(player.submission.type === "image") { %>'+
+        '<img src="<%= player.submission.url %>">'+
       '<% } else { %>'+
-        '<video src="<%= players[i].submission.url %>"></video>'+
+        '<video src="<%= player.submission.url %>"></video>'+
       '<% } %>'+
     '<% } %>'+
-  '<% } %>'+
+  '<% }); %>'+
 '');
