@@ -6,7 +6,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   initialize: function(options) {
     _.bindAll(this, 'addInvited');
-    options.dispatcher.bind('addInvited', this.addInvited);
+    ht.dispatcher.bind('addInvited', this.addInvited);
 
     this.render();
   },
@@ -28,6 +28,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   sendInvitations: function(){
+    $('#startGameButton').hide();
     var self = this;
     var obj = {};
     obj.author = this.model.get('username');
@@ -52,16 +53,17 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   addInvited: function(data, player){
+    this.search.remove();
     this[player] = data;
-    $('#'+player).css('background-image', "url("+data.avatarURL+")");
+    $('#'+player).attr('src', data.avatarURL);
     if(this.player2 && this.player3 && this.player4){
-      this.$el.append('<div><button id="start">Start The Game!</button></div>');
+      $('#startGameButton').show();
     }
   },
 
-  searchStart: function() {
-    console.log(event.target.id);
-    this.$el.append(new ht.Views.CreateGameSearchView({player: event.target.id, dispatcher: ht.dispatcher}).el);
+  searchStart: function(e) {
+    this.search = new ht.Views.CreateGameSearchView({attributes: {player: e.target.id}});
+    this.$el.find('form').after(this.search.el);
   }
 
 });

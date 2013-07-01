@@ -4,9 +4,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
 
   template: ht.Templates.CreateGameSearchTemplate,
 
-  initialize: function(options) {
-    this.player = options.player;
-    this.dispatcher = options.dispatcher;
+  initialize: function() {
     this.render();
   },
 
@@ -20,12 +18,12 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
 
   search: function() {
     var self = this;
+    var playerName = $('#playerSearch').val();
     $.ajax({
-      url: '/users/search/'+$('#playerSearch').val(),
+      url: '/users/search/'+playerName,
       type: 'GET',
       success: function(data){
-        self.dispatcher.trigger('addInvited', data, self.player);
-        self.remove();
+        ht.dispatcher.trigger('addInvited', data, self.attributes.player);
       },
       error: function(){
         console.log('error');

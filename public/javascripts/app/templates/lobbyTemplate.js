@@ -1,7 +1,7 @@
 ht.Templates.LobbyTemplate = _.template(''+
   '<div class="row lobby-header">'+
     '<div class="small-3 columns">'+
-      '<img class="avatar" src="<%= avatarURL %>">'+
+      '<img src="<%= avatarURL %>">'+
     '</div>'+
     '<div class="small-5 small-centered columns">'+
       '<h2>#Lobby</h2>'+

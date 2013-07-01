@@ -68,10 +68,14 @@ h5 {
   background-color: lightgray;
 }
 
-/*.avatar {
-  width: 75px;
-  height: 75px;
-}*/
+.avatar {
+  width: 150px;
+  height: 150px;
+}
+
+#startGameButton {
+  display: none;
+}
 
 /*.game-info {
   display: none;

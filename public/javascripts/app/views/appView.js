@@ -104,8 +104,7 @@ ht.Views.AppView = Backbone.View.extend({
     this.$el.empty();
     this.$el.append(
       new ht.Views.CreateGameView({
-      model: this.user,
-      dispatcher: ht.dispatcher
+      model: this.user
     }).el);
   },
 
