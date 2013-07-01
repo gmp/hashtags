@@ -1,6 +1,6 @@
 var socketio = require('socket.io'),
     io,
-    socketCont = require('../controllers/socketController.js'), 
+    socketCont = require('../controllers/socketController.js'),
     clients = {};
 
 
@@ -16,14 +16,18 @@ exports.socketStart= function (server){
           console.log(socket.userId);
           clients[socket.userId] = socket;
         });
-        
+
         socket.on('disconnect', function (){
           console.log(socket.userId);
           delete clients[socket.userId];
         });
 
-        socket.on('joinGame', function (data){
-          socketCont.joinGame(socket, data);
+        socket.on('joinGame', function (gameId){
+          socketCont.joinGame(socket, gameId);
+        });
+
+        socket.on('leaveGame', function (roomId){
+          socketCont.leaveGame(socket, roomId);
         });
 
       });
