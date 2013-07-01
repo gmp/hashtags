@@ -33,8 +33,11 @@ exports.socketStart= function (server){
         socket.on('playerSubmit', function(gameId){
           socketCont.updateSubmittedProp(socket, gameId);
         });
-
       });
+};
+
+exports.alertRoom = function(room){
+  io.sockets.in(room).emit('otherPlayerSubmit');
 };
 
 exports.clients = clients;

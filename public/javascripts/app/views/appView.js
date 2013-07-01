@@ -6,16 +6,17 @@ ht.Views.AppView = Backbone.View.extend({
 
     "giveClient": "giveClient",
     "changeInUser" : "changeInUser",
-    "joinedRoom" : "joinedRoom"
+    "joinedRoom" : "joinedRoom",
+    "otherPlayerSubmit" : "otherPlayerSubmit"
 
   },
 
 
   initialize: function() {
 
-    _.bindAll(this, 'createSockets', 'leaveRooms', 'mediaSelect');
+    _.bindAll(this, 'createSockets', 'leaveRooms');
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
-    ht.dispatcher.bind('createSockets', this.createSockets);
+    ht.dispatcher.on('createSockets', this.createSockets);
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
 
   },
@@ -131,9 +132,9 @@ ht.Views.AppView = Backbone.View.extend({
     });
   },
 
-  mediaSelect: function(gameId) {
-    var self = this;
-    this.socket.emit('playerSubmit', gameId);
+  otherPlayerSubmit: function(gameId) {
+    console.log('heard the submission');
+    ht.dispatcher.trigger('playerSubmit');
   }
 
 });
