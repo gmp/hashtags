@@ -12,6 +12,7 @@ ht.Views.GameView = Backbone.View.extend({
     // create reference to current player in game model's players array
 
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
+    console.log("this.myPlayer in GameView: ", this.myPlayer);
     this.render();
 
     _.bindAll(this, 'mediaSelect');
@@ -46,16 +47,13 @@ ht.Views.GameView = Backbone.View.extend({
   mediaSelect: function(submissionUrl, type, hashtag) {
     console.log(submissionUrl, hashtag);
     var players = this.model.get('players');
-    for (var i = 0; i < players.length; i++) {
-      if (players[i].username === this.options.user.attributes.username) {
-        players[i].submitted = true;
-        players[i].submission = {url: submissionUrl, type: type, hashtag: hashtag};
-      }
-    }
+    var player = players[this.options.user.id];
+    player.submitted = true;
+    player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
     this.model.set('players', players);
     var sendPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
     console.log('sendPlayer', sendPlayer);
-    this.model.update();
+    this.model.save();
     this.subView.render();
   }
 

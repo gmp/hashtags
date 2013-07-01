@@ -20,6 +20,7 @@ ht.Views.GameWaitingView = Backbone.View.extend({
 
   playerSubmit: function() {
     var self = this;
+    console.log("GameWaitingView");
     this.model.fetch({
       success: function(){
         self.render();
