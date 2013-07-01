@@ -16,7 +16,7 @@ exports.socketStart= function (server){
           console.log(socket.userId);
           clients[socket.userId] = socket;
         });
-        
+
         socket.on('disconnect', function (){
           console.log(socket.userId);
           delete clients[socket.userId];
