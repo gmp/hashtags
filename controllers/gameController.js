@@ -16,14 +16,16 @@ exports.updateById = function(req, res){
     console.log("you are the judge and I don't know what to do")
   } else {
     console.log('sup');
-	  Game.findById(gameId, function(err, obj){
-	    obj.player[player.userGlobalId] = player;
+	  Game.findById(gameId, function (err, obj){
+      console.log('this is the old player', obj.players[player.userGlobalId]);
+      console.log('this is the new player', player);
+	    obj.players[player.userGlobalId] = player;
 	    obj.save(function (err){
 	      if(err)(console.error(err));
-	      socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
+	      socketEvents.io.sockets.in(gameId).emit('otherPlayerSubmit');
 	    });
-	  });	
-  }  
+	  });
+  }
   res.writeHead(204);
   res.end();
 };
