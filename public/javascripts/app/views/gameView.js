@@ -51,9 +51,7 @@ ht.Views.GameView = Backbone.View.extend({
     player.submitted = true;
     player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
     this.model.set('players', players);
-    var sendPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
-    console.log('sendPlayer', sendPlayer);
-    this.model.save();
+    this.model.save(player, {patch: true});
     this.subView.render();
   }
 

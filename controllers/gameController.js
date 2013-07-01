@@ -10,16 +10,18 @@ exports.findById = function(req, res){
 };
 
 exports.updateById = function(req, res){
-  var id = req.params.id;
-  var room = req.body._id;
-
-  console.log("req.body", req.body);
-  Game.findById(id, function(err, obj){
-    console.log(obj);
-    obj.save(function(err){
-      if(err)(console.error(err));
-      socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
-    });
-  });
+  var gameId = req.params.id;
+  var player = req.body;
+  if(player.isJ){
+    console.log("you are the judge and I don't know what to do")
+  } else {
+	  Game.findById(gameId, function(err, obj){
+	    obj.player[player.userGlobalId] = player;
+	    obj.save(function (err){
+	      if(err)(console.error(err));
+	      socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
+	    });
+	  });	
+  }  
 };
 
