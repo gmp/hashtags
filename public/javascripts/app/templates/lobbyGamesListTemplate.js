@@ -6,14 +6,14 @@ ht.Templates.LobbyGamesListTemplate = _.template(''+
         '<div class="content" data-section-content>'+
           '<ul class="no-bullet">'+
             '<li><b>Prompt:</b> <%= games[i].prompt %></li>'+
-            '<li><b>Judge:</b> <%= games[i].judge %></li>'+
+            '<li><b>Judge:</b> <%= games[i].judge.username %></li>'+
             '<li><b>Players:</b></li>'+
             '<ul class="inline-list">'+
             '<% for(var j = 0; j < games[i].players.length; j++) { %>'+
               '<li><%= games[i].players[j].username %></li>'+
             '<% } %>'+
             '</ul>'+
-            '<li><a class="button tiny" href="/#game/<%= games[i].gameId %>">Play!</a></li>'+
+            '<li><a class="button small expand" href="/#game/<%= games[i].gameId %>">Play!</a></li>'+
           '</ul>'+
         '</div>'+
       '</section>'+

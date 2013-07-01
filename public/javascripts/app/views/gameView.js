@@ -4,6 +4,8 @@ ht.Views.GameView = Backbone.View.extend({
 
   initialize: function() {
 
+    console.log(this.model);
+
     this.joinGame();
 
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
