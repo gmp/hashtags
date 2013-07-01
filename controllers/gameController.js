@@ -21,5 +21,7 @@ exports.updateById = function(req, res){
       socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
     });
   });
+  res.writeHead(204);
+  res.end();
 };
 
