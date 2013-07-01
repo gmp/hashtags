@@ -95,8 +95,6 @@ ht.Views.AppView = Backbone.View.extend({
     }).el);
   },
 
-
-
   game: function(gameId) {
     var self = this;
     var game = new ht.Models.GameModel({
