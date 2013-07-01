@@ -16,7 +16,7 @@ module.exports = function(){
         player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
         if(flag){
           player.isJ = true;
-          game.judge = item.username;
+          game.judge = {username: item.username, avatarURL:item.avatarURL};
           flag = false;
         } else {
           player.isJ = false;
@@ -53,7 +53,7 @@ module.exports = function(){
         player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
         if(flag){
           player.isJ = true;
-          game1.judge = item.username;
+          game1.judge = {username: item.username, avatarURL : item.avatarURL};
           flag = false;
         } else {
           player.isJ = false;
@@ -90,7 +90,7 @@ module.exports = function(){
         player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
         if(flag){
           player.isJ = true;
-          game2.judge = item.username;
+          game.judge = {username: item.username, avatarURL:item.avatarURL};
           flag = false;
         } else {
           player.isJ = false;
@@ -127,7 +127,7 @@ module.exports = function(){
         player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
         if(flag){
           player.isJ = true;
-          game3.judge = item.username;
+          game.judge = {username: item.username, avatarURL:item.avatarURL};
           flag = false;
         } else {
           player.isJ = false;
