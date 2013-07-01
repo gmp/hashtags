@@ -21,7 +21,7 @@ exports.create = function(req, res){
           if(!obj.pendingGames){
             obj.pendingGames = [];
           }
-          obj.pendingGames.push({invite: invite._id, author: invite.author, title: invite.title});
+          obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3});
         } else {
           obj.invites.push({invite: invite._id, author: invite.author});
           if(clients[obj._id]){
