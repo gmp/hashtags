@@ -30,7 +30,12 @@ exports.socketStart= function (server){
           socketCont.leaveGame(socket, roomId);
         });
 
+        socket.on('playerSubmit', function(gameId){
+          socketCont.updateSubmittedProp(socket, gameId);
+        });
       });
+
+      exports.io = io;
 };
 
 exports.clients = clients;
