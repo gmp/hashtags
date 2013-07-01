@@ -7,7 +7,7 @@ ht.Templates.LobbyTemplate = _.template(''+
       '<h2>#Lobby</h2>'+
     '</div>'+
     '<div class="small-2 columns">'+
-      '<button data-modal-id="new-game-modal" class="small button new-game-button">+</button><br>'+
+      '<button data-modal-id="new-game-modal" id="new-game-button" class="small button">+</button><br>'+
     '</div>'+
   '</div>'+
   '<div id="new-game-modal" class="new-game-modal">'+

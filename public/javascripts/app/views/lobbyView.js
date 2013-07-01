@@ -14,13 +14,9 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   events: {
-    'click .new-game-button': 'modalShow',
+    'click #new-game-button': 'modalShow',
     'click #cancel, #mask': 'modalHide',
-    'click #start-new-game': 'createGame',
-    'click #accept-game': 'inviteResponse',
-    'click #invite': 'inviteModalShow',
-    'click #decline-game': 'declineResponse',
-    'click .drop-down': 'dropDown'
+    'click #start-new-game': 'createGame'
   },
 
   render: function() {
@@ -43,12 +39,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   leaveRooms: function(){
     console.log('i gets called');
     ht.dispatcher.trigger('leaveRooms');
-  },
-
-  inviteModalShow: function(event){
-    $('#invite-game-modal').fadeIn(300);
-    this.$el.append('<div id="mask" class="mask"></div>');
-    $('#mask').fadeIn(300);
   },
 
   modalShow: function(event) {
@@ -79,20 +69,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   createGame: function() {
     this.modalHide();
     ht.router.navigate('/lobby/'+this.model.id+'/new', {trigger: true});
-  },
-
-  inviteResponse: function() {
-    console.log('herro');
-  },
-
-  declineResponse: function() {
-    console.log('goodBye');
-  },
-
-  dropDown: function(e) {
-    console.log('drop');
-    var $target = $(e.target);
-    console.log($target.next(".game-info"));
-    $target.next(".game-info").slideDown();
   }
+
 });
