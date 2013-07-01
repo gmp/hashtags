@@ -5,6 +5,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
+    console.log(this.model);
     _.bindAll(this, 'changeInUser');
     ht.dispatcher.on('changeInUser', this.changeInUser);
     ht.dispatcher.trigger('createSockets');
@@ -17,13 +18,22 @@ ht.Views.LobbyView = Backbone.View.extend({
     'click #start-new-game': 'createGame',
     'click #accept-game': 'inviteResponse',
     'click #invite': 'inviteModalShow',
-    'click #decline-game': 'declineResponse'
+    'click #decline-game': 'declineResponse',
     'click .drop-down': 'dropDown'
   },
 
   render: function() {
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
+    // if (this.model.get('invites')) {
+    //   this.$el.append(ht.Views.LobbyInviteView({model: this.model}));
+    // }
+    // if (this.model.get('pendingGames')) {
+    //   this.$el.append(ht.Views.LobbyPendingGamesView({model: this.model}));
+    // }
+    // if (this.model.get('games')) {
+    //   this.$el.append(ht.Views.LobbyGamesListView({model: this.model}));
+    // }
   },
 
   inviteModalShow: function(event){

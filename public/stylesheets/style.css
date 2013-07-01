@@ -1,4 +1,4 @@
-body {
+/*body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #dc3983;
   background: #f2e0ea;
@@ -37,7 +37,7 @@ h5 {
 .login {
   font-family: 'Permanent Marker';
   text-align: center;
-}
+}*/
 
 .instagram-login {
   margin-top: 15px;
@@ -52,35 +52,30 @@ h5 {
 }
 
 .lobby-header {
-  display: inline-block;
-  width: 100%;
   text-align: center;
 }
 
 .avatar {
-  float: left;
-  margin: 15px;
   width: 75px;
   height: 75px;
 }
 
-.game-info {
+/*.game-info {
   display: none;
   height: 75px;
   -webkit-animation: max-height 0.5s ease-out;
-}
+}*/
 
-.new-game-button {
+/*.new-game-button {
   float: right;
   font-size: 2em;
   border-radius: 8px;
   margin-top: -25px;
   margin-right: 15px;
-}
+}*/
 
 .new-game-modal {
   display: none;
-  height: 150px;
   width: 200px;
   background: white;
   position: fixed;
@@ -90,10 +85,10 @@ h5 {
   margin-left: -100px;
   z-index: 999999;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 1em;
 }
 
-.invite-game-modal {
+/*.invite-game-modal {
   display: none;
   height: 150px;
   width: 200px;
@@ -106,7 +101,7 @@ h5 {
   z-index: 999999;
   text-align: center;
   padding-top: 50px;
-}
+}*/
 
 
 .mask {
@@ -121,7 +116,7 @@ h5 {
   z-index: 999;
 }
 
-.avatar-row {
+/*.avatar-row {
   display: inline-block;
 }
 
@@ -138,3 +133,4 @@ h5 {
   width: 100px;
   border: 1px solid black;
 }
+*/

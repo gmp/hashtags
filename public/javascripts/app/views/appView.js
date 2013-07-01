@@ -72,7 +72,6 @@ ht.Views.AppView = Backbone.View.extend({
     });
     this.user.fetch({
       success: function(user) {
-        console.log(self.user);
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
