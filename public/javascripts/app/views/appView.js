@@ -20,6 +20,7 @@ ht.Views.AppView = Backbone.View.extend({
   leaveRooms: function(){
     if(this.roomId){
       this.socket.emit('leaveGame', this.roomId);
+      delete this.roomId;
     }
   },
 
