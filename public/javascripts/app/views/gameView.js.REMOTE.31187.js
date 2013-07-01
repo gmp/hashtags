@@ -3,33 +3,16 @@ ht.Views.GameView = Backbone.View.extend({
   className: 'game',
 
   initialize: function() {
-
-    this.joinGame();
-
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
     ht.dispatcher.trigger('enterGame', {playerId: this.options.user.id, gameId: this.model.id});
 
     // create reference to current player in game model's players array
-
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
     this.render();
 
     _.bindAll(this, 'mediaSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
-
-
-  joinGame: function(){
-    ht.dispatcher.trigger('joinGame', this.model.attributes.id);
-  },
-
-  events: {
-    'click button' : 'handleClick'
-  },
-
-  handleClick: function(){
-  },
-
 
   render: function() {
     this.$el.empty();

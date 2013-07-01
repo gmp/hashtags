@@ -7,6 +7,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   initialize: function(options) {
     _.bindAll(this, 'addInvited');
     options.dispatcher.bind('addInvited', this.addInvited);
+
     this.render();
   },
 
@@ -29,6 +30,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   sendInvitations: function(){
     var self = this;
     var obj = {};
+    obj.author = this.model.get('username');
     obj.gameAdmin = this.model.get('_id');
     obj.player2 = this.player2._id;
     obj.player3 = this.player3._id;

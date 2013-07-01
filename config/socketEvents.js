@@ -12,10 +12,21 @@ exports.socketStart= function (server){
 
         socket.on('setUpClients', function (data) {
           console.log(data);
-          clients[data.user] = socket;
+          socket.userId = data.user;
+          console.log(socket.userId);
+          clients[socket.userId] = socket;
+        });
+        
+        socket.on('disconnect', function (){
+          console.log(socket.userId);
+          delete clients[socket.userId];
         });
 
-        socket.on('joinGame', socketCont.joinGame(socket, data));
+        socket.on('joinGame', function (data){
+          socketCont.joinGame(socket, data);
+        });
 
       });
 };
+
+exports.clients = clients;
