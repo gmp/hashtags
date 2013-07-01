@@ -12,7 +12,7 @@ ht.Views.AppView = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'createSockets');
-    ht.dispatcher.bind('createSockets', this.createSockets);  
+    ht.dispatcher.bind('createSockets', this.createSockets);
   },
 
   createSockets: function() {
@@ -35,7 +35,7 @@ ht.Views.AppView = Backbone.View.extend({
       }
       method = _.bind(method, this);
       this.socket.on(key, method);
-    };
+    }
   },
 
   giveClient: function(data){
@@ -50,7 +50,6 @@ ht.Views.AppView = Backbone.View.extend({
   joinGame: function(gameId){
     this.socket.emit('joinGame', gameId);
   },
-
 
   render: function() {
     $('body').append(this.$el);

@@ -1,23 +1,37 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #dc3983;
   background: #f2e0ea;
 }
 
 a {
+  text-decoration: none;
   color: #00b7ff;
 }
 
-h1 {
-  margin: 0;
-  font-size: 22em;
+h1, h2, h3, h4 {
   text-shadow: 0.03em 0 whitesmoke;
+  margin: 0;
+}
+
+h1 {
+  font-size: 22em;
+}
+
+h2 {
+  width: 100%;
+  margin-left: -115px;
+  font-size: 3em;
 }
 
 h3 {
   font-size: 1.5em;
   margin: -75px 0 0 0;
+}
+
+h5 {
+  font-size: 1.5em;
+  margin: 0;
 }
 
 .login {
@@ -35,6 +49,33 @@ h3 {
 
 .instagram-login:hover {
   background: url('/images/Instagram_hover.png');
+}
+
+.lobby-header {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.avatar {
+  float: left;
+  margin: 15px;
+  width: 75px;
+  height: 75px;
+}
+
+.game-info {
+  display: none;
+  height: 75px;
+  -webkit-animation: max-height 0.5s ease-out;
+}
+
+.new-game-button {
+  float: right;
+  font-size: 2em;
+  border-radius: 8px;
+  margin-top: -25px;
+  margin-right: 15px;
 }
 
 .new-game-modal {
@@ -96,9 +137,4 @@ h3 {
   height: 100px;
   width: 100px;
   border: 1px solid black;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
 }

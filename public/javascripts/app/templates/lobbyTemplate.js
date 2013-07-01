@@ -1,7 +1,7 @@
 ht.Templates.LobbyTemplate = _.template(''+
   '<div class="lobby-header">'+
     '<img class="avatar" src="<%= avatarURL %>">'+
-    '<h1>#Lobby</h1>'+
+    '<h2>#Lobby</h2>'+
     '<button data-modal-id="new-game-modal" class="new-game-button">+</button><br>'+
   '</div>'+
   '<div>Invitations</div>'+
@@ -16,6 +16,8 @@ ht.Templates.LobbyTemplate = _.template(''+
   '<% if (games.length) { %>'+
     '<% for(var i = 0; i < games.length; i++) { %>'+
       '<div><a href="/#game/<%= games[i] %>"><%=games[i].title %></a></div>'+
+      '<h5><i class="icon-th-list drop-down"></i><a href="/#game/<%= games[i] %>">Game Title <i class="icon-chevron-right"></i></a></h5>'+
+      '<div class="game-info">Some text here with more information about the game<br>Check it outttt!!</div>'+
     '<% } %>'+
   '<% } else { %>'+
     '<div class="intro"><p>To get the party started, begin  a new game or join a random game</div>'+

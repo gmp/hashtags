@@ -18,6 +18,7 @@ ht.Views.LobbyView = Backbone.View.extend({
     'click #accept-game': 'inviteResponse',
     'click #invite': 'inviteModalShow',
     'click #decline-game': 'declineResponse'
+    'click .drop-down': 'dropDown'
   },
 
   render: function() {
@@ -67,5 +68,12 @@ ht.Views.LobbyView = Backbone.View.extend({
 
   declineResponse: function() {
     console.log('goodBye');
+  },
+
+  dropDown: function(e) {
+    console.log('drop');
+    var $target = $(e.target);
+    console.log($target.next(".game-info"));
+    $target.next(".game-info").slideDown();
   }
 });
