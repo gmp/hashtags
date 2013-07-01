@@ -15,7 +15,7 @@ var GameSchema = new Schema({
     avatarURL: String,
     isJ: {type: Boolean, default: false},
     submitted: {type: Boolean, default: false},
-    submission: {url: String, hashtag: String},
+    submission: {url: String, type: String, hashtag: String},
     userGlobalId: { type: ObjectId, ref: 'User' },
     continued: {type: Boolean, default: false}
   }],

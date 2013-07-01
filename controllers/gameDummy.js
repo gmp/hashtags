@@ -27,13 +27,13 @@ module.exports = function(){
         player.username = item.username;
         game.players.push(player);
         User.findById(item._id, function(err, obj){
-          obj.games.push(game._id);
+          obj.games.push({gameId: game._id, gameAdmin: 'gmp5', title: 'dummyGame1'});
           obj.save(function(err){
             if(err) console.log(err);
           })
         });
       });
-      game.title = 'dummyGame';
+      game.title = 'dummyGame1';
       game.prompt = 'I\'m building up an army of _______';
       game.round = 1;
       game.save(function(err){
@@ -60,13 +60,13 @@ module.exports = function(){
         player.username = item.username;
         game1.players.push(player);
         User.findById(item._id, function(err, obj){
-          obj.games.push(game1._id);
+          obj.games.push({gameId: game1._id, gameAdmin: 'gmp5', title: 'dummyGame2'});
           obj.save(function(err){
             if(err) console.log(err);
           })
         });
       });
-      game1.title = 'dummyGame';
+      game1.title = 'dummyGame2';
       game1.prompt = 'I\'m building up an army of _______';
       game1.round = 1;
       game1.save(function(err){
@@ -93,13 +93,13 @@ module.exports = function(){
         player.username = item.username;
         game2.players.push(player);
         User.findById(item._id, function(err, obj){
-          obj.games.push(game2._id);
+          obj.games.push({gameId: game2._id, gameAdmin: 'gmp5', title: 'dummyGame3'});
           obj.save(function(err){
             if(err) console.log(err);
           })
         });
       });
-      game2.title = 'dummyGame';
+      game2.title = 'dummyGame3';
       game2.prompt = 'I\'m building up an army of _______';
       game2.round = 1;
       game2.save(function(err){
@@ -126,13 +126,13 @@ module.exports = function(){
         player.username = item.username;
         game3.players.push(player);
         User.findById(item._id, function(err, obj){
-          obj.games.push(game3._id);
+          obj.games.push({gameId: game3._id, gameAdmin: 'gmp5', title: 'dummyGame4'});
           obj.save(function(err){
             if(err) console.log(err);
           })
         });
       });
-      game3.title = 'dummyGame';
+      game3.title = 'dummyGame4';
       game3.prompt = 'I\'m building up an army of _______';
       game3.round = 1;
       game3.save(function(err){

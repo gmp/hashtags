@@ -3,10 +3,11 @@ var mongoose = require('mongoose'),
 
 var InviteSchema = new Schema({
   title     : String,
+  author    : String,
   gameAdmin : String,
-  player2   : {user: String, accepted: {type: Boolean, default: false}},
-  player3   : {user: String, accepted: {type: Boolean, default: false}},
-  player4   : {user: String, accepted: {type: Boolean, default: false}},
+  player2   : {user: String, accepted: {type: String, default: 'waiting'}},
+  player3   : {user: String, accepted: {type: String, default: 'waiting'}},
+  player4   : {user: String, accepted: {type: String, default: 'waiting'}},
 });
 
 module.exports = mongoose.model('Invites', InviteSchema);

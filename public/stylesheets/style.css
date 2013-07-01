@@ -52,6 +52,22 @@ h3 {
   padding-top: 50px;
 }
 
+.invite-game-modal {
+  display: none;
+  height: 150px;
+  width: 200px;
+  background: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  z-index: 999999;
+  text-align: center;
+  padding-top: 50px;
+}
+
+
 .mask {
   display: none;
   background: black;
