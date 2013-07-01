@@ -12,9 +12,11 @@ ht.Views.AppView = Backbone.View.extend({
 
 
   initialize: function() {
+
     _.bindAll(this, 'createSockets', 'leaveRooms');
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
     ht.dispatcher.bind('createSockets', this.createSockets);  
+
   },
 
   leaveRooms: function(){

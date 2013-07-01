@@ -11,7 +11,7 @@ ht.Views.PlayerView = Backbone.View.extend({
   },
 
   render: function() {
-    // if the current round has ended (judge selected a winner), 
+    // if the current round has ended (judge selected a winner),
     // but the current player has not 'continued'
     // render the gameEndView to see round results
     if (this.model.gameEnded) {

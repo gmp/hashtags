@@ -9,7 +9,7 @@ var UserSchema = new Schema({
   avatarURL: String,
   games: [{gameId: { type: ObjectId, ref: 'Games' }, gameAdmin: String, title: String}],
   invites: [{invite: { type: ObjectId, ref: 'Invites' }, author: String}],
-  pendingGames: [{invite: { type: ObjectId, ref: 'Invites' }, author: String}] 
+  pendingGames: [{invite: { type: ObjectId, ref: 'Invites' }, author: String}]
 });
 
 module.exports = mongoose.model('Users', UserSchema);

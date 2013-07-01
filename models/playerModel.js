@@ -5,13 +5,13 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 var Player = new Schema({
-	userGlobalId: String, 
-	hand: [String], 
-	isJ: {type: Boolean, default: false}, 
-	submitted: {type: Boolean, default: false}, 
-	submission: String, 
-	score: Number, 
-	avatar: String, 
+	userGlobalId: String,
+	hand: [String],
+	isJ: {type: Boolean, default: false},
+	submitted: {type: Boolean, default: false},
+	submission: String,
+	score: Number,
+	avatar: String,
 	username: String
 });
 
