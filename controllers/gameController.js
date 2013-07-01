@@ -1,5 +1,5 @@
 var Game = require('../models/gameModel.js');
-var io = require('../config/socketEvents.js');
+var socketEvents = require('../config/socketEvents.js');
 
 exports.findById = function(req, res){
   var id = req.params.id;
@@ -11,12 +11,15 @@ exports.findById = function(req, res){
 
 exports.updateById = function(req, res){
   var id = req.params.id;
+  var room = req.body._id;
+
   console.log("req.body", req.body);
   Game.findById(id, function(err, obj){
     console.log(obj);
     obj.save(function(err){
       if(err)(console.error(err));
-      io.alertRoom(req.body._id);
+      socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
     });
   });
 };
+

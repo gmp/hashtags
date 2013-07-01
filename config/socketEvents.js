@@ -34,10 +34,8 @@ exports.socketStart= function (server){
           socketCont.updateSubmittedProp(socket, gameId);
         });
       });
-};
 
-exports.alertRoom = function(room){
-  io.sockets.in(room).emit('otherPlayerSubmit');
+      exports.io = io;
 };
 
 exports.clients = clients;
