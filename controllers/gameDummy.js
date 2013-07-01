@@ -25,8 +25,12 @@ module.exports = function(){
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
-        game.players.push(player);
+        if(!game.players){
+          game.players = {};
+        }
+        game.players[item._id] = player;
         game.title = 'dummyGame1';
+        game.numberOfSub = 0;
         game.prompt = 'I\'m building up an army of _______';
         game.round = 1;
         User.findById(item._id, function(err, obj){
@@ -58,7 +62,11 @@ module.exports = function(){
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
-        game1.players.push(player);
+        if(!game1.players){
+          game1.players = {};
+        }
+        game1.players[item._id] = player;
+        game1.numberOfSub = 0;
         game1.title = 'dummyGame1';
         game1.prompt = 'I\'m building up an army of _______';
         game1.round = 1;
@@ -91,7 +99,11 @@ module.exports = function(){
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
-        game2.players.push(player);
+        if(!game2.players){
+          game2.players = {};
+        }
+        game2.players[item._id] = player;
+        game2.numberOfSub = 0;
         game2.title = 'dummyGame1';
         game2.prompt = 'I\'m building up an army of _______';
         game2.round = 1;
@@ -124,8 +136,12 @@ module.exports = function(){
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
-        game3.players.push(player);
+        if(!game3.players){
+          game3.players = {};
+        }
+        game3.players[item._id] = player;
         game3.title = 'dummyGame1';
+        game3.numberOfSub = 0;
         game3.prompt = 'I\'m building up an army of _______';
         game3.round = 1;
         User.findById(item._id, function(err, obj){
