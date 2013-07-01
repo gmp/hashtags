@@ -22,8 +22,12 @@ exports.socketStart= function (server){
           delete clients[socket.userId];
         });
 
-        socket.on('joinGame', function (data){
-          socketCont.joinGame(socket, data);
+        socket.on('joinGame', function (gameId){
+          socketCont.joinGame(socket, gameId);
+        });
+
+        socket.on('leaveGame', function (roomId){
+          socketCont.leaveGame(socket, roomId);
         });
 
       });

@@ -8,6 +8,7 @@ ht.Views.LobbyView = Backbone.View.extend({
     _.bindAll(this, 'changeInUser');
     ht.dispatcher.on('changeInUser', this.changeInUser);
     ht.dispatcher.trigger('createSockets');
+    this.leaveRooms();
     this.render();
   },
 
@@ -22,8 +23,12 @@ ht.Views.LobbyView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    debugger;
     this.$el.append(this.template(this.model.attributes));
+  },
+
+  leaveRooms: function(){
+    console.log('i gets called');
+    ht.dispatcher.trigger('leaveRooms');
   },
 
   inviteModalShow: function(event){

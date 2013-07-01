@@ -25,8 +25,7 @@ exports.create = function(req, res){
         } else {
           obj.invites.push({invite: invite._id, author: invite.author});
           if(clients[obj._id]){
-            console.log(clients[obj._id]);
-            clients[obj._id].emit('invitationRecieved');
+            clients[obj._id].emit('changeInUser');
           }
         }
         obj.save(function(err){
