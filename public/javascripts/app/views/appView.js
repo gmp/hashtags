@@ -4,7 +4,8 @@ ht.Views.AppView = Backbone.View.extend({
 
   socket_events: {
 
-    "giveClient": "giveClient"
+    "giveClient": "giveClient",
+    "invitationRecieved" : "invitationRecieved"
 
   },
 
@@ -39,6 +40,10 @@ ht.Views.AppView = Backbone.View.extend({
 
   giveClient: function(data){
     this.socket.emit('setUpClients', {user: this.user.id});
+  },
+
+  invitationRecieved: function(){
+    console.log('recieved invitation');
   },
 
   joinGame: function(gameId){
