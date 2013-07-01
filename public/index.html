@@ -9,16 +9,18 @@
   <!-- CSS -->
   <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-  <!-- <link rel="stylesheet" type="text/css" href="http://necolas.github.io/normalize.css/2.1.2/normalize.css"> -->
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
   <!-- Libraries -->
   <script src="javascripts/lib/underscore.js"></script>
-  <script src="javascripts/lib/jquery.js"></script>
+  <!-- <script src="javascripts/lib/jquery.js"></script> -->
+  <script src="javascripts/lib/zepto.js"></script>
   <script src="javascripts/lib/Backbone.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="javascripts/lib/foundation.min.js"></script>
+  <script src="javascripts/lib/custom.modernizr.js"></script>
 
   <!-- Hashtags namespace -->
   <script src="javascripts/app/hashtags.js"></script>
@@ -68,6 +70,7 @@
   <script src="javascripts/app/views/playerView.js"></script>
 
   <script>
+    $(document).foundation();
     $(function() {
       ht.init();
     });

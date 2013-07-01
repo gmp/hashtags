@@ -30,9 +30,10 @@ ht.Views.LobbyView = Backbone.View.extend({
       this.invites = new ht.Views.LobbyInvitesView({model: this.model});
       this.$el.append(this.invites.el);
     }
-    // if (this.model.get('pendingGames')) {
-    //   this.$el.append(ht.Views.LobbyPendingGamesView({model: this.model}));
-    // }
+    if (this.model.get('pendingGames').length) {
+      this.pendingGames = new ht.Views.LobbyPendingGamesView({model: this.model});
+      this.$el.append(this.pendingGames.el);
+    }
     if (this.model.get('games').length) {
       this.games = new ht.Views.LobbyGamesListView({model: this.model});
       this.$el.append(this.games.el);

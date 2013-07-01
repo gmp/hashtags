@@ -2,8 +2,9 @@
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #dc3983;
   background: #f2e0ea;
-}
+}*/
 
+/*
 a {
   text-decoration: none;
   color: #00b7ff;
@@ -33,11 +34,11 @@ h5 {
   font-size: 1.5em;
   margin: 0;
 }
-
+*/
 .login {
   font-family: 'Permanent Marker';
   text-align: center;
-}*/
+}
 
 .instagram-login {
   margin-top: 15px;
@@ -53,6 +54,18 @@ h5 {
 
 .lobby-header {
   text-align: center;
+  padding-bottom: 1em;
+}
+
+.invites {
+  padding-bottom: 1em;
+}
+
+.invite {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 13px;
+  background-color: lightgray;
 }
 
 /*.avatar {
