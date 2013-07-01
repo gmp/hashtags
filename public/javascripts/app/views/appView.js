@@ -5,14 +5,25 @@ ht.Views.AppView = Backbone.View.extend({
   socket_events: {
 
     "giveClient": "giveClient",
-    "invitationRecieved" : "invitationRecieved"
+    "changeInUser" : "changeInUser",
+    "joinedRoom" : "joinedRoom"
 
   },
 
 
   initialize: function() {
-    _.bindAll(this, 'createSockets');
+
+    _.bindAll(this, 'createSockets', 'leaveRooms');
+    ht.dispatcher.on('leaveRooms', this.leaveRooms);
     ht.dispatcher.bind('createSockets', this.createSockets);
+
+  },
+
+  leaveRooms: function(){
+    if(this.roomId){
+      this.socket.emit('leaveGame', this.roomId);
+      delete this.roomId;
+    }
   },
 
   createSockets: function() {
@@ -42,13 +53,18 @@ ht.Views.AppView = Backbone.View.extend({
     this.socket.emit('setUpClients', {user: this.user.id});
   },
 
-  invitationRecieved: function(){
-    console.log('recieved invitation');
+  changeInUser: function(){
+    console.log('recieved a change');
     ht.dispatcher.trigger('changeInUser');
   },
 
   joinGame: function(gameId){
     this.socket.emit('joinGame', gameId);
+  },
+
+  joinedRoom: function(gameId){
+    console.log('made it back with the id: ', gameId);
+    this.roomId = gameId;
   },
 
   render: function() {
@@ -92,8 +108,6 @@ ht.Views.AppView = Backbone.View.extend({
       dispatcher: ht.dispatcher
     }).el);
   },
-
-
 
   game: function(gameId) {
     var self = this;

@@ -8,6 +8,7 @@ ht.Views.LoginView = Backbone.View.extend({
     this.render();
   },
 
+
   render: function() {
     this.$el.empty();
     this.$el.append(this.template());

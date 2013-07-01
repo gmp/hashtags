@@ -20,7 +20,6 @@ ht.Views.GameView = Backbone.View.extend({
 
 
   joinGame: function(){
-    debugger;
     ht.dispatcher.trigger('joinGame', this.model.attributes.id);
   },
 
