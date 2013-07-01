@@ -68,6 +68,19 @@ h5 {
   background-color: lightgray;
 }
 
+.game {
+  font-size: 1.5em;
+}
+
+.menu-icon {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+.right-icon {
+  margin-left: 7em;
+}
+
 .avatar {
   width: 150px;
   height: 150px;

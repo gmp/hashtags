@@ -5,7 +5,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
-    console.log(this.model);
     _.bindAll(this, 'changeInUser');
     ht.dispatcher.on('changeInUser', this.changeInUser);
     ht.dispatcher.trigger('createSockets');

@@ -42,7 +42,6 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   game: function(gameId) {
-
     this.app.game(gameId);
   }
 
