@@ -7,7 +7,7 @@ ht.Templates.LobbyTemplate = _.template(''+
   '<div>Invitations</div>'+
    '<% if (invites.length) { %>'+
     '<% for(var i = 0; i < invites.length; i++) { %>'+
-      '<div><button><%=invites[i].author %></button></div>'+
+      '<div><button id="invite"><%=invites[i].author %></button></div>'+
     '<% } %>'+
   '<% } else { %>'+
     '<div class="intro"><p>no new invitations</p></div>'+
@@ -31,6 +31,11 @@ ht.Templates.LobbyTemplate = _.template(''+
   '<div id="new-game-modal" class="new-game-modal">'+
     '<button id="start-new-game">Start a new game</button><br>'+
     '<button id="join-random">Join a random game</button><br>'+
+    '<button id="cancel">Cancel</button>'+
+  '</div>'+
+  '<div id="invite-game-modal" class="invite-game-modal">'+
+    '<button id="accept-game">Join</button><br>'+
+    '<button id="decline-game">Decline</button><br>'+
     '<button id="cancel">Cancel</button>'+
   '</div>'+
 '');

@@ -44,6 +44,7 @@ ht.Views.AppView = Backbone.View.extend({
 
   invitationRecieved: function(){
     console.log('recieved invitation');
+    ht.dispatcher.trigger('changeInUser');
   },
 
   joinGame: function(gameId){
