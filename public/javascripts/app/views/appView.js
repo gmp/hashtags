@@ -13,9 +13,10 @@ ht.Views.AppView = Backbone.View.extend({
 
   initialize: function() {
 
-    _.bindAll(this, 'createSockets', 'leaveRooms');
+    _.bindAll(this, 'createSockets', 'leaveRooms', 'mediaSelect');
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
-    ht.dispatcher.bind('createSockets', this.createSockets);  
+    ht.dispatcher.bind('createSockets', this.createSockets);
+    ht.dispatcher.on('mediaSelect', this.mediaSelect);
 
   },
 
@@ -128,6 +129,11 @@ ht.Views.AppView = Backbone.View.extend({
         console.log("error: ", res);
       }
     });
+  },
+
+  mediaSelect: function(gameId) {
+    var self = this;
+    this.socket.emit('playerSubmit', gameId);
   }
 
 });
