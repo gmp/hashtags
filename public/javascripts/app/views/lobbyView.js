@@ -25,15 +25,16 @@ ht.Views.LobbyView = Backbone.View.extend({
   render: function() {
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
-    // if (this.model.get('invites')) {
-    //   this.$el.append(ht.Views.LobbyInviteView({model: this.model}));
-    // }
+    if (this.model.get('invites')) {
+      this.invites = new ht.Views.LobbyInvitesView({model: this.model});
+      this.$el.append(this.invites.el);
+    }
     // if (this.model.get('pendingGames')) {
     //   this.$el.append(ht.Views.LobbyPendingGamesView({model: this.model}));
     // }
-    // if (this.model.get('games')) {
-    //   this.$el.append(ht.Views.LobbyGamesListView({model: this.model}));
-    // }
+    if (this.model.get('games')) {
+      this.$el.append(ht.Views.LobbyGamesListView({model: this.model}));
+    }
   },
 
   inviteModalShow: function(event){
