@@ -15,6 +15,7 @@ exports.updateById = function(req, res){
   if(player.isJ){
     console.log("you are the judge and I don't know what to do")
   } else {
+    console.log('sup');
 	  Game.findById(gameId, function(err, obj){
 	    obj.player[player.userGlobalId] = player;
 	    obj.save(function (err){
@@ -23,5 +24,7 @@ exports.updateById = function(req, res){
 	    });
 	  });	
   }  
+  res.writeHead(204);
+  res.end();
 };
 

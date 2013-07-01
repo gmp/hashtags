@@ -7,7 +7,7 @@ var GameSchema = new Schema({
   prompt : String,
   round  : Number,
   gameEnd : {type:Boolean, default: false},
-  judge  : {avatarURL: String, userGlobalId: String},
+  judge  : {username: String, avatarURL: String, userGlobalId: String},
   numberOfSub : Number,
   players : {},
   previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
