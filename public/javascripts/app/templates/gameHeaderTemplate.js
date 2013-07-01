@@ -1,12 +1,8 @@
 ht.Templates.GameHeaderTemplate = _.template(''+
-  '<header>'+
-    '<span><%= prompt %></span>'+
-    '<% _.each(players, function(player) { %>'+
-      '<% if (player.isJ) { %>'+
-        '<div style="color:blue;"><%= player.username %></div>'+
-      '<% } else { %>'+
-        '<div><%= player.username %></div>'+
-      '<% } %>'+
-    '<% }); %>'+
-  '</header>'+
+  '<div class="small-3 columns">'+
+    '<img src="<%= judge.avatarURL %>">'+
+  '</div>'+
+  '<div class="small-9 columns">'+
+    '<h4><%= prompt %></h4>'+
+  '</div>'+
 '');
