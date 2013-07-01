@@ -1,6 +1,6 @@
 var socketio = require('socket.io'),
     io,
-    socketCont = require('../controllers/socketController.js'), 
+    socketCont = require('../controllers/socketController.js'),
     clients = {};
 
 
