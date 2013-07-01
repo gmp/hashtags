@@ -5,10 +5,10 @@ module.exports = function (){
   Invite.remove({}, function (err) {
     invite = new Invite();
     invite.title = '#1 Best Game';
-    invite.author = 'gmp5';
-    invite.gameAdmin = "51cc74bbb298b522c2000001";
+    invite.author = 'hifelight';
+    invite.gameAdmin = "51cc6e4854dd74c4c1000001";
     invite.player2 = {user: "51cc70e677ee79fcc1000001", accepted: 'waiting'};
-    invite.player3 = {user: "51cc6e4854dd74c4c1000001", accepted: 'waiting'};
+    invite.player3 = {user: "51cc74bbb298b522c2000001", accepted: 'waiting'};
     invite.player4 = {user: "51cc710577ee79fcc1000002", accepted: 'waiting'};
     User.findById(invite.player2.user, function (err, obj){
       if(!obj.invites){
