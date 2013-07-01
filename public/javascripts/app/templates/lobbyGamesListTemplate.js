@@ -8,9 +8,9 @@ ht.Templates.LobbyGamesListTemplate = _.template(''+
             '<li>Prompt: <%= games[i].prompt %></li>'+
             '<li>Judge: <%= games[i].judge %></li>'+
             '<li>Players:</li>'+
-            '<% for(var j = 0; j < games.players.length; j++) { %>'+
-              '<li>games.players[j].username</li>'+
-            '<% } %>'+
+            // '<% for(var j = 0; j < games[i].players.length; j++) { %>'+
+            //   '<li>games.[i].players[j].username</li>'+
+            // '<% } %>'+
           '</ul>'+
         '</div>'+
       '</section>'+
