@@ -33,7 +33,8 @@ ht.Views.LobbyView = Backbone.View.extend({
     //   this.$el.append(ht.Views.LobbyPendingGamesView({model: this.model}));
     // }
     if (this.model.get('games')) {
-      this.$el.append(ht.Views.LobbyGamesListView({model: this.model}));
+      this.games = new ht.Views.LobbyGamesListView({model: this.model});
+      this.$el.append(this.games.el);
     }
   },
 
