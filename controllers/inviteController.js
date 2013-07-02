@@ -45,5 +45,6 @@ exports.create = function(req, res){
 };
 
 exports.accept = function(req, res){
-  console.log("invitation accepted");
+  console.log(req.body);
+  res.end();
 }
