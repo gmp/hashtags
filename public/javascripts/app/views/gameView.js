@@ -13,7 +13,6 @@ ht.Views.GameView = Backbone.View.extend({
 
     // create reference to current player in game model's players array
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
-    console.log("this.myPlayer in GameView: ", this.myPlayer);
     this.render();
 
     _.bindAll(this, 'mediaSelect');
