@@ -7,7 +7,7 @@ ht.Templates.CreateGameTemplate = _.template(''+
       '<h3>#CreateNewGame</h2>'+
     '</div>'+
   '</div>'+
-  '<form>'+
+  '<form id="game-title-form">'+
     '<div class="row">'+
       '<div class="small-2 columns">'+
         '<label for="right-label" class="right inline">#Title</label>'+
@@ -17,7 +17,7 @@ ht.Templates.CreateGameTemplate = _.template(''+
       '</div>'+
     '</div>'+
   '</form>'+
-  '<ul class="small-block-grid-2">'+
+  '<ul class="small-block-grid-2 text-center">'+
       '<li><img id="player1" class="avatar" src=" <%= avatarURL %> "></li>'+
       '<li><img id="player2" class="avatar avatar-contain" src="images/placeholder.jpg"></li>'+
       '<li><img id="player3" class="avatar avatar-contain" src="images/placeholder.jpg"></li>'+
