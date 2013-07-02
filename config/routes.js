@@ -13,6 +13,7 @@ module.exports = function (app) {
   app.patch('/games/:id', game.updateById);
 
   app.post('/invite/create', invite.create)
+  app.get('/invites/accept', invite.accept);
 
 
   app.get('/auth/instagram',

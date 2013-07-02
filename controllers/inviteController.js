@@ -43,3 +43,7 @@ exports.create = function(req, res){
     res.end();
   });
 };
+
+exports.accept = function(req, res){
+  console.log("invitation accepted");
+}

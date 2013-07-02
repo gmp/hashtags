@@ -21,6 +21,16 @@ ht.Views.LobbyInvitesView = Backbone.View.extend({
   inviteResponse: function(e) {
     var inviteId = $(e.target).data('invite-id');
     console.log('herro:', inviteId);
+    $.ajax({
+      url: '/invites/accept/',
+      type: 'GET',
+      success: function(data){
+        
+      },
+      error: function(){
+        console.log('error');
+      }
+    });
   },
 
   declineResponse: function(e) {
