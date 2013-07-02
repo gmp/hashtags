@@ -27,10 +27,22 @@ ht.Views.PlayerView = Backbone.View.extend({
         this.$el.append(this.subView.el);
       }
 
-    // else if the current round is not over
+    // else if the current round is not over and you're the judge and
+    // and not everyone has submitted...
     } else {
+      if(this.attributes.myPlayer.isJ) {
+        this.subView && this.subView.remove();
+        this.$el.empty();
+        console.log('you\' in the JudgeView');
+        this.subView = new ht.Views.JudgeView({
+          model: this.model
+        });
+        this.$el.append(this.subView.el);
+      } else
+
       // if player has not submitted image and not selected hashtag
       if (!this.attributes.myPlayer.submitted && !this.hashtagSelected) {
+        console.log('this view too?');
         this.subView && this.subView.remove();
         this.$el.empty();
         this.subView = new ht.Views.PlayerHashtagSelectView({
@@ -65,6 +77,7 @@ ht.Views.PlayerView = Backbone.View.extend({
           }
         });
         this.$el.append(this.subView.el);
+        console.log(this);
       }
     }
   },

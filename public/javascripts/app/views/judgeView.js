@@ -17,13 +17,11 @@ ht.Views.JudgeView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    console.log("players: ", this.model.get('players'));
     this.$el.append(this.template({players: this.model.get('players')}));
   },
 
   playerSubmit: function() {
     var self = this;
-    console.log("GameWaitingView");
     this.model.fetch({
       success: function(){
         self.render();
@@ -34,8 +32,10 @@ ht.Views.JudgeView = Backbone.View.extend({
     });
   },
 
-  judgeChoose: function() {
-    console.log("judge chooses: ");
+  judgeChoose: function(e) {
+    if(confirm("Are you sure about your choice?")){
+      console.log(e.target);
+    }
   }
 
 });
