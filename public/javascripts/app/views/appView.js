@@ -13,12 +13,10 @@ ht.Views.AppView = Backbone.View.extend({
 
 
   initialize: function() {
-
     _.bindAll(this, 'createSockets', 'leaveRooms');
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
     ht.dispatcher.on('createSockets', this.createSockets);
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
-
   },
 
   leaveRooms: function(){
@@ -48,7 +46,7 @@ ht.Views.AppView = Backbone.View.extend({
       }
       method = _.bind(method, this);
       this.socket.on(key, method);
-    };
+    }
   },
 
   giveClient: function(data){
@@ -90,7 +88,6 @@ ht.Views.AppView = Backbone.View.extend({
     });
     this.user.fetch({
       success: function(user) {
-        console.log(self.user);
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
@@ -107,8 +104,7 @@ ht.Views.AppView = Backbone.View.extend({
     this.$el.empty();
     this.$el.append(
       new ht.Views.CreateGameView({
-      model: this.user,
-      dispatcher: ht.dispatcher
+      model: this.user
     }).el);
   },
 

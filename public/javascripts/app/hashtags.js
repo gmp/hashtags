@@ -15,8 +15,7 @@ var ht = {
 };
 
 ht.Helpers.getMyPlayer = function(gameModel, userId){
-  var players = gameModel.attributes.players;
-  return players[userId];
+  return gameModel.get('players')[userId];
 };
 
 

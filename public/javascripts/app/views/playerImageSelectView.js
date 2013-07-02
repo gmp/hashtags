@@ -43,10 +43,10 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     for (var i = 0, l = media.length; i < l; i++) {
       if (media[i].type === "image") {
         var image = media[i];
-        htmlChunk += '<div class="media-container"><img src="'+image.images.low_resolution.url+'"><button data-type ="'+image.type+'" data-url="'+image.images.low_resolution.url+'" class="media-select">Submit Image</button></div><hr>';
+        htmlChunk += '<div class="text-center media-container row"><div class="small-11 small-centered columns"><img class="media" src="'+image.images.low_resolution.url+'"><button data-type ="'+image.type+'" data-url="'+image.images.low_resolution.url+'" class="media-select expand">Submit Image</button></div></div>';
       } else if (media[i].type === "video") {
         var video = media[i];
-        htmlChunk += '<div class="media-container"><video src="'+video.videos.low_resolution.url+'"></video><button data-type ="'+video.type+'" data-url="'+video.videos.low_resolution.url+'" class="media-select">Submit Video</button></div><hr>';
+        htmlChunk += '<div class="text-center media-container row"><div class="small-11 small-centered columns"><video class="media" src="'+video.videos.low_resolution.url+'"></video><button data-type ="'+video.type+'" data-url="'+video.videos.low_resolution.url+'" class="media-select expand">Submit Video</button></div></div>';
       }
     }
     this.$el.append(htmlChunk);

@@ -1,25 +1,3 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #dc3983;
-  background: #f2e0ea;
-}
-
-a {
-  color: #00b7ff;
-}
-
-h1 {
-  margin: 0;
-  font-size: 22em;
-  text-shadow: 0.03em 0 whitesmoke;
-}
-
-h3 {
-  font-size: 1.5em;
-  margin: -75px 0 0 0;
-}
-
 .login {
   font-family: 'Permanent Marker';
   text-align: center;
@@ -37,9 +15,51 @@ h3 {
   background: url('/images/Instagram_hover.png');
 }
 
+.lobby-header {
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.invites {
+  padding-bottom: 1em;
+}
+
+.invite {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 13px;
+  background-color: lightgray;
+}
+
+.game {
+  font-size: 1.5em;
+}
+
+.menu-icon {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+.right-icon {
+  margin-left: 7em;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+}
+
+.avatar-small {
+  width: 75px;
+  height: 75px;
+}
+
+#startGameButton {
+  display: none;
+}
+
 .new-game-modal {
   display: none;
-  height: 150px;
   width: 200px;
   background: white;
   position: fixed;
@@ -49,24 +69,8 @@ h3 {
   margin-left: -100px;
   z-index: 999999;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 1em;
 }
-
-.invite-game-modal {
-  display: none;
-  height: 150px;
-  width: 200px;
-  background: white;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -100px;
-  z-index: 999999;
-  text-align: center;
-  padding-top: 50px;
-}
-
 
 .mask {
   display: none;
@@ -80,25 +84,16 @@ h3 {
   z-index: 999;
 }
 
-.avatar-row {
-  display: inline-block;
+.game-header {
+  margin-bottom: 1em;
+  background-color: lightgrey;
+  text-align: center;
 }
 
-.avatar-contain {
-  float: left;
-  height: 100px;
-  width: 100px;
-  border: 1px solid black;
+.text-center {
+  text-align: center;
 }
 
-.avatar-self {
-  float: left;
-  height: 100px;
-  width: 100px;
-  border: 1px solid black;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
+.media {
+  width: 100%;
 }
