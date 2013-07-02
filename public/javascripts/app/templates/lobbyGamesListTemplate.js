@@ -10,7 +10,7 @@ ht.Templates.LobbyGamesListTemplate = _.template(''+
             '<li><b>Players:</b></li>'+
             '<ul class="inline-list">'+
             '<% for(var j = 0; j < games[i].players.length; j++) { %>'+
-              '<li><%= games[i].players[j].username %></li>'+
+              '<li><%= games[i].players[j].username %><span><%= games[i].players[j].score %></span></li>'+
             '<% } %>'+
             '</ul>'+
             '<li><a class="button small expand" href="/#game/<%= games[i].gameId %>">Play!</a></li>'+
