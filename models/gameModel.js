@@ -9,7 +9,7 @@ var GameSchema = new Schema({
   gameEnd : {type:Boolean, default: false},
   judge  : {username: String, avatarURL: String, userGlobalId: String},
   numberOfSub : Number,
-  players : {},
+  players : Object,
   previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
 });
 

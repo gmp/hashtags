@@ -1,5 +1,5 @@
 var Game = require('../models/gameModel.js');
-var socketEvents = require('../config/socketEvents.js');
+var clients = require('../config/socketEvents.js').clients;
 
 exports.findById = function(req, res){
   var id = req.params.id;
@@ -10,16 +10,22 @@ exports.findById = function(req, res){
 };
 
 exports.updateById = function(req, res){
-  var id = req.params.id;
-  var room = req.body._id;
-
-  console.log("req.body", req.body);
-  Game.findById(id, function(err, obj){
-    console.log(obj);
-    obj.save(function(err){
-      if(err)(console.error(err));
-      socketEvents.io.sockets.in(room).emit('otherPlayerSubmit');
-    });
-  });
+  var gameId = req.params.id;
+  var player = req.body;
+  if(player.isJ){
+    console.log("you are the judge and I don't know what to do")
+  } else {
+    console.log('sup');
+	  Game.findById(gameId, function (err, obj){
+      obj.set('players.'+player.userGlobalId, player);
+	    obj.save( function (err, doc){
+	      if(err) console.error(err);
+        console.log(doc);
+	      clients[player.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+        res.writeHead(204);
+        res.end();
+	    });
+	  });
+  }
 };
 
