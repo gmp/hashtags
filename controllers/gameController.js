@@ -1,5 +1,5 @@
 var Game = require('../models/gameModel.js');
-var socketEvents = require('../config/socketEvents.js');
+var clients = require('../config/socketEvents.js').clients;
 
 exports.findById = function(req, res){
   var id = req.params.id;
@@ -17,16 +17,15 @@ exports.updateById = function(req, res){
   } else {
     console.log('sup');
 	  Game.findById(gameId, function (err, obj){
-      console.log('this is the old player', obj.players[player.userGlobalId]);
-      console.log('this is the new player', player);
-	    obj.players[player.userGlobalId] = player;
-	    obj.save(function (err){
-	      if(err)(console.error(err));
-	      socketEvents.io.sockets.in(gameId).emit('otherPlayerSubmit');
+      obj.set('players.'+player.userGlobalId, player);
+	    obj.save( function (err, doc){
+	      if(err) console.error(err);
+        console.log(doc);
+	      clients[player.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+        res.writeHead(204);
+        res.end();
 	    });
 	  });
   }
-  res.writeHead(204);
-  res.end();
 };
 
