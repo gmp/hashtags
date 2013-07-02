@@ -13,7 +13,6 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    console.log("players: ", this.model.get('players'));
     this.$el.append(this.template({players: this.model.get('players')}));
   },
 
