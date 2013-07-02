@@ -48,7 +48,7 @@ ht.Views.PlayerView = Backbone.View.extend({
         this.subView = new ht.Views.PlayerImageSelectView({
           model: this.model,
           attributes: {
-            accessToken: this.attributes.user.attributes.accessToken,
+            accessToken: this.attributes.user.get('accessToken'),
             hashtag: this.hashtagSelected
           }
         });
@@ -59,7 +59,10 @@ ht.Views.PlayerView = Backbone.View.extend({
         this.subView && this.subView.remove();
         this.$el.empty();
         this.subView = new ht.Views.PlayerWaitingView({
-          model: this.model
+          model: this.model,
+          attributes: {
+            myPlayer: this.attributes.myPlayer
+          }
         });
         this.$el.append(this.subView.el);
       }
