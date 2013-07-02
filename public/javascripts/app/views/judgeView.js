@@ -33,8 +33,23 @@ ht.Views.JudgeView = Backbone.View.extend({
   },
 
   judgeChoose: function(e) {
-    if(confirm("Are you sure about your choice?")){
-      console.log(e.target);
+    var counter = 0;
+    var players = this.model.get('players');
+    _.each(players, function (player) {
+      if(player.submitted){
+        counter++;
+      }
+    });
+
+    var remainingSubs = Object.keys(players).length - 1 - counter;
+    if(counter === Object.keys(players).length - 1){
+      if(confirm("Are you sure about your choice?")){
+       console.log(e);
+      }
+    } else if(remainingSubs === 1){
+      alert('awaiting 1 submission');
+    } else {
+      alert('awaiting '+remainingSubs+' submissions');
     }
   }
 
