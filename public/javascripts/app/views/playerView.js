@@ -52,7 +52,7 @@ ht.Views.PlayerView = Backbone.View.extend({
       } else if (this.options.myPlayer.submitted) {
         this.subView && this.subView.remove();
         this.$el.empty();
-        this.subView = new ht.Views.GameWaitingView({
+        this.subView = new ht.Views.PlayerWaitingView({
           model: this.model,
           player: this.options.myPlayer
         });

@@ -1,8 +1,8 @@
-ht.Views.GameWaitingView = Backbone.View.extend({
+ht.Views.PlayerWaitingView = Backbone.View.extend({
 
   className: 'waiting',
 
-  template: ht.Templates.GameWaitingTemplate,
+  template: ht.Templates.PlayerWaitingTemplate,
 
 
   initialize: function() {

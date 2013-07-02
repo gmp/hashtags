@@ -1,4 +1,4 @@
-ht.Templates.GameWaitingTemplate = _.template(''+
+ht.Templates.PlayerWaitingTemplate = _.template(''+
   '<% _.each(players, function(player) { %>'+
     '<% if(player.submitted) { %>'+
       '<div class="row text-center">'+
