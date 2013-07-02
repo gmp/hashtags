@@ -34,7 +34,6 @@ ht.Views.PlayerView = Backbone.View.extend({
       if(this.attributes.myPlayer.isJ) {
         this.subView && this.subView.remove();
         this.$el.empty();
-        console.log('you\' in the JudgeView');
         this.subView = new ht.Views.JudgeView({
           model: this.model,
           attributes: {

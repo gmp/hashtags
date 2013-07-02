@@ -1,5 +1,10 @@
 ht.Templates.JudgeTemplate = _.template(''+
   '<div>I\'m a judge!</div>'+
+  '<% if(remainingSubs) { %>'+
+    '<h4>Awaiting <%= remainingSubs %> submissions</h4>'+
+  '<% } else { %>'+
+    '<h4>Ready to vote!</h4>'+
+  '<% } %>'+
   '<% _.each(players, function(player) { %>'+
     '<% if(player.submitted) { %>'+
       '<div class="row text-center">'+
