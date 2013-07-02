@@ -23,10 +23,10 @@ exports.updateById = function(req, res){
 	    obj.save(function (err){
 	      if(err)(console.error(err));
 	      socketEvents.io.sockets.in(gameId).emit('otherPlayerSubmit');
+        res.writeHead(204);
+        res.end();
 	    });
 	  });
   }
-  res.writeHead(204);
-  res.end();
 };
 
