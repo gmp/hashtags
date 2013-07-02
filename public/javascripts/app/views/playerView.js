@@ -27,15 +27,19 @@ ht.Views.PlayerView = Backbone.View.extend({
         this.$el.append(this.subView.el);
       }
 
-    // else if the current round is not over and you're the judge and
-    // and not everyone has submitted...
+    // else if the current round is not over
     } else {
+
+    // if you're the judge and not everyone has submitted...
       if(this.attributes.myPlayer.isJ) {
         this.subView && this.subView.remove();
         this.$el.empty();
         console.log('you\' in the JudgeView');
         this.subView = new ht.Views.JudgeView({
-          model: this.model
+          model: this.model,
+          attributes: {
+            myPlayer: this.attributes.myPlayer
+          }
         });
         this.$el.append(this.subView.el);
       } else

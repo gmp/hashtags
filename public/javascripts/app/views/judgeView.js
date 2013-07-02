@@ -17,7 +17,8 @@ ht.Views.JudgeView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template({players: this.model.get('players')}));
+    this.$el.append(this.template({players: this.model.get('players'), myPlayer: this.attributes.myPlayer}));
+    console.log("this in JudgeView", this);
   },
 
   playerSubmit: function() {
