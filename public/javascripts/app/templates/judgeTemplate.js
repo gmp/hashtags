@@ -10,10 +10,10 @@ ht.Templates.JudgeTemplate = _.template(''+
       '<div class="row text-center">'+
         '<div class="small-11 small-centered columns">'+
           '<% if(player.submission.type === "image") { %>'+
-            '<img class="media" src="<%= player.submission.url %>">'+
+            '<img class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>">'+
             '<h4><%= player.submission.hashtag %></h4>'+
           '<% } else { %>'+
-            '<video class="media" src="<%= player.submission.url %>"></video>'+
+            '<video class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>"></video>'+
             '<h4><%= player.submission.hashtag %></h4>'+
           '<% } %>'+
         '</div>'+

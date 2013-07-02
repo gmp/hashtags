@@ -41,9 +41,17 @@ ht.Views.JudgeView = Backbone.View.extend({
   },
 
   judgeChoose: function(e) {
+    console.log($(e.target).data('submittedby'));
+    var counter = 0;
+    var players = this.model.get('players');
+    _.each(players, function (player) {
+      if(player.submitted){
+        counter++;
+      }
+    });
     if(counter === Object.keys(players).length - 1){
       if(confirm("Are you sure about your choice?")){
-       console.log(e);
+       console.log($(e.target).data('submittedby'));
       }
     }
   }
