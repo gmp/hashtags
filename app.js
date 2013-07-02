@@ -7,11 +7,12 @@ var controller = require('./config/routes.js'),
 
 controller(app);
 
+require('./controllers/inviteDummy.js')();
+
 require('./controllers/userDummy.js')();
 
 require('./controllers/gameDummy.js')();
 
-require('./controllers/inviteDummy.js')();
 
 
 var server = http.createServer(app).listen(app.get('port'), function(){
