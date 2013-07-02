@@ -15,13 +15,13 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template({hashtag: this.options.hashtag}));
+    this.$el.append(this.template({hashtag: this.attributes.hashtag}));
   },
 
   getMedia: function() {
     var self = this;
-    var hashtagQuery = this.options.hashtag;
-    var accessToken = this.options.accessToken;
+    var hashtagQuery = this.attributes.hashtag;
+    var accessToken = this.attributes.accessToken;
     hashtagQuery = hashtagQuery.slice(1);
     console.log(hashtagQuery);
     $.ajax({
@@ -43,17 +43,27 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     for (var i = 0, l = media.length; i < l; i++) {
       if (media[i].type === "image") {
         var image = media[i];
-        htmlChunk += '<div class="text-center media-container row"><div class="small-11 small-centered columns"><img class="media" src="'+image.images.low_resolution.url+'"><button data-type ="'+image.type+'" data-url="'+image.images.low_resolution.url+'" class="media-select expand">Submit Image</button></div></div>';
+        htmlChunk += '<div class="text-center media-container row">'+
+                        '<div class="small-11 small-centered columns">'+
+                          '<img class="media" src="'+image.images.low_resolution.url+'">'+
+                          '<button data-type ="'+image.type+'" data-url="'+image.images.low_resolution.url+'" class="media-select expand">Submit Image</button>'+
+                        '</div>'+
+                      '</div>';
       } else if (media[i].type === "video") {
         var video = media[i];
-        htmlChunk += '<div class="text-center media-container row"><div class="small-11 small-centered columns"><video class="media" src="'+video.videos.low_resolution.url+'"></video><button data-type ="'+video.type+'" data-url="'+video.videos.low_resolution.url+'" class="media-select expand">Submit Video</button></div></div>';
+        htmlChunk += '<div class="text-center media-container row">'+
+                        '<div class="small-11 small-centered columns">'+
+                          '<video class="media" src="'+video.videos.low_resolution.url+'"></video>'+
+                          '<button data-type ="'+video.type+'" data-url="'+video.videos.low_resolution.url+'" class="media-select expand">Submit Video</button>'+
+                        '</div>'+
+                      '</div>';
       }
     }
     this.$el.append(htmlChunk);
   },
 
   submitMedia: function(e) {
-    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.options.hashtag);
+    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.attributes.hashtag);
   }
 
 });

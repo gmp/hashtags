@@ -118,8 +118,10 @@ ht.Views.AppView = Backbone.View.extend({
         self.$el.empty();
         self.$el.append(
           new ht.Views.GameView({
-          model: game,
-          user: self.user
+            model: game,
+            attributes: {
+              user: self.user
+            }
         }).el);
       },
       error: function(game, res) {

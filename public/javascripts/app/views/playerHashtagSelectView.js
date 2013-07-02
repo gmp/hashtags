@@ -11,7 +11,7 @@ ht.Views.PlayerHashtagSelectView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template({hand: this.options.hand}));
+    this.$el.append(this.template({hand: this.attributes.hand}));
   },
 
   hashtagClick: function(e) {
