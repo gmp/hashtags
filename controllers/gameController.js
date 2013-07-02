@@ -17,8 +17,8 @@ exports.updateById = function(req, res){
   } else {
     console.log('sup');
 	  Game.findById(gameId, function (err, obj){
-      console.log('this is the old player', obj.players[player.userGlobalId]);
-      console.log('this is the new player', player);
+      // console.log('this is the old player', obj.players[player.userGlobalId]);
+      // console.log('this is the new player', player);
 	    obj.players[player.userGlobalId] = player;
 	    obj.save(function (err){
 	      if(err)(console.error(err));
@@ -29,4 +29,3 @@ exports.updateById = function(req, res){
 	  });
   }
 };
-
