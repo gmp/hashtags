@@ -23,6 +23,9 @@ exports.create = function(req, res){
           }
           obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3});
         } else {
+          if(!obj.invites){
+            obj.invites = [];
+          }
           obj.invites.push({invite: invite._id, author: invite.author});
           if(clients[obj._id]){
             clients[obj._id].emit('changeInUser');
