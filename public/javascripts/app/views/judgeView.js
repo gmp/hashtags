@@ -60,6 +60,7 @@ ht.Views.JudgeView = Backbone.View.extend({
         });
         prevRound.prompt = this.model.get('prompt');
         this.model.set('previousRound', prevRound);
+        var selfie = this;
         this.model.save( prevRound, {
           patch: true,
           success: function(obj){
