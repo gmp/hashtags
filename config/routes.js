@@ -11,8 +11,9 @@ module.exports = function (app) {
 
   app.get('/games/:id', game.findById);
   app.patch('/games/:id', game.updateById);
+  app.put('/games/:id', game.handleJudgePut);
 
-  app.post('/invite/create', invite.create)
+  app.post('/invite/create', invite.create);
 
 
   app.get('/auth/instagram',
