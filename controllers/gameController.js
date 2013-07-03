@@ -31,8 +31,9 @@ exports.updateById = function(req, res){
 
 exports.handleJudgePut = function(req, res){
   var gameId = req.params.id;
-  var player = req.body;
+  var whatIsThis = req.body;
   Game.findById(gameId, function (err, obj){
     console.log("obj", obj);
+    console.log("whatIsThis: ", whatIsThis);
   });
 };
