@@ -15,48 +15,72 @@ ht.Views.PlayerView = Backbone.View.extend({
     // but the current player has not 'continued'
     // render the gameEndView to see round results
     if (this.model.gameEnded) {
-      if (!this.options.myPlayer.continued) {
+      if (!this.attributes.myPlayer.continued) {
         this.subView && this.subView.remove();
         this.$el.empty();
         this.subView = new ht.Views.GameEndView({
           model: this.model,
-          player: this.options.myPlayer
+          attributes: {
+            player: this.attributes.myPlayer
+          }
         });
         this.$el.append(this.subView.el);
       }
 
     // else if the current round is not over
     } else {
+
+    // if you're the judge and not everyone has submitted...
+      if(this.attributes.myPlayer.isJ) {
+        this.subView && this.subView.remove();
+        this.$el.empty();
+        this.subView = new ht.Views.JudgeView({
+          model: this.model,
+          attributes: {
+            myPlayer: this.attributes.myPlayer
+          }
+        });
+        this.$el.append(this.subView.el);
+      } else
+
       // if player has not submitted image and not selected hashtag
-      if (!this.options.myPlayer.submitted && !this.hashtagSelected) {
+      if (!this.attributes.myPlayer.submitted && !this.hashtagSelected) {
+        console.log('this view too?');
         this.subView && this.subView.remove();
         this.$el.empty();
         this.subView = new ht.Views.PlayerHashtagSelectView({
           model: this.model,
-          hand: this.options.myPlayer.hand
+          attributes: {
+            hand: this.attributes.myPlayer.hand
+          }
         });
         this.$el.append(this.subView.el);
 
       // if player has not submitted image, but selected hashtag
-      } else if (!this.options.myPlayer.submitted && this.hashtagSelected) {
+      } else if (!this.attributes.myPlayer.submitted && this.hashtagSelected) {
         this.subView && this.subView.remove();
         this.$el.empty();
         this.subView = new ht.Views.PlayerImageSelectView({
           model: this.model,
-          accessToken: this.options.user.attributes.accessToken,
-          hashtag: this.hashtagSelected
+          attributes: {
+            accessToken: this.attributes.user.get('accessToken'),
+            hashtag: this.hashtagSelected
+          }
         });
         this.$el.append(this.subView.el);
 
       // if player has submitted, but game has not ended
-      } else if (this.options.myPlayer.submitted) {
+      } else if (this.attributes.myPlayer.submitted) {
         this.subView && this.subView.remove();
         this.$el.empty();
-        this.subView = new ht.Views.GameWaitingView({
+        this.subView = new ht.Views.PlayerWaitingView({
           model: this.model,
-          player: this.options.myPlayer
+          attributes: {
+            myPlayer: this.attributes.myPlayer
+          }
         });
         this.$el.append(this.subView.el);
+        console.log(this);
       }
     }
   },

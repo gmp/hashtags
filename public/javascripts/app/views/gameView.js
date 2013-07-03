@@ -9,47 +9,54 @@ ht.Views.GameView = Backbone.View.extend({
     this.joinGame();
 
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
-    ht.dispatcher.trigger('enterGame', {playerId: this.options.user.id, gameId: this.model.id});
+    ht.dispatcher.trigger('enterGame', {playerId: this.attributes.user.id, gameId: this.model.id});
 
     // create reference to current player in game model's players array
-
-    this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.options.user.id);
-    console.log("this.myPlayer in GameView: ", this.myPlayer);
+    this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.render();
 
     _.bindAll(this, 'mediaSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
-
-  joinGame: function(){
-    ht.dispatcher.trigger('joinGame', this.model.attributes.id);
-  },
-
   events: {
     'click button' : 'handleClick'
   },
 
-  handleClick: function(){
-  },
-
-
   render: function() {
     this.$el.empty();
+
     this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
+
     if(this.myPlayer.isJudge){
-      this.subView = new ht.Views.JudgeView({ model: this.model, myPlayer: this.myPlayer });
+      this.subView = new ht.Views.JudgeView({
+        model: this.model,
+        attributes: {
+          myPlayer: this.myPlayer
+        }
+      });
       this.$el.append(this.subView.el);
+
     } else {
-      this.subView = new ht.Views.PlayerView({ model: this.model, user: this.options.user, myPlayer: this.myPlayer });
+      this.subView = new ht.Views.PlayerView({
+        model: this.model,
+        attributes: {
+          user: this.attributes.user,
+          myPlayer: this.myPlayer
+        }
+      });
       this.$el.append(this.subView.el);
     }
+  },
+
+  joinGame: function(){
+    ht.dispatcher.trigger('joinGame', this.model.get('id'));
   },
 
   mediaSelect: function(submissionUrl, type, hashtag) {
     console.log(submissionUrl, hashtag);
     var players = this.model.get('players');
-    var player = players[this.options.user.id];
+    var player = players[this.attributes.user.id];
     player.submitted = true;
     player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
     this.model.set('players', players);
@@ -68,7 +75,7 @@ ht.Views.GameView = Backbone.View.extend({
         });
       },
       error: function(){
-        console.error("bummer dude");
+        console.error('bummer dude');
       }
     });
   }

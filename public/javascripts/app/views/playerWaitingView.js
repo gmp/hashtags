@@ -1,8 +1,8 @@
-ht.Views.GameWaitingView = Backbone.View.extend({
+ht.Views.PlayerWaitingView = Backbone.View.extend({
 
   className: 'waiting',
 
-  template: ht.Templates.GameWaitingTemplate,
+  template: ht.Templates.PlayerWaitingTemplate,
 
 
   initialize: function() {
@@ -13,13 +13,11 @@ ht.Views.GameWaitingView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    console.log("players: ", this.model.get('players'));
-    this.$el.append(this.template({players: this.model.get('players')}));
+    this.$el.append(this.template({players: this.model.get('players'), myPlayer: this.attributes.myPlayer}));
   },
 
   playerSubmit: function() {
     var self = this;
-    console.log("GameWaitingView");
     this.model.fetch({
       success: function(){
         self.render();
