@@ -10,12 +10,14 @@ var GameSchema = new Schema({
   judge  : {username: String, avatarURL: String, userGlobalId: String},
   numberOfSub : Number,
   players : Object,
-  previousRound : [{ type: ObjectId, ref: 'PrevRound'}]
+  previousRound : Object
 });
 
 module.exports = mongoose.model('Games', GameSchema);
 
-// user: {
+
+// this is what player looks like
+// userID: {
 //         hand: [String],
 //         score: Number,
 //         username: String,
