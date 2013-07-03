@@ -41,7 +41,6 @@ ht.Views.JudgeView = Backbone.View.extend({
   },
 
   judgeChoose: function(e) {
-    console.log($(e.target).data('submittedby'));
     var counter = 0;
     var players = this.model.get('players');
     _.each(players, function (player) {
@@ -51,7 +50,35 @@ ht.Views.JudgeView = Backbone.View.extend({
     });
     if(counter === Object.keys(players).length - 1){
       if(confirm("Are you sure about your choice?")){
-       console.log($(e.target).data('submittedby'));
+        var prevRound = {};
+        prevRound.winningSub = e.target.src;
+        prevRound.winner = $(e.target).data('submittedby');
+        var selfie = this;
+        prevRound.players = [];
+        _.each(players, function(player){
+          prevRound.players.push({username: player.username, submissionURL: player.submission});
+        });
+        console.log(this.model);
+        prevRound.prompt = this.model.prompt;
+        this.model.set('previousRound', prevRound);
+        var gameID = this.model.id;
+        this.model.save(gameID, {
+          patch: true,
+          success: function(obj){
+            selfie.model.fetch({
+              success: function (obj, res){
+                selfie.model = obj;
+                selfie.subView.render();
+              },
+              error: function (){
+                console.log('dude where\'s my subview?');
+              }
+            });
+          },
+          error: function(){
+            console.error('bummer dude. save failed.');
+          }
+        });
       }
     }
   }

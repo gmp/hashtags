@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 var PrevRound = new Schema({
   prompt: String,
-  players : [{ type: ObjectId, ref: 'Player' }],
+  players : [{ username: String, submission: Object}],
   winner : String,
   winningSub : String
 });
