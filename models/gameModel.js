@@ -15,7 +15,9 @@ var GameSchema = new Schema({
 
 module.exports = mongoose.model('Games', GameSchema);
 
-// user: {
+
+// this is what player looks like
+// userID: {
 //         hand: [String],
 //         score: Number,
 //         username: String,
