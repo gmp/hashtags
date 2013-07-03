@@ -12,8 +12,8 @@ exports.findById = function(req, res){
 exports.updateById = function(req, res){
   var gameId = req.params.id;
   var player = req.body;
-  if(player.isJ){
-    console.log("you are the judge and I don't know what to do")
+  if(req.body.winner){
+    console.log("you are the judge and I don't know what to do: ", player);
   } else {
     console.log('sup');
 	  Game.findById(gameId, function (err, obj){
