@@ -20,7 +20,7 @@ exports.updateById = function(req, res){
       obj.set('players.'+player.userGlobalId, player);
 	    obj.save( function (err, doc){
 	      if(err) console.error(err);
-        console.log(doc);
+        //console.log(doc);
 	      clients[player.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
         res.writeHead(204);
         res.end();
@@ -33,7 +33,7 @@ exports.handleJudgePut = function(req, res){
   var gameId = req.params.id;
   var whatIsThis = req.body;
   Game.findById(gameId, function (err, obj){
-    console.log("obj", obj);
+    //console.log("obj", obj);
     console.log("whatIsThis: ", whatIsThis);
   });
 };

@@ -56,14 +56,13 @@ ht.Views.JudgeView = Backbone.View.extend({
         var selfie = this;
         prevRound.players = [];
         _.each(players, function(player){
-          prevRound.players.push({username: player.username, submissionURL: player.submission});
+          prevRound.players.push({username: player.username, submission: player.submission});
         });
-        console.log(this.model);
         prevRound.prompt = this.model.prompt;
         this.model.set('previousRound', prevRound);
+        prevRound = this.model.get('previousRound');
         var gameID = this.model.id;
-        this.model.save(gameID, {
-          patch: true,
+        this.model.save({
           success: function(obj){
             selfie.model.fetch({
               success: function (obj, res){
