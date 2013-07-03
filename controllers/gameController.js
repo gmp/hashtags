@@ -28,3 +28,7 @@ exports.updateById = function(req, res){
 	  });
   }
 };
+
+var handleJudgePost = function (){
+  
+}

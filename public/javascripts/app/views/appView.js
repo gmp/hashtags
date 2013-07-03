@@ -54,7 +54,6 @@ ht.Views.AppView = Backbone.View.extend({
   },
 
   changeInUser: function(){
-    console.log('recieved a change');
     ht.dispatcher.trigger('changeInUser');
   },
 

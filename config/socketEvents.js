@@ -11,9 +11,7 @@ exports.socketStart= function (server){
         socket.emit('giveClient');
 
         socket.on('setUpClients', function (data) {
-          console.log(data);
           socket.userId = data.user;
-          console.log(socket.userId);
           clients[socket.userId] = socket;
         });
 
