@@ -45,10 +45,11 @@ exports.create = function(req, res){
 };
 
 exports.accept = function(req, res){
-  console.log(req.body.inviteId);
+
   //grab invite from database
   Invite.findById(req.body.inviteId, function (err, invite){
     console.log(invite);
+
   });
 
   res.end();

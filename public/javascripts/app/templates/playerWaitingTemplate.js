@@ -1,19 +1,18 @@
-ht.Templates.JudgeTemplate = _.template(''+
-  '<div>You\'re the judge</div>'+
-  '<% if(remainingSubs) { %>'+
-    '<h4>Awaiting <%= remainingSubs %> submissions</h4>'+
-  '<% } else { %>'+
-    '<h4>Ready to vote!</h4>'+
-  '<% } %>'+
+ht.Templates.PlayerWaitingTemplate = _.template(''+
   '<% _.each(players, function(player) { %>'+
     '<% if(player.submitted) { %>'+
       '<div class="row text-center">'+
         '<div class="small-11 small-centered columns">'+
+            '<% if(player.username === myPlayer.username) { %>'+
+              '<h4>You submitted:</h4>'+
+            '<% } else { %>'+
+              '<h4><%= player.username %> submitted:</h4>'+
+            '<% } %>'+
           '<% if(player.submission.type === "image") { %>'+
-            '<img class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>">'+
+            '<img class="media" src="<%= player.submission.url %>">'+
             '<h4><%= player.submission.hashtag %></h4>'+
           '<% } else { %>'+
-            '<video class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>"></video>'+
+            '<video class="media" src="<%= player.submission.url %>"></video>'+
             '<h4><%= player.submission.hashtag %></h4>'+
           '<% } %>'+
         '</div>'+
