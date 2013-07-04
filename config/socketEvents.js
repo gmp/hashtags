@@ -8,9 +8,8 @@ exports.socketStart= function (server){
       io = socketio.listen(server);
 
       io.sockets.on('connection', function (socket) {
-        socket.emit('giveClient');
 
-        socket.on('setUpClients', function (data) {
+        socket.on('gotUserId', function(data) {
           socket.userId = data.user;
           clients[socket.userId] = socket;
         });

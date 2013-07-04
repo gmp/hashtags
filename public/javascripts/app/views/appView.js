@@ -3,19 +3,16 @@ ht.Views.AppView = Backbone.View.extend({
   id: '#hashtags',
 
   socket_events: {
-
-    "giveClient": "giveClient",
     "changeInUser" : "changeInUser",
     "joinedRoom" : "joinedRoom",
     "otherPlayerSubmit" : "otherPlayerSubmit"
-
   },
 
-
   initialize: function() {
-    _.bindAll(this, 'createSockets', 'leaveRooms');
+    this.createSockets();
+    _.bindAll(this, 'joinGame','leaveRooms');
+    ht.dispatcher.on('joinGame', this.joinGame);
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
-    ht.dispatcher.on('createSockets', this.createSockets);
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
@@ -28,8 +25,6 @@ ht.Views.AppView = Backbone.View.extend({
 
   createSockets: function() {
     this.socket = io.connect();
-    _.bindAll(this, 'joinGame');
-    ht.dispatcher.on('joinGame', this.joinGame);
     if (this.socket_events && _.size(this.socket_events) > 0) {
       this.delegateSocketEvents(this.socket_events);
     }
@@ -47,10 +42,6 @@ ht.Views.AppView = Backbone.View.extend({
       method = _.bind(method, this);
       this.socket.on(key, method);
     }
-  },
-
-  giveClient: function(data){
-    this.socket.emit('setUpClients', {user: this.user.id});
   },
 
   changeInUser: function(){
@@ -82,11 +73,13 @@ ht.Views.AppView = Backbone.View.extend({
 
   lobby: function(id) {
     var self = this;
+    this.currentGame && this.currentGame.remove();
     this.user = this.user || new ht.Models.UserModel({
       id: id
     });
     this.user.fetch({
       success: function(user) {
+        self.socket.emit('gotUserId', {user: user.get('id')});
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
@@ -115,13 +108,13 @@ ht.Views.AppView = Backbone.View.extend({
     game.fetch({
       success: function(game, res) {
         self.$el.empty();
-        self.$el.append(
-          new ht.Views.GameView({
+        self.currentGame = new ht.Views.GameView({
             model: game,
             attributes: {
               user: self.user
             }
-        }).el);
+        });
+        self.$el.append(self.currentGame.el);
       },
       error: function(game, res) {
         console.log("error: ", res);

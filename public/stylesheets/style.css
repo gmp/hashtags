@@ -97,3 +97,7 @@
 .media {
   width: 100%;
 }
+
+#continue {
+  background-color: green;
+}
