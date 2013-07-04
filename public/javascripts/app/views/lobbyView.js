@@ -8,6 +8,8 @@ ht.Views.LobbyView = Backbone.View.extend({
     console.log(this.model);
     _.bindAll(this, 'changeInUser');
     ht.dispatcher.on('changeInUser', this.changeInUser);
+    this.model.on('change:pendingGames', this.render, this);
+    this.model.on('change:invites', this.render, this);
     this.leaveRooms();
     this.render();
   },
