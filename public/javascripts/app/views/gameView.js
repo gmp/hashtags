@@ -9,7 +9,7 @@ ht.Views.GameView = Backbone.View.extend({
     this.joinGame();
 
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
-    ht.dispatcher.trigger('enterGame', {playerId: this.attributes.user.id, gameId: this.model.id});
+    // ht.dispatcher.trigger('enterGame', {playerId: this.attributes.user.id, gameId: this.model.id});
 
     // create reference to current player in game model's players array
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);

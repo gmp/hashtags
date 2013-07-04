@@ -8,7 +8,7 @@ ht.Views.LobbyView = Backbone.View.extend({
     console.log(this.model);
     _.bindAll(this, 'changeInUser');
     ht.dispatcher.on('changeInUser', this.changeInUser);
-    ht.dispatcher.trigger('createSockets');
+    // ht.dispatcher.trigger('createSockets');
     this.leaveRooms();
     this.render();
   },
