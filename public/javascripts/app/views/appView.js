@@ -16,13 +16,6 @@ ht.Views.AppView = Backbone.View.extend({
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
-  leaveRooms: function(){
-    if(this.roomId){
-      this.socket.emit('leaveGame', this.roomId);
-      delete this.roomId;
-    }
-  },
-
   createSockets: function() {
     this.socket = io.connect();
     if (this.socket_events && _.size(this.socket_events) > 0) {
@@ -41,6 +34,13 @@ ht.Views.AppView = Backbone.View.extend({
       }
       method = _.bind(method, this);
       this.socket.on(key, method);
+    }
+  },
+
+  leaveRooms: function(){
+    if(this.roomId){
+      this.socket.emit('leaveGame', this.roomId);
+      delete this.roomId;
     }
   },
 

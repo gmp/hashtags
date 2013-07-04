@@ -4,7 +4,6 @@ exports.joinGame = function(socket, gameId){
 };
 
 exports.leaveGame = function(socket, roomId){
-  console.log('left the game');
   socket.leave(roomId);
 };
 

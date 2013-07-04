@@ -19,10 +19,6 @@ ht.Views.GameView = Backbone.View.extend({
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
-  events: {
-    'click button' : 'handleClick'
-  },
-
   render: function() {
     this.$el.empty();
 
