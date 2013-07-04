@@ -73,13 +73,13 @@ ht.Views.AppView = Backbone.View.extend({
 
   lobby: function(id) {
     var self = this;
+    this.socket.emit('gotUserId', {user: id});
     this.currentGame && this.currentGame.remove();
     this.user = this.user || new ht.Models.UserModel({
       id: id
     });
     this.user.fetch({
       success: function(user) {
-        self.socket.emit('gotUserId', {user: user.get('id')});
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
