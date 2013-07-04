@@ -35,6 +35,7 @@ exports.updateById = function(req, res){
       obj.set('gameEnd', true);
       obj.set('numberOfSub', 0);
       obj.set('previousRound', submitted);
+      console.log(obj);
     } else {
       obj.set('players.'+submitted.userGlobalId, submitted);
     }

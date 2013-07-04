@@ -45,12 +45,49 @@ exports.create = function(req, res){
 };
 
 exports.accept = function(req, res){
-
+  console.log(req.body)
+  var inviteId = req.body.inviteId;
+  var userId  = req.body.userId;
   //grab invite from database
-  Invite.findById(req.body.inviteId, function (err, invite){
-    console.log(invite);
-
+  Invite.findById(inviteId, function (err, invite){
+    var playersArr = [];
+    playersArr.push(invite.player2);
+    playersArr.push(invite.player3);
+    playersArr.push(invite.player4);
+    for(var i = 0; i < playersArr.length; i ++){
+      if(playersArr[i].user === userId){
+        invite.set('player' + (i+2) +'.accepted', 'accepted');
+        invite.set('waitingOn', --invite.waitingOn);
+        moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
+      }
+    }
+    invite.save(function (err, invite){
+       if(err) console.log(err);
+    });
   });
+};
 
-  res.end();
+var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
+  User.findById(userId, function (err, user){
+    for(var i = 0; i < user.invites.length; i ++){
+      if(user.invites[i].invite.toString() === inviteId){
+        user.invites.splice(i, 1);
+        user.set('invites', user.invites);
+      }
+    };
+    var pendingGames = [];
+    pendingGames.push({invite: inviteId, title: title, waitingOn: waitingOn});
+    user.set('pendingGames', pendingGames);
+    user.save(function(err){
+      if(err) console.log(err);
+      res.writeHead(204);
+      res.end();
+    });
+  });
 }
+
+
+
+
+
+
