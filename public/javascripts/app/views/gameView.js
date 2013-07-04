@@ -28,7 +28,7 @@ ht.Views.GameView = Backbone.View.extend({
 
     this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
 
-    if(this.myPlayer.isJudge){
+    if(this.myPlayer.isJ){
       this.subView = new ht.Views.JudgeView({
         model: this.model,
         attributes: {

@@ -1,5 +1,5 @@
 ht.Templates.PlayerWaitingTemplate = _.template(''+
-  '<div>Player X won</div>'
+  '<div>Player X won</div>'+
   '<% _.each(players, function(player) { %>'+
     '<div class="row text-center">'+
       '<div class="small-11 small-centered columns">'+
@@ -20,7 +20,7 @@ ht.Templates.PlayerWaitingTemplate = _.template(''+
   '<% }); %>'+
   '<div class="row">'+
     '<div class="small-9 small-centered columns">'+
-      '<a href="/#lobby/<%= myPlayer.userGlobalId %>" class="button expand" id="continue">Next Round</a>'+
+      '<a href="" class="button expand" id="continue">Next Round</a>'+
     '</div>'+
   '</div>'+
   '<div class="row">'+
