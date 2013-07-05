@@ -63,6 +63,7 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   submitMedia: function(e) {
+    this.remove();
     ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.attributes.hashtag);
   }
 

@@ -68,15 +68,8 @@ ht.Views.JudgeView = Backbone.View.extend({
           success: function(obj){
             selfie.model.fetch({
               success: function (obj, res){
-                console.log(obj);
-                selfie.subView = new ht.Views.GameEndView({
-                  model: obj.attributes.previousRound,
-                  attributes: {
-                    myPlayer: selfie.attributes.myPlayer
-                  }
-                });
-                selfie.$el.empty();
-                selfie.subView.render();
+                selfie.remove();
+                ht.dispatcher.trigger('judgeSelect');
               },
               error: function (){
                 console.log('dude where\'s my subview?');

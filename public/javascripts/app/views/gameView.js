@@ -4,8 +4,6 @@ ht.Views.GameView = Backbone.View.extend({
 
   initialize: function() {
 
-    console.log(this.model);
-
     this.joinGame();
 
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
@@ -15,8 +13,9 @@ ht.Views.GameView = Backbone.View.extend({
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.render();
 
-    _.bindAll(this, 'mediaSelect');
+    _.bindAll(this, 'mediaSelect', 'judgeSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
+    ht.dispatcher.on('judgeSelect', this.judgeSelect);
   },
 
   events: {
@@ -28,7 +27,15 @@ ht.Views.GameView = Backbone.View.extend({
 
     this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
 
-    if(this.myPlayer.isJ){
+    if(this.model.get('gameEnd')){
+      this.subView = new ht.Views.GameEndView({
+        model: this.model.get('previousRound'),
+        attributes: {
+          myPlayer: this.myPlayer
+        }
+      });
+      this.$el.append(this.subView.el);
+    } else if(this.myPlayer.isJ){
       this.subView = new ht.Views.JudgeView({
         model: this.model,
         attributes: {
@@ -54,7 +61,6 @@ ht.Views.GameView = Backbone.View.extend({
   },
 
   mediaSelect: function(submissionUrl, type, hashtag) {
-    console.log(submissionUrl, hashtag);
     var players = this.model.get('players');
     var player = players[this.attributes.user.id];
     player.submitted = true;
@@ -78,6 +84,10 @@ ht.Views.GameView = Backbone.View.extend({
         console.error('bummer dude');
       }
     });
+  },
+
+  judgeSelect: function(prevRound) {
+    this.render();
   }
 
 });
