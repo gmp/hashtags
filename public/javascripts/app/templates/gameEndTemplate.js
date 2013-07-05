@@ -1,6 +1,14 @@
 ht.Templates.GameEndTemplate = _.template(''+
-  '<div><%= winner %> won</div>'+
-  '<div><%= prompt %></div>'+
+  '<div class="game-header row">'+
+    '<div class="small-11 small-centered columns">'+
+      '<h6><%= prompt %><h6>'+
+    '</div>'+
+    '<div class="row">'+
+      '<div class="small-5 small-centered columns">'+
+        '<p>Winner: <%= winner %></p>'+
+      '</div>'+
+    '</div>'+
+  '</div>'+
   '<% _.each(players, function(player) { %>'+
     '<div class="row text-center">'+
       '<div class="small-11 small-centered columns">'+
