@@ -24,9 +24,9 @@ ht.Views.GameView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    if(this.model.get('gameEnd')){
+    if(!this.myPlayer.continued){
       this.subView = new ht.Views.GameEndView({
-        model: this.model.get('previousRound'),
+        model: this.model,
         attributes: {
           myPlayer: this.myPlayer
         }
