@@ -11,7 +11,7 @@ ht.Routes.Router = Backbone.Router.extend({
 
   initialize: function() {
     this.app = new ht.Views.AppView();
-    this.app.render();
+    $('body').append(this.app.$el);
   },
 
   checkState: function() {
