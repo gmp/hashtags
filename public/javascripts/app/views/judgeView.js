@@ -54,8 +54,8 @@ ht.Views.JudgeView = Backbone.View.extend({
     if(counter === Object.keys(players).length - 1){
       if(confirm("Are you sure about your choice?")){
         var prevRound = {};
-        prevRound.winningSub = e.target.previousSibling.previousSibling.src;
-        prevRound.winner = $(e.target.previousSibling.previousSibling).data('submittedby');
+        prevRound.winningSub = $(e.target).data('submittedUrl');
+        prevRound.winner = $(e.target).data('submittedby');
         var selfie = this;
         prevRound.players = [];
         _.each(players, function(player){

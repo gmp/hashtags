@@ -7,7 +7,6 @@ ht.Views.GameView = Backbone.View.extend({
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.joinGame();
     this.render();
-
   },
 
   dispatcher_events: {
