@@ -48,13 +48,12 @@ exports.updateById = function(req, res){
       obj.set('previousRound', submitted);
     } else {
       obj.set('players.'+submitted.userGlobalId, submitted);
-      obj.set('numberOfSub', ++obj.numberOfSub);
     }
     obj.save( function (err, doc){
       if(err) console.error(err);
       if(submitted.userGlobalId){
         clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
-      } else {
+      } else if (oldJudge) {
         clients[oldJudge].broadcast.to(gameId).emit('otherPlayerSubmit');
       }
       res.writeHead(204);
