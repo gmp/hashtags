@@ -21,7 +21,7 @@ ht.Templates.GameEndTemplate = _.template(''+
   '<% }); %>'+
   '<div class="row">'+
     '<div class="small-9 small-centered columns">'+
-      '<a href="" class="button expand" id="continue">Next Round</a>'+
+      '<a href="" class="button expand" id="continue">Continue</a>'+
     '</div>'+
   '</div>'+
   '<div class="row">'+
