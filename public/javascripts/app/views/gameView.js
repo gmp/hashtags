@@ -3,7 +3,7 @@ ht.Views.GameView = Backbone.View.extend({
   className: 'game',
 
   initialize: function() {
-
+    this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.joinGame();
     console.log(this.model);
 
@@ -11,12 +11,12 @@ ht.Views.GameView = Backbone.View.extend({
     // ht.dispatcher.trigger('enterGame', {playerId: this.attributes.user.id, gameId: this.model.id});
 
     // create reference to current player in game model's players array
-    this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.render();
 
-    _.bindAll(this, 'mediaSelect', 'judgeSelect');
+    _.bindAll(this, 'mediaSelect', 'judgeSelect', 'continued');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
     ht.dispatcher.on('judgeSelect', this.judgeSelect);
+    ht.dispatcher.on('continued', this.continued);
   },
 
   events: {
@@ -86,7 +86,17 @@ ht.Views.GameView = Backbone.View.extend({
     });
   },
 
-  judgeSelect: function(prevRound) {
+  judgeSelect: function() {
+    var selfie = this;
+    this.model.fetch({
+      success: function(){
+        selfie.myPlayer = ht.Helpers.getMyPlayer(selfie.model, selfie.attributes.user.id);
+        selfie.render();
+      }
+    });
+  },
+
+  continued: function() {
     this.render();
   }
 

@@ -6,7 +6,7 @@ ht.Views.AppView = Backbone.View.extend({
     "changeInUser" : "changeInUser",
     "joinedRoom" : "joinedRoom",
     "otherPlayerSubmit" : "otherPlayerSubmit",
-    // "judgeSelect" : "judgeSelect"
+    "judgeSelect" : "judgeSelect"
   },
 
   initialize: function() {
@@ -121,9 +121,12 @@ ht.Views.AppView = Backbone.View.extend({
     });
   },
 
-  otherPlayerSubmit: function(gameId) {
-    console.log('heard the submission');
+  otherPlayerSubmit: function() {
     ht.dispatcher.trigger('playerSubmit');
+  },
+
+  judgeSelect: function() {
+    ht.dispatcher.trigger('judgeSelect');
   }
 
 });

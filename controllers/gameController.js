@@ -54,7 +54,7 @@ exports.updateById = function(req, res){
       if(submitted.userGlobalId){
         clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
       } else if (oldJudge) {
-        clients[oldJudge].broadcast.to(gameId).emit('otherPlayerSubmit');
+        clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
       }
       res.writeHead(204);
       res.end();

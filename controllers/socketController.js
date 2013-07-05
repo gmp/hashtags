@@ -7,7 +7,3 @@ exports.leaveGame = function(socket, roomId){
   console.log('left the game');
   socket.leave(roomId);
 };
-
-exports.updateSubmittedProp = function(socket, gameId){
-  console.log("updateSubmittedProp: ", socket, gameId);
-};
