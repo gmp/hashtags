@@ -12,9 +12,11 @@ ht.Templates.JudgeTemplate = _.template(''+
           '<% if(player.submission.type === "image") { %>'+
             '<img class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>">'+
             '<h4><%= player.submission.hashtag %></h4>'+
+            '<button class="media-select expand">Choose Image</button>'+
           '<% } else { %>'+
             '<video class="media" data-submittedby="<%= player.username %>" src="<%= player.submission.url %>"></video>'+
             '<h4><%= player.submission.hashtag %></h4>'+
+            '<button class="expand">Choose Video</button>'+
           '<% } %>'+
         '</div>'+
       '</div>'+
