@@ -74,18 +74,25 @@ exports.accept = function(req, res) {
     for (var i = 0; i < playersArr.length; i++) {
       if (playersArr[i].user === userId) {
         invite.set('player' + (i + 2) + '.accepted', 'accepted');
-        console.log("WAITING ON",invite.waitingOn);
+        console.log("WAITING ON", invite.waitingOn);
         if (invite.waitingOn > 1) {
           invite.set('waitingOn', --invite.waitingOn);
           moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
         } else if (invite.waitingOn === 1) {
-          createGame(invite.gameAdmin, playersArr, inviteId, invite.title);
+          var userIds = [];
+          userIds.push(invite.gameAdmin);
+          userIds.push(invite.player2.user);
+          userIds.push(invite.player3.user);
+          userIds.push(invite.player4.user);
+          createGame(userIds, inviteId, invite.title);
         }
 
       }
     }
     invite.save(function(err, invite) {
       if (err) console.log(err);
+      res.writeHead(204);
+      res.end();
     });
   });
 };
@@ -95,78 +102,104 @@ exports.accept = function(req, res) {
 //Add that game to every user involved in game
 // Remove pending game from every user including game admin except for one who is currently accepting
 //Then clients[userId].emit on each user- in the save callback of that user
-var createGame = function(gameAdmin, otherPlayers, inviteId, inviteTitle) {
-  console.log("new game");
+var createGame = function(userIds, inviteId, inviteTitle) {
   var player = {};
   var game = new Game();
-  game.title = inviteTitle
+  game.title = inviteTitle;
   game.prompt = "When I woke up from a nap my siginificant other had ___";
+  game.round = 1;
+  game.numberOfSub = 0;
   game.players = {};
-  User.findById(gameAdmin, function(err, player) {
-      if(err) console.log(err);
-      player.userGlobalId = player._id;
-      player.hand = ['#shnuur', '#omg', '#kitty', '#jj_forum', '#jaja'];
-      game.players[player._id] = player;
-  });
 
-  for (var i = 0; i < otherPlayers.length; i++) {
-    User.findById(otherPlayers[i].user, function(err, player) {
-      if(err)console.log(err);
-      player = {};
-      player.userGlobalId = player._id;
-      player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
-      game.players[player._id] = player;
-    });
+  //Add players to game
+  for (var i = 0; i < userIds.length; i++) {
+    addPlayerToGame(userIds[i], game, i);
   }
 
-  //before saving game, add to each user associated with game and remove pending game
-  for(var i = 0; i < otherPlayers.length; i++){
-    User.findById(otherPlayers[i].user, function(err, user){
-      if(err)console.log(err);
+  game.set('players', game.players);
+
+  //Save the game
+  game.save(function(err) {
+    if (err) console.log(err);
+    for (var i = 0; i < userIds.length; i++) {
+      removePendingGameFromUser(userIds[i], inviteId);
+      addGameToUser(userIds[i], game);
+    }
+  });
+}
+
+var addPlayerToGame = function(userId, game, index) {
+  User.findById(userId, function(err, user) {
+    if (err) console.log(err);
+    player = {};
+    player.userGlobalId = userId;
+    player.submitted = false;
+    player.score = 0;
+    player.username = user.username;
+    player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
+    if(index === 0){
+      player.isJ = true;
+      game.judge = {username: user.username, avatarURL:user.avatarURL};
+    }
+    else{
+      player.isJ = false;
+    }
+    game.players[userId] = player;
+  });
+}
+
+  var addGameToUser = function(userId, game) {
+    User.findById(userId, function(err, user) {
+      if (err) console.log(err);
       user.games.push(game);
+      console.log("PLAYERS ", game.players)
+      user.set('games', user.games);
+ 
+
+      user.save(function(err) {
+        if (err) console.log(err);
+        console.log("USER GAMES", user.games);
+        if(clients[userId]){
+          clients[userId].emit('changeInUser');
+        }
+      })
+    })
+  }
+
+  var removePendingGameFromUser = function(userId, inviteId) {
+    User.findById(userId, function(err, user) {
+      if (err) console.log(err);
       var pendingGames = user.pendingGames;
       //splice this pending game put of user's pending games array:
-      for(var i = 0 ; i < pendingGames.length; i++){
-        if(pendingGames[i].invite.toString() === inviteId){
+      for (var i = 0; i < pendingGames.length; i++) {
+        if (pendingGames[i].invite.toString() === inviteId) {
           pendingGames.splice(i, 1);
           user.set('pendingGames', pendingGames);
         }
-
       }
-      user.save(function(err){
-        if(err)console.log(err);
-        console.log('user saved');
-      })
     });
   }
 
-  game.save(function(err) {
-    console.log('game saved')
-    if (err) console.log(err);
-  });
-};
 
 
+  var moveGameToPending = function(userId, inviteId, title, waitingOn, res) {
+    User.findById(userId, function(err, user) {
+      for (var i = 0; i < user.invites.length; i++) {
+        if (user.invites[i].invite.toString() === inviteId) {
+          user.invites.splice(i, 1);
+          user.set('invites', user.invites);
+        }
+      };
+      var pendingGames = [];
+      pendingGames.push({
+        invite: inviteId,
+        title: title,
+        waitingOn: waitingOn
+      });
+      user.set('pendingGames', pendingGames);
+      user.save(function(err) {
+        if (err) console.log(err);
 
-var moveGameToPending = function(userId, inviteId, title, waitingOn, res) {
-  User.findById(userId, function(err, user) {
-    for (var i = 0; i < user.invites.length; i++) {
-      if (user.invites[i].invite.toString() === inviteId) {
-        user.invites.splice(i, 1);
-        user.set('invites', user.invites);
-      }
-    };
-    var pendingGames = [];
-    pendingGames.push({
-      invite: inviteId,
-      title: title,
-      waitingOn: waitingOn
+      });
     });
-    user.set('pendingGames', pendingGames);
-    user.save(function(err) {
-      if (err) console.log(err);
-      res.writeHead(204);
-      res.end();
-    });
-  });
-}
+  }

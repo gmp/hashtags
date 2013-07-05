@@ -32,6 +32,7 @@ ht.Views.LobbyView = Backbone.View.extend({
       this.$el.append(this.pendingGames.el);
     }
     if (this.model.get('games').length) {
+      debugger;
       this.games = new ht.Views.LobbyGamesListView({model: this.model});
       this.$el.append(this.games.el);
     }
