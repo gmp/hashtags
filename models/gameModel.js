@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 var GameSchema = new Schema({
   title  : String,
   prompt : String,
+  gameData : {type: ObjectId, ref: 'GameData'},
   judgingOrder : Array,
   round  : Number,
   gameEnd : {type:Boolean, default: false},

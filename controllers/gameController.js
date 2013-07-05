@@ -44,7 +44,8 @@ exports.roundChange = function (req, res){
         console.log('how many times');
       }
       if(submitted.previousRound.winner === item.username){
-        obj.set('players.'+item.userGlobalId+'.score', ++item.score);
+        var score = item.score++
+        obj.set('players.'+item.userGlobalId+'.score', score);
       }
     });
     var currentround = obj.round + 1;
