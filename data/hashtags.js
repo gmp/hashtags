@@ -1,4 +1,4 @@
-var hashtags = [
+module.exports = [
   "babieswithswag",
   "gamesetmatch",
   "twerkortreat",

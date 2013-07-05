@@ -1,4 +1,4 @@
-var prompts = [
+module.exports = [
   "Take two ______ and call me in the morning.",
   "As long as none of my friends ever found out, I would totally ______ .",
   "The reason I sweat at night...",
