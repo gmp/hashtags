@@ -13,6 +13,7 @@ exports.findById = function(req, res){
 exports.updateById = function(req, res){
   var gameId = req.params.id;
   var submitted = req.body;
+  var oldJudge;
   Game.findById(gameId, function (err, obj){
     if(submitted.winner){
       //need to deal with prompts
@@ -23,6 +24,8 @@ exports.updateById = function(req, res){
         obj.set('players.'+item.userGlobalId+'.submission', {});
         if(item.isJ){
           obj.set('players.'+item.userGlobalId+'.isJ', false);
+          oldJudge = item.userGlobalId;
+          console.log('how many times');
         }
         if(submitted.winner === item.username){
           obj.set('players.'+item.userGlobalId+'.score', ++item.score);
@@ -36,7 +39,6 @@ exports.updateById = function(req, res){
       judge.username = obj.players[newJudge].username;
       judge.avatarURL = obj.players[newJudge].avatarURL;
       judge.userGlobalId = newJudge;
-      console.log(newJudge);
       obj.set('players.' + newJudge +'.isJ', true);
       obj.set('judge', judge);
       obj.set('prompt', 'the next prompt');
@@ -44,7 +46,6 @@ exports.updateById = function(req, res){
       obj.set('gameEnd', true);
       obj.set('numberOfSub', 0);
       obj.set('previousRound', submitted);
-      console.log(obj);
     } else {
       obj.set('players.'+submitted.userGlobalId, submitted);
       obj.set('numberOfSub', ++obj.numberOfSub);
@@ -53,6 +54,8 @@ exports.updateById = function(req, res){
       if(err) console.error(err);
       if(submitted.userGlobalId){
         clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+      } else {
+        clients[oldJudge].broadcast.to(gameId).emit('otherPlayerSubmit');
       }
       res.writeHead(204);
       res.end();
