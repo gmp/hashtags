@@ -20,11 +20,11 @@ ht.Templates.GameEndTemplate = _.template(''+
       '</div>'+
     '</div>'+
   '<% }); %>'+
-  // '<div class="row">'+
-  //   '<div class="small-9 small-centered columns">'+
-  //     '<a href="" class="button expand" id="continue">Next Round</a>'+
-  //   '</div>'+
-  // '</div>'+
+  '<div class="row">'+
+    '<div class="small-9 small-centered columns">'+
+      '<a href="" class="button expand" id="continue">Next Round</a>'+
+    '</div>'+
+  '</div>'+
   '<div class="row">'+
     '<div class="small-9 small-centered columns">'+
       '<a href="/#lobby/<%= myPlayer.userGlobalId %>" class="button expand">Back to lobby</a>'+
