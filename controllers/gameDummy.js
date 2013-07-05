@@ -22,6 +22,7 @@ module.exports = function(){
           player.isJ = false;
         }
         player.submitted = false;
+        player.continued = true;
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
@@ -98,6 +99,7 @@ module.exports = function(){
           player.isJ = false;
         }
         player.submitted = false;
+        player.continued = true;
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
@@ -136,6 +138,7 @@ module.exports = function(){
           player.isJ = false;
         }
         player.submitted = false;
+        player.continued = true;
         player.score = 0;
         player.avatar = item.avatarURL;
         player.username = item.username;
