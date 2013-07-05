@@ -2,6 +2,21 @@ ht.Views.AppView = Backbone.View.extend({
 
   id: '#hashtags',
 
+  initialize: function() {
+    this.createSockets();
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
+    this.render();
+  },
+
+  render: function() {
+    return this;
+  },
+
+  dispatcher_events: {
+    'joinGame': 'joinGame',
+    'leaveRooms': 'leaveRooms'
+  },
+
   socket_events: {
     "changeInUser" : "changeInUser",
     "joinedRoom" : "joinedRoom",
@@ -9,31 +24,10 @@ ht.Views.AppView = Backbone.View.extend({
     "judgeSelect" : "judgeSelect"
   },
 
-  initialize: function() {
-    this.createSockets();
-    _.bindAll(this, 'joinGame','leaveRooms');
-    ht.dispatcher.on('joinGame', this.joinGame);
-    ht.dispatcher.on('leaveRooms', this.leaveRooms);
-  },
-
   createSockets: function() {
     this.socket = io.connect();
     if (this.socket_events && _.size(this.socket_events) > 0) {
-      this.delegateSocketEvents(this.socket_events);
-    }
-  },
-
-  delegateSocketEvents: function(events) {
-    for (var key in events) {
-      var method = events[key];
-      if (!_.isFunction(method)) {
-        method = this[events[key]];
-      }
-      if (!method) {
-        throw new Error('Method "' + events[key] + '" does not exist');
-      }
-      method = _.bind(method, this);
-      this.socket.on(key, method);
+      ht.Helpers.delegateCustomEvents(this.socket, this.socket_events, this);
     }
   },
 
@@ -54,10 +48,6 @@ ht.Views.AppView = Backbone.View.extend({
 
   joinedRoom: function(gameId){
     this.roomId = gameId;
-  },
-
-  render: function() {
-    $('body').append(this.$el);
   },
 
   login: function() {

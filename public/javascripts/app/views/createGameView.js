@@ -5,9 +5,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   template: ht.Templates.CreateGameTemplate,
 
   initialize: function(options) {
-    _.bindAll(this, 'addInvited');
-    ht.dispatcher.bind('addInvited', this.addInvited);
-
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.render();
   },
 
@@ -15,6 +13,10 @@ ht.Views.CreateGameView = Backbone.View.extend({
     'click #cancel': 'cancel',
     'click .avatar-contain': 'searchStart',
     'click #start': 'sendInvitations'
+  },
+
+  dispatcher_events: {
+    'addInvited': 'addInvited'
   },
 
   render: function () {

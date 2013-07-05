@@ -13,17 +13,14 @@ module.exports = function (app) {
   app.patch('/games/:id', game.updateById);
   //app.put('/games/:id', game.handleJudgePut);
 
-
-  app.post('/invite/create', invite.create)
+  app.post('/invite/create', invite.create);
   app.post('/invites/accept', invite.accept);
-
-
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
     function(req, res){
       // function will not be called.
-   }
+    }
   );
 
   app.get('/auth/instagram/callback',
