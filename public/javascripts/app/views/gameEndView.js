@@ -10,7 +10,7 @@ ht.Views.GameEndView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template({players: this.model.players, myPlayer: this.attributes.myPlayer}));
+    this.$el.append(this.template({players: this.model.players, myPlayer: this.attributes.myPlayer, winner: this.model.winner}));
   }
 
 });

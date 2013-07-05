@@ -1,8 +1,6 @@
 ht.Templates.GameEndTemplate = _.template(''+
-  '<div>Player X won</div>'+
-  '<% console.log("GameEndTemplate"); %>'+
+  '<div><%= winner %> won</div>'+
   '<% _.each(players, function(player) { %>'+
-    '<% console.log(player); %>'+
     '<div class="row text-center">'+
       '<div class="small-11 small-centered columns">'+
           '<% if(player.username === myPlayer.username) { %>'+

@@ -37,7 +37,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   leaveRooms: function(){
-    console.log('i gets called');
     ht.dispatcher.trigger('leaveRooms');
   },
 

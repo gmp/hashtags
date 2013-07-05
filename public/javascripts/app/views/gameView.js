@@ -24,9 +24,6 @@ ht.Views.GameView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-
-    this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
-
     if(this.model.get('gameEnd')){
       this.subView = new ht.Views.GameEndView({
         model: this.model.get('previousRound'),
@@ -35,24 +32,26 @@ ht.Views.GameView = Backbone.View.extend({
         }
       });
       this.$el.append(this.subView.el);
-    } else if(this.myPlayer.isJ){
-      this.subView = new ht.Views.JudgeView({
-        model: this.model,
-        attributes: {
-          myPlayer: this.myPlayer
-        }
-      });
-      this.$el.append(this.subView.el);
-
     } else {
-      this.subView = new ht.Views.PlayerView({
-        model: this.model,
-        attributes: {
-          user: this.attributes.user,
-          myPlayer: this.myPlayer
-        }
-      });
-      this.$el.append(this.subView.el);
+      this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
+      if(this.myPlayer.isJ){
+        this.subView = new ht.Views.JudgeView({
+          model: this.model,
+          attributes: {
+            myPlayer: this.myPlayer
+          }
+        });
+        this.$el.append(this.subView.el);
+      } else {
+        this.subView = new ht.Views.PlayerView({
+          model: this.model,
+          attributes: {
+            user: this.attributes.user,
+            myPlayer: this.myPlayer
+          }
+        });
+        this.$el.append(this.subView.el);
+      }
     }
   },
 
