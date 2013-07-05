@@ -95,26 +95,43 @@ exports.accept = function(req, res) {
 //Add that game to every user involved in game
 // Remove pending game from every user including game admin except for one who is currently accepting
 //Then clients[userId].emit on each user- in the save callback of that user
-var createGame = function(gameAdmin, otherPlayerIds) {
+var createGame = function(gameAdmin, otherPlayers) {
   console.log("new game");
   var game = new Game();
-  game.title = "User Created Game!";
+  game.title = "Created Game!";
   game.prompt = "When I woke up from a nap my siginificant other had ___";
   game.players = {};
+  users = [];
   User.findById(gameAdmin, function(err, admin) {
+    users.push(admin);
     game.players[gameAdmin._id] = gameAdmin;
   });
-  for (var i = 0; i < otherPlayerIds; i++) {
-    User.findById(otherPlayersIds[i], function(err, player) {
+
+  for (var i = 0; i < otherPlayers.length; i++) {
+    User.findById(otherPlayers[i].user, function(err, user) {
+      users.push(player)
       game.players[player._id] = player;
     });
   }
 
+  //before saving game, add to each user associated with game and remove pending game
+  for(var i = 0; i < otherPlayers.length; i++){
+    User.findById(otherPlayers[i].user, function(err, user){
+      if(err)console.log(err);
+      user.games.push(game);
+      user.save(function(err){
+        console.log('user saved');
+      })
+    });
+  }
+
   game.save(function(err) {
+    console.log('game saved')
     if (err) console.log(err);
   });
-
 };
+
+
 
 var moveGameToPending = function(userId, inviteId, title, waitingOn, res) {
   User.findById(userId, function(err, user) {
