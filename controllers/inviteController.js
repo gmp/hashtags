@@ -79,7 +79,7 @@ exports.accept = function(req, res) {
           invite.set('waitingOn', --invite.waitingOn);
           moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
         } else if (invite.waitingOn === 1) {
-          createGame(invite.gameAdmin, playersArr);
+          createGame(invite.gameAdmin, playersArr, inviteId, invite.title);
         }
 
       }
@@ -95,21 +95,26 @@ exports.accept = function(req, res) {
 //Add that game to every user involved in game
 // Remove pending game from every user including game admin except for one who is currently accepting
 //Then clients[userId].emit on each user- in the save callback of that user
-var createGame = function(gameAdmin, otherPlayers) {
+var createGame = function(gameAdmin, otherPlayers, inviteId, inviteTitle) {
   console.log("new game");
+  var player = {};
   var game = new Game();
-  game.title = "Created Game!";
+  game.title = inviteTitle
   game.prompt = "When I woke up from a nap my siginificant other had ___";
   game.players = {};
-  users = [];
-  User.findById(gameAdmin, function(err, admin) {
-    users.push(admin);
-    game.players[gameAdmin._id] = gameAdmin;
+  User.findById(gameAdmin, function(err, player) {
+      if(err) console.log(err);
+      player.userGlobalId = player._id;
+      player.hand = ['#shnuur', '#omg', '#kitty', '#jj_forum', '#jaja'];
+      game.players[player._id] = player;
   });
 
   for (var i = 0; i < otherPlayers.length; i++) {
-    User.findById(otherPlayers[i].user, function(err, user) {
-      users.push(player)
+    User.findById(otherPlayers[i].user, function(err, player) {
+      if(err)console.log(err);
+      player = {};
+      player.userGlobalId = player._id;
+      player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
       game.players[player._id] = player;
     });
   }
@@ -119,7 +124,17 @@ var createGame = function(gameAdmin, otherPlayers) {
     User.findById(otherPlayers[i].user, function(err, user){
       if(err)console.log(err);
       user.games.push(game);
+      var pendingGames = user.pendingGames;
+      //splice this pending game put of user's pending games array:
+      for(var i = 0 ; i < pendingGames.length; i++){
+        if(pendingGames[i].invite.toString() === inviteId){
+          pendingGames.splice(i, 1);
+          user.set('pendingGames', pendingGames);
+        }
+
+      }
       user.save(function(err){
+        if(err)console.log(err);
         console.log('user saved');
       })
     });
