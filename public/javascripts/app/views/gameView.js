@@ -4,8 +4,6 @@ ht.Views.GameView = Backbone.View.extend({
 
   initialize: function() {
 
-    console.log(this.model);
-
     this.joinGame();
 
     // on enter game, trigger enterGame event and send data to dispatcher to talk through socket
@@ -15,33 +13,41 @@ ht.Views.GameView = Backbone.View.extend({
     this.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     this.render();
 
-    _.bindAll(this, 'mediaSelect');
+    _.bindAll(this, 'mediaSelect', 'judgeSelect');
     ht.dispatcher.on('mediaSelect', this.mediaSelect);
+    ht.dispatcher.on('judgeSelect', this.judgeSelect);
   },
 
   render: function() {
     this.$el.empty();
-
-    this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
-
-    if(this.myPlayer.isJudge){
-      this.subView = new ht.Views.JudgeView({
-        model: this.model,
+    if(this.model.get('gameEnd')){
+      this.subView = new ht.Views.GameEndView({
+        model: this.model.get('previousRound'),
         attributes: {
           myPlayer: this.myPlayer
         }
       });
       this.$el.append(this.subView.el);
-
     } else {
-      this.subView = new ht.Views.PlayerView({
-        model: this.model,
-        attributes: {
-          user: this.attributes.user,
-          myPlayer: this.myPlayer
-        }
-      });
-      this.$el.append(this.subView.el);
+      this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
+      if(this.myPlayer.isJ){
+        this.subView = new ht.Views.JudgeView({
+          model: this.model,
+          attributes: {
+            myPlayer: this.myPlayer
+          }
+        });
+        this.$el.append(this.subView.el);
+      } else {
+        this.subView = new ht.Views.PlayerView({
+          model: this.model,
+          attributes: {
+            user: this.attributes.user,
+            myPlayer: this.myPlayer
+          }
+        });
+        this.$el.append(this.subView.el);
+      }
     }
   },
 
@@ -50,7 +56,6 @@ ht.Views.GameView = Backbone.View.extend({
   },
 
   mediaSelect: function(submissionUrl, type, hashtag) {
-    console.log(submissionUrl, hashtag);
     var players = this.model.get('players');
     var player = players[this.attributes.user.id];
     player.submitted = true;
@@ -74,6 +79,10 @@ ht.Views.GameView = Backbone.View.extend({
         console.error('bummer dude');
       }
     });
+  },
+
+  judgeSelect: function(prevRound) {
+    this.render();
   }
 
 });

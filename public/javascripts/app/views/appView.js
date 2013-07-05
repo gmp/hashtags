@@ -5,7 +5,8 @@ ht.Views.AppView = Backbone.View.extend({
   socket_events: {
     "changeInUser" : "changeInUser",
     "joinedRoom" : "joinedRoom",
-    "otherPlayerSubmit" : "otherPlayerSubmit"
+    "otherPlayerSubmit" : "otherPlayerSubmit",
+    // "judgeSelect" : "judgeSelect"
   },
 
   initialize: function() {
@@ -13,7 +14,6 @@ ht.Views.AppView = Backbone.View.extend({
     _.bindAll(this, 'joinGame','leaveRooms');
     ht.dispatcher.on('joinGame', this.joinGame);
     ht.dispatcher.on('leaveRooms', this.leaveRooms);
-    ht.dispatcher.on('mediaSelect', this.mediaSelect);
   },
 
   createSockets: function() {
@@ -53,7 +53,6 @@ ht.Views.AppView = Backbone.View.extend({
   },
 
   joinedRoom: function(gameId){
-    console.log('made it back with the id: ', gameId);
     this.roomId = gameId;
   },
 

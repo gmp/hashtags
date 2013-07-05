@@ -28,6 +28,7 @@ module.exports = function(){
         if(!game.players){
           game.players = {};
         }
+        game.judgingOrder.push(player.userGlobalId);
         game.players[item._id] = player;
         game.title = 'dummyGame1';
         game.numberOfSub = 0;
@@ -66,6 +67,7 @@ module.exports = function(){
           game1.players = {};
         }
         game1.players[item._id] = player;
+        game1.judgingOrder.push(player.userGlobalId);
         game1.numberOfSub = 0;
         game1.title = 'dummyGame2';
         game1.prompt = 'I\'m building up an army of _______';
@@ -104,6 +106,7 @@ module.exports = function(){
         }
         game2.players[item._id] = player;
         game2.numberOfSub = 0;
+        game2.judgingOrder.push(player.userGlobalId);
         game2.title = 'dummyGame3';
         game2.prompt = 'I\'m building up an army of _______';
         game2.round = 1;
@@ -141,6 +144,7 @@ module.exports = function(){
         }
         game3.players[item._id] = player;
         game3.title = 'dummyGame4';
+        game3.judgingOrder.push(player.userGlobalId);
         game3.numberOfSub = 0;
         game3.prompt = 'I\'m building up an army of _______';
         game3.round = 1;

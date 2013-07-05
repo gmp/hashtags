@@ -13,6 +13,7 @@ exports.findById = function(req, res){
 exports.updateById = function(req, res){
   var gameId = req.params.id;
   var submitted = req.body;
+  var oldJudge;
   Game.findById(gameId, function (err, obj){
     if(submitted.winner){
       //need to deal with prompts
@@ -23,25 +24,38 @@ exports.updateById = function(req, res){
         obj.set('players.'+item.userGlobalId+'.submission', {});
         if(item.isJ){
           obj.set('players.'+item.userGlobalId+'.isJ', false);
+          oldJudge = item.userGlobalId;
+          console.log('how many times');
         }
-        //deal with judge in a real way
-        if(item.username === 'gmp5'){
-          obj.set('players.'+item.userGlobalId+'.isJ', true);
-          obj.set('judge', {username:"gmp5", avatarURL: "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg", userGlobalId: item.userGlobalId});
+        if(submitted.winner === item.username){
+          obj.set('players.'+item.userGlobalId+'.score', ++item.score);
         }
       });
+      var currentround = obj.round + 1;
+      var nJ = currentround % 4;
+      var newJudge = obj.judgingOrder[nJ];
+      newJudge = newJudge.toString();
+      var judge = {};
+      judge.username = obj.players[newJudge].username;
+      judge.avatarURL = obj.players[newJudge].avatarURL;
+      judge.userGlobalId = newJudge;
+      obj.set('players.' + newJudge +'.isJ', true);
+      obj.set('judge', judge);
       obj.set('prompt', 'the next prompt');
-      obj.set('round', ++obj.round);
+      obj.set('round', currentround);
       obj.set('gameEnd', true);
       obj.set('numberOfSub', 0);
       obj.set('previousRound', submitted);
     } else {
       obj.set('players.'+submitted.userGlobalId, submitted);
+      obj.set('numberOfSub', ++obj.numberOfSub);
     }
     obj.save( function (err, doc){
       if(err) console.error(err);
       if(submitted.userGlobalId){
         clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+      } else {
+        clients[oldJudge].broadcast.to(gameId).emit('otherPlayerSubmit');
       }
       res.writeHead(204);
       res.end();

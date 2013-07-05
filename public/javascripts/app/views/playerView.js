@@ -15,6 +15,7 @@ ht.Views.PlayerView = Backbone.View.extend({
     // but the current player has not 'continued'
     // render the gameEndView to see round results
     if (this.model.gameEnded) {
+      console.log("word");
       if (!this.attributes.myPlayer.continued) {
         this.subView && this.subView.remove();
         this.$el.empty();
@@ -29,19 +30,6 @@ ht.Views.PlayerView = Backbone.View.extend({
 
     // else if the current round is not over
     } else {
-
-    // if you're the judge and not everyone has submitted...
-      if(this.attributes.myPlayer.isJ) {
-        this.subView && this.subView.remove();
-        this.$el.empty();
-        this.subView = new ht.Views.JudgeView({
-          model: this.model,
-          attributes: {
-            myPlayer: this.attributes.myPlayer
-          }
-        });
-        this.$el.append(this.subView.el);
-      } else
 
       // if player has not submitted image and not selected hashtag
       if (!this.attributes.myPlayer.submitted && !this.hashtagSelected) {

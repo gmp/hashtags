@@ -5,8 +5,13 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
   template: ht.Templates.LobbyPendingGamesTemplate,
 
   initialize: function() {
+    this.model.on('change:pendingGames', this.render);
     this.render();
   },
+
+  // events: {
+  //   'change:pendingGames': 'render'
+  // },
 
   render: function() {
     this.$el.empty();
