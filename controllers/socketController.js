@@ -6,7 +6,3 @@ exports.joinGame = function(socket, gameId){
 exports.leaveGame = function(socket, roomId){
   socket.leave(roomId);
 };
-
-exports.updateSubmittedProp = function(socket, gameId){
-  console.log("updateSubmittedProp: ", socket, gameId);
-};
