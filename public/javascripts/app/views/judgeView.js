@@ -66,19 +66,11 @@ ht.Views.JudgeView = Backbone.View.extend({
         prevRound.prompt = this.model.get('prompt');
         this.model.set('previousRound', prevRound);
         this.attributes.myPlayer.continued = false;
-        var selfie = this;
-        this.model.save( prevRound, {
-          patch: true,
-          success: function(obj){
-            selfie.model.fetch({
-              success: function (obj, res){
-                selfie.remove();
-                ht.dispatcher.trigger('judgeSelect');
-              },
-              error: function (){
-                console.log('dude where\'s my subview?');
-              }
-            });
+        this.model.save(prevRound, {
+          success: function(){
+            selfie.remove();
+            console.log('success');
+            ht.dispatcher.trigger('judgeSelect');
           },
           error: function(){
             console.error('bummer dude. save failed.');
