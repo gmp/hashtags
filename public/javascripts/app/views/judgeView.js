@@ -56,7 +56,9 @@ ht.Views.JudgeView = Backbone.View.extend({
         var selfie = this;
         prevRound.players = [];
         _.each(players, function(player){
-          prevRound.players.push({username: player.username, submission: player.submission});
+          if(!player.isJ){
+            prevRound.players.push({username: player.username, submission: player.submission});
+          }
         });
         prevRound.prompt = this.model.get('prompt');
         this.model.set('previousRound', prevRound);
@@ -66,7 +68,14 @@ ht.Views.JudgeView = Backbone.View.extend({
           success: function(obj){
             selfie.model.fetch({
               success: function (obj, res){
-                selfie.model = obj;
+                console.log(obj);
+                selfie.subView = new ht.Views.GameEndView({
+                  model: obj.attributes.previousRound,
+                  attributes: {
+                    myPlayer: selfie.attributes.myPlayer
+                  }
+                });
+                selfie.$el.empty();
                 selfie.subView.render();
               },
               error: function (){

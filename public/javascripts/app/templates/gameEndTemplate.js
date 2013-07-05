@@ -1,4 +1,4 @@
-ht.Templates.PlayerWaitingTemplate = _.template(''+
+ht.Templates.GameEndTemplate = _.template(''+
   '<div>Player X won</div>'+
   '<% _.each(players, function(player) { %>'+
     '<div class="row text-center">'+

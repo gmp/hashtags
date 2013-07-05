@@ -15,6 +15,7 @@ ht.Views.PlayerView = Backbone.View.extend({
     // but the current player has not 'continued'
     // render the gameEndView to see round results
     if (this.model.gameEnded) {
+      console.log("word");
       if (!this.attributes.myPlayer.continued) {
         this.subView && this.subView.remove();
         this.$el.empty();
