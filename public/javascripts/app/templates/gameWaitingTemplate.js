@@ -6,9 +6,9 @@ ht.Templates.GameWaitingTemplate = _.template(''+
           '<% if(player.submission.type === "image") { %>'+
             '<h4><%= player.username %> submitted:</h4>'+
             '<img class="media" src="<%= player.submission.url %>">'+
-            '<h4><%= player.submission.hashtag %></h4>'+
+            '<h4>#<%= player.submission.hashtag %></h4>'+
           '<% } else { %>'+
-            '<h4><%= player.username %> submitted:</h4>'+
+            '<h4>#<%= player.username %> submitted:</h4>'+
             '<video class="media" src="<%= player.submission.url %>"></video>'+
             '<h4><%= player.submission.hashtag %></h4>'+
           '<% } %>'+

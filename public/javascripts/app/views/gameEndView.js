@@ -14,7 +14,9 @@ ht.Views.GameEndView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
+    console.log(this.model);
     this.$el.append(this.template({
+      playersWithScore: this.model.get('players'),
       players: this.model.get('previousRound').players,
       myPlayer: this.attributes.myPlayer,
       winner: this.model.get('previousRound').winner,
