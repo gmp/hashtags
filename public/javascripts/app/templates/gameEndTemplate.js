@@ -5,12 +5,12 @@ ht.Templates.GameEndTemplate = _.template(''+
     '</div>'+
     '<div class="row">'+
       '<div class="small-5 small-centered columns">'+
-        '<p>Winner: <%= winner %></p>'+
+        '<p id="winner">Winner: <%= winner %></p>'+
       '</div>'+
     '</div>'+
   '</div>'+
   '<% _.each(playersWithScore, function(player) { %>'+
-    '<p><%= player.username %>: <%= player.score %></p>'+
+    '<div><span class="scoreBoard"><%= player.username %>: </span><span class="scoreNumber"><%= player.score %></span></div>'+
   '<% }); %>'+
   '<% _.each(players, function(player) { %>'+
     '<div class="row text-center">'+

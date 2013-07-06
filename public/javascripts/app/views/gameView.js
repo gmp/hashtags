@@ -55,7 +55,6 @@ ht.Views.GameView = Backbone.View.extend({
   mediaSelect: function(submissionUrl, type, hashtag) {
     var players = this.model.get('players');
     var player = players[this.attributes.user.id];
-    debugger;
     player.submitted = true;
     player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
     this.model.set('players', players);
