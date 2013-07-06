@@ -18,12 +18,15 @@ exports.updateById = function(req, res){
     console.log("SAVING PLAYER STATE");
     console.log(obj);
     obj.save( function (err, doc){
-      if(err) console.error(err);
-      if(submitted.userGlobalId){
-        clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+      if(err) {
+        console.error(err);
+      } else {
+        if(submitted.submitted){
+          clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+        }
+        res.writeHead(204);
+        res.end();
       }
-      res.writeHead(204);
-      res.end();
     });
   });
 };
