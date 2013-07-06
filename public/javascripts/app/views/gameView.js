@@ -55,25 +55,26 @@ ht.Views.GameView = Backbone.View.extend({
   mediaSelect: function(submissionUrl, type, hashtag) {
     var players = this.model.get('players');
     var player = players[this.attributes.user.id];
+    debugger;
     player.submitted = true;
     player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
     this.model.set('players', players);
     var selfie = this;
     this.model.save(player, {
       patch: true,
-      success: function(obj){
+      success: function(){
         selfie.model.fetch({
           success: function (obj, res){
             selfie.model = obj;
             selfie.subView.render();
           },
           error: function (){
-            console.log('what the fuck');
+            console.log('bummer dude, bad patch');
           }
         });
       },
       error: function(){
-        console.error('bummer dude');
+        console.error('bummer dude, bad save.');
       }
     });
   },
