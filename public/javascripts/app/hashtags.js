@@ -15,7 +15,6 @@ var ht = {
 };
 
 ht.Helpers.getMyPlayer = function(gameModel, userId){
-  debugger;
   return gameModel.get('players')[userId];
 };
 

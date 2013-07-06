@@ -108,7 +108,7 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
   game.set('round', 1);
   game.set('numberOfSub', 0);
   var players = {};
-  var playerCounter = 0;
+  var playerIndex = 0;
   
   //Add players to game
   for (var i = 0; i < userIds.length; i++) {
@@ -121,8 +121,9 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
       player.submitted = false;
       player.score = 0;
       player.username = user.username;
+      player.continued = true;
       player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
-      if (playerCounter ===1) {
+      if (playerIndex ===0) {
         player.isJ = true;
         game.judge = {
           username: user.username,
@@ -132,9 +133,8 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
         player.isJ = false;
       }
       players[user._id] = player;
-      playerCounter++;
-      console.log("******player counter*****", playerCounter);
-      if (playerCounter === 4) {
+      console.log("******player counter*****", playerIndex);
+      if (playerIndex === 3) {
         for (var i = 0; i < userIds.length; i++) {
           addGameToUser(userIds[i], game, inviteId);
         }
@@ -142,9 +142,9 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
 
         game.save(function(err){
           if(err)console.log(err);
-          console.log("GAME SAVED!")
-        })
+        });
       }
+      playerIndex++;
     });
   }
 };
@@ -160,8 +160,8 @@ var addGameToUser = function(userId, game, inviteId) {
     var userPlayers = [];
     for (var playerId in game.players) {
       var userPlayer = {};
-      userPlayer.username = user.username;
-      userPlayer.avatarURL = user.avatarURL;
+      userPlayer.username = game.players[playerId].username;
+      userPlayer.avatarURL = game.players[playerId].avatarURL;
       userPlayer.score = game.players[playerId].score;
       userPlayers.push(userPlayer);
 

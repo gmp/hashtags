@@ -60,7 +60,6 @@ ht.Views.LobbyView = Backbone.View.extend({
     var self = this;
     this.model.fetch({
       success: function(user) {
-        debugger;
 
         self.render();
       },
