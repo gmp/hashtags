@@ -6,7 +6,7 @@ module.exports = [
   "Doc, I've been these recurring dreams about ______ .",
   "______ is why the internet was invented.",
   "Sometimes I like to dress up and pretend to be ______ .",
-  "Disney presents ______ on ice!"
+  "Disney presents ______ on ice!",
   "The best part of waking up is ______ in your cup.",
   "Come at me bro!",
   "In school they were voted most likely to be viewed by millions on the internet.",
