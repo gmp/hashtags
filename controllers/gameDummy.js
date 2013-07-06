@@ -14,7 +14,7 @@ module.exports = function(){
     gameData = new GameData();
     gameData.hashtags = _.shuffle(hashtags);
     promptList = _.shuffle(prompts);
-    promptList = promptList.splice(0, 37);
+    promptList = promptList.slice(0, 37);
     gameData.prompts = promptList;
     gameData.gameId = game._id;
     game.gameData = gameData._id;
@@ -61,7 +61,7 @@ module.exports = function(){
     gameData2 = new GameData();
     gameData2.hashtags = _.shuffle(hashtags);
     promptList = _.shuffle(prompts);
-    promptList = promptList.splice(0, 37);
+    promptList = promptList.slice(0, 37);
     gameData2.prompts = promptList;
     gameData2.gameId = game._id;
     game2.gameData = gameData2._id;
@@ -89,7 +89,7 @@ module.exports = function(){
         }
         game2.judgingOrder.push(player.userGlobalId);
         game2.players[item._id] = player;
-        game2.title = 'dummyGame1';
+        game2.title = 'dummyGame2';
         game2.numberOfSub = 0;
         game2.prompt = gameData2.prompts.pop();
         game2.round = 1;
