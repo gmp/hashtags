@@ -89,7 +89,7 @@ module.exports = function(){
         }
         game2.judgingOrder.push(player.userGlobalId);
         game2.players[item._id] = player;
-        game2.title = 'dummyGame1';
+        game2.title = 'dummyGame2';
         game2.numberOfSub = 0;
         game2.prompt = gameData2.prompts.pop();
         game2.round = 1;
