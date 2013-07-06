@@ -1,4 +1,5 @@
 var Game = require('../models/gameModel.js');
+var GameData = require('../models/gameDataModel.js');
 var clients = require('../config/socketEvents.js').clients;
 var _ = require('underscore');
 
@@ -15,8 +16,8 @@ exports.updateById = function(req, res){
   var submitted = req.body;
   Game.findById(gameId, function (err, obj){
     obj.set('players.'+submitted.userGlobalId, submitted);
-    console.log("SAVING PLAYER STATE");
-    console.log(obj);
+    //console.log("SAVING PLAYER STATE");
+    //console.log(obj);
     obj.save( function (err, doc){
       if(err) {
         console.error(err);
@@ -36,8 +37,20 @@ exports.roundChange = function (req, res){
   var gameId = req.params.id;
   var submitted = req.body;
   var oldJudge;
+  console.log("GAME ID PASSED IN", gameId);
   //need to deal with prompts
   Game.findById(gameId, function (err, obj){
+    GameData.findById(obj.gameData, function (err, gameData){
+      console.log(gameData.prompts);
+      var newPrompt = gameData.prompts.pop();
+      obj.set('prompt', newPrompt);
+      obj.save(function(err){
+        if(err)console.log(err);
+      })
+      gameData.save(function(err){
+        if(err)console.log(err);
+      });
+    });
     _.each(obj.players, function(item){
       //change players hands
       obj.set('players.'+item.userGlobalId+'.continued', false);
@@ -62,17 +75,16 @@ exports.roundChange = function (req, res){
     judge.userGlobalId = newJudge;
     obj.set('players.' + newJudge +'.isJ', true);
     obj.set('judge', judge);
-    obj.set('prompt', 'the next prompt');
     obj.set('round', currentround);
     obj.set('gameEnd', true);
     obj.set('numberOfSub', 0);
     obj.set('previousRound', submitted.previousRound);
-    console.log("RESTTING PLAYER STATE");
-    console.log(obj);
+    // console.log("RESTTING PLAYER STATE");
+    // console.log(obj);
     obj.save( function (err, doc){
       if(err) console.error(err);
-      console.log("SAVED PLAYER STATE");
-      console.log(doc);
+      // console.log("SAVED PLAYER STATE");
+      // console.log(doc);
       res.writeHead(204);
       res.end();
       clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
