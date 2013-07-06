@@ -63,8 +63,26 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   submitMedia: function(e) {
-    this.remove();
-    ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.attributes.hashtag);
+    var selfie = this;
+    var submissionUrl = $(e.target).data('url');
+    var type = $(e.target).data('type');
+    var hashtag = this.attributes.hashtag;
+    var players = this.model.get('players');
+    var player = players[this.attributes.myPlayer.userGlobalId];
+    player.submitted = true;
+    player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
+    this.model.set('players', players);
+    this.model.save(player, {
+      patch: true,
+      success: function(model, res){
+        selfie.model.unsetChanges();
+        ht.dispatcher.trigger('mediaSelect', model);
+        selfie.remove();
+      },
+      error: function(){
+        console.error('bummer dude');
+      }
+    });
   },
 
   playVideo: function(e) {

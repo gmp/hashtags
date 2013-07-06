@@ -32,6 +32,12 @@ ht.Helpers.delegateCustomEvents = function(obj, events, context) {
   }
 };
 
+Backbone.Model.prototype.unsetChanges = function() {
+  _(this.changed).each(function(val, attr) {
+    this.unset(attr, {silent: true});
+  }, this);
+};
+
 
 
 
