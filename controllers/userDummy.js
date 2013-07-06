@@ -11,6 +11,7 @@ module.exports = function(){
     user._id = '51cc6e4854dd74c4c1000001';
     user.games = [];
     user.invites = [];
+    user.pendingGames = [];
     user.save(function(err){
       if(err) console.log(err);
     });
@@ -22,6 +23,7 @@ module.exports = function(){
     user._id = '51cc70e677ee79fcc1000001';
     user.games = [];
     user.invites = [];
+    user.pendingGames = [];
     user.save(function(err){
       if(err) console.log(err);
     });
@@ -33,6 +35,7 @@ module.exports = function(){
     user._id = '51cc710577ee79fcc1000002';
     user.games = [];
     user.invites = [];
+    user.pendingGames = [];
     user.save(function(err){
       if(err) console.log(err);
     });
@@ -44,6 +47,7 @@ module.exports = function(){
     user._id = '51cc74bbb298b522c2000001';
     user.games = [];
     user.invites = [];
+    user.pendingGames = [];
     user.save(function(err){
       if(err) console.log(err);
     });

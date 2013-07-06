@@ -37,7 +37,6 @@ exports.roundChange = function (req, res){
   //need to deal with prompts
   Game.findById(gameId, function (err, obj){
     _.each(obj.players, function(item){
-      //change players hands
       obj.set('players.'+item.userGlobalId+'.continued', false);
       obj.set('players.'+item.userGlobalId+'.submitted', false);
       obj.set('players.'+item.userGlobalId+'.submission', {});

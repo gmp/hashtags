@@ -18,9 +18,6 @@ module.exports = function(){
     gameData.prompts = promptList;
     gameData.gameId = game._id;
     game.gameData = gameData._id;
-    gameData.save(function(err){
-      if(err) console.log(err);
-    });
     User.find({}, function(err, obj){
       flag = true;
       _.each(obj, function(item){
@@ -56,6 +53,9 @@ module.exports = function(){
           });
         });
       });
+      gameData.save(function(err){
+        if(err) console.log(err);
+      });
       game.save(function(err){
         if(err) console.log(err);
       });
@@ -68,9 +68,6 @@ module.exports = function(){
     gameData2.prompts = promptList;
     gameData2.gameId = game._id;
     game2.gameData = gameData2._id;
-    gameData.save(function(err){
-      if(err) console.log(err);
-    });
     User.find({}, function(err, obj){
       flag = true;
       _.each(obj, function(item){
@@ -105,6 +102,9 @@ module.exports = function(){
             if(err) console.log(err);
           });
         });
+      });
+      gameData2.save(function(err){
+        if(err) console.log(err);
       });
       game2.save(function(err){
         if(err) console.log(err);

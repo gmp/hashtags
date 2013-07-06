@@ -4,42 +4,36 @@ var User = require('../models/userModel.js');
 module.exports = function (){
   Invite.remove({}, function (err) {
     invite = new Invite();
-    invite.title = '#1 Best Game';
-    invite.author = 'hifelight';
-    invite.gameAdmin = "51cc6e4854dd74c4c1000001";
-    invite.player2 = {user: "51cc70e677ee79fcc1000001", accepted: 'waiting'};
-    invite.player3 = {user: "51cc74bbb298b522c2000001", accepted: 'waiting'};
-    invite.player4 = {user: "51cc710577ee79fcc1000002", accepted: 'waiting'};
-    User.findById(invite.player2.user, function (err, obj){
-      if(!obj.invites){
-        obj.invites = [];
+    User.find({}, function (err, users){
+      invite.title = '#1 Best Game';
+      flag = true;
+      console.log(users);
+      for (var i = 0; i < users.length; i ++){
+        if(flag){
+          invite.author = users[i].username;
+          invite.gameAdmin = {user: users[i]._id, username: users[i].username, avatarURL: users[i].avatarURL};
+          flag = false;
+          User.findById(users[i]._id, function (err, obj){
+            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3});
+            obj.save(function(err){
+              if(err) console.log(err);
+            });
+          });
+        } else {
+          invite['player' + (i+1)] = {user: users[i]._id, username: users[i].username, avatarURL: users[i].avatarURL, accepted: 'waiting'};
+          User.findById(users[i]._id, function (err, obj){
+            obj.invites.push({invite: invite._id, author: invite.author});
+            obj.save(function(err){
+              if(err) console.log(err);
+            });
+          });
+        }  
       }
-      obj.invites.push({invite: invite._id, author: invite.author});
-      obj.save(function (err){
-        if(err) console.log(err);
+      invite.save(function (err, invite){
+        if(err){ 
+          console.log(err);
+        }
       });
     });
-    User.findById(invite.player3.user, function (err, obj){
-      if(!obj.invites){
-        obj.invites = [];
-      }
-      obj.invites.push({invite: invite._id, author: invite.author});
-      obj.save(function (err){
-        if(err) console.log(err);
-      });
-    });
-    User.findById(invite.player4.user, function (err, obj){
-      if(err) console.log(err);
-      if(!obj.invites){
-        obj.invites = [];
-      }
-      obj.invites.push({invite: invite._id, author: invite.author});
-      obj.save(function (err){
-        if(err) console.log(err);
-      });
-    });
-    invite.save(function (err){
-      if(err) console.log(err);
-    })
   });
 }

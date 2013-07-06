@@ -8,7 +8,6 @@ var GameSchema = new Schema({
   gameData : {type: ObjectId, ref: 'GameData'},
   judgingOrder : Array,
   round  : Number,
-  gameEnd : {type:Boolean, default: false},
   judge  : {username: String, avatarURL: String, userGlobalId: String},
   numberOfSub : Number,
   players : Object,
