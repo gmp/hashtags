@@ -16,12 +16,15 @@ exports.updateById = function(req, res){
   Game.findById(gameId, function (err, obj){
     obj.set('players.'+submitted.userGlobalId, submitted);
     obj.save( function (err, doc){
-      if(err) console.error(err);
-      if(submitted.userGlobalId){
-        clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+      if(err) {
+        console.error(err);
+      } else {
+        if(submitted.submitted){
+          clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+        }
+        res.writeHead(204);
+        res.end();
       }
-      res.writeHead(204);
-      res.end();
     });
   });
 };
