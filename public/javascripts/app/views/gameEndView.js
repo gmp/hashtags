@@ -9,7 +9,8 @@ ht.Views.GameEndView = Backbone.View.extend({
   },
 
   events: {
-    'click #continue': 'goToNextRound'
+    'click #continue': 'goToNextRound',
+    'click video': 'playVideo'
   },
 
   render: function() {
@@ -33,6 +34,10 @@ ht.Views.GameEndView = Backbone.View.extend({
         ht.dispatcher.trigger('continued');
       }
     });
+  },
+
+  playVideo: function(e) {
+    e.target.play();
   }
 
 });
