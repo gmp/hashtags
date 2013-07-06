@@ -1,3 +1,17 @@
+.scoreBoard {
+  font-size: 14px;
+}
+
+#winner {
+  font-size: 18px;
+}
+
+.scoreNumber {
+  position: absolute;
+  left: 175px;
+  font-size: 14px;
+}
+
 .login {
   font-family: 'Permanent Marker';
   text-align: center;

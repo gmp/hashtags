@@ -14,6 +14,10 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
     'playerSubmit': 'playerSubmit'
   },
 
+  events: {
+    'click video': 'playVideo'
+  },
+
   render: function() {
     this.$el.empty();
     this.$el.append(this.template({players: this.model.get('players'), myPlayer: this.attributes.myPlayer}));
@@ -29,6 +33,10 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
         console.error("error");
       }
     });
+  },
+
+  playVideo: function(e) {
+    e.target.play();
   }
 
 });

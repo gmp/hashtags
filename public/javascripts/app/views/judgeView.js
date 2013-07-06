@@ -52,31 +52,29 @@ ht.Views.JudgeView = Backbone.View.extend({
       }
     });
     if(counter === Object.keys(players).length - 1){
-      if(confirm("Are you sure about your choice?")){
-        var prevRound = {};
-        prevRound.winningSub = $(e.target).data('submittedUrl');
-        prevRound.winner = $(e.target).data('submittedby');
-        var selfie = this;
-        prevRound.players = [];
-        _.each(players, function(player){
-          if(!player.isJ){
-            prevRound.players.push({username: player.username, submission: player.submission});
-          }
-        });
-        prevRound.prompt = this.model.get('prompt');
-        this.model.set('previousRound', prevRound);
-        this.attributes.myPlayer.continued = false;
-        this.model.save(prevRound, {
-          success: function(){
-            selfie.remove();
-            console.log('success');
-            ht.dispatcher.trigger('judgeSelect');
-          },
-          error: function(){
-            console.error('bummer dude. save failed.');
-          }
-        });
-      }
+      var prevRound = {};
+      prevRound.winningSub = $(e.target).data('submittedUrl');
+      prevRound.winner = $(e.target).data('submittedby');
+      var selfie = this;
+      prevRound.players = [];
+      _.each(players, function(player){
+        if(!player.isJ){
+          prevRound.players.push({username: player.username, submission: player.submission});
+        }
+      });
+      prevRound.prompt = this.model.get('prompt');
+      this.model.set('previousRound', prevRound);
+      this.attributes.myPlayer.continued = false;
+      this.model.save(prevRound, {
+        success: function(){
+          selfie.remove();
+          console.log('success');
+          ht.dispatcher.trigger('judgeSelect');
+        },
+        error: function(){
+          console.error('bummer dude. save failed.');
+        }
+      });
     }
   },
 

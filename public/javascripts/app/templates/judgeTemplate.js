@@ -16,7 +16,7 @@ ht.Templates.JudgeTemplate = _.template(''+
           '<% } else { %>'+
             '<video class="media" src="<%= player.submission.url %>"></video>'+
             '<h4>#<%= player.submission.hashtag %></h4>'+
-            '<button class="expand" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Video</button>'+
+            '<button class="media-select expand" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Video</button>'+
           '<% } %>'+
         '</div>'+
       '</div>'+
