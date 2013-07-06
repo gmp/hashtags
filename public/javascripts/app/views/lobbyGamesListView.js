@@ -10,6 +10,7 @@ ht.Views.LobbyGamesListView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
+    debugger;
     this.$el.append(this.template({games: this.model.get('games')}));
   }
 });
