@@ -23,7 +23,6 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     var self = this;
     var hashtagQuery = this.attributes.hashtag;
     var accessToken = this.attributes.accessToken;
-    hashtagQuery = hashtagQuery.slice(1);
     console.log(hashtagQuery);
     $.ajax({
       url: 'https://api.instagram.com/v1/tags/'+hashtagQuery+'/media/recent?access_token='+accessToken+'',
