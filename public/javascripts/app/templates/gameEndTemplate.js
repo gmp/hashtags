@@ -22,10 +22,10 @@ ht.Templates.GameEndTemplate = _.template(''+
           '<% } %>'+
         '<% if(player.submission.type === "image") { %>'+
           '<img class="media" src="<%= player.submission.url %>">'+
-          '<h4><%= player.submission.hashtag %></h4>'+
+          '<h4>#<%= player.submission.hashtag %></h4>'+
         '<% } else { %>'+
           '<video class="media" src="<%= player.submission.url %>"></video>'+
-          '<h4><%= player.submission.hashtag %></h4>'+
+          '<h4>#<%= player.submission.hashtag %></h4>'+
         '<% } %>'+
       '</div>'+
     '</div>'+
