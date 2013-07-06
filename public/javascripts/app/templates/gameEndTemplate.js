@@ -9,6 +9,9 @@ ht.Templates.GameEndTemplate = _.template(''+
       '</div>'+
     '</div>'+
   '</div>'+
+  '<% _.each(playersWithScore, function(player) { %>'+
+    '<p><%= player.username %>: <%= player.score %></p>'+
+  '<% }); %>'+
   '<% _.each(players, function(player) { %>'+
     '<div class="row text-center">'+
       '<div class="small-11 small-centered columns">'+
