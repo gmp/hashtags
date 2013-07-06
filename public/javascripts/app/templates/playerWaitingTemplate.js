@@ -3,7 +3,7 @@ ht.Templates.PlayerWaitingTemplate = _.template(''+
     '<% if(player.submitted) { %>'+
       '<div class="row text-center">'+
         '<div class="small-11 small-centered columns">'+
-            '<% if(player.username === myPlayer.username) { %>'+
+            '<% if(player.username === username) { %>'+
               '<h4>You submitted:</h4>'+
             '<% } else { %>'+
               '<h4><%= player.username %> submitted:</h4>'+
@@ -21,7 +21,7 @@ ht.Templates.PlayerWaitingTemplate = _.template(''+
   '<% }); %>'+
   '<div class="row">'+
     '<div class="small-9 small-centered columns">'+
-      '<a href="/#lobby/<%= myPlayer.userGlobalId %>" class="button expand">Back to lobby</a>'+
+      '<a href="/#lobby/<%= userGlobalId %>" class="button expand">Back to lobby</a>'+
     '</div>'+
   '</div>'+
 '');

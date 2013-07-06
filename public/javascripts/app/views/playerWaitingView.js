@@ -16,7 +16,7 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template({players: this.model.get('players'), myPlayer: this.attributes.myPlayer}));
+    this.$el.append(this.template({players: this.model.get('players'), username: this.attributes.username, userGlobalId: this.attributes.userGlobalId}));
   },
 
   playerSubmit: function() {
