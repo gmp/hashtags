@@ -56,8 +56,6 @@ exports.create = function(req, res) {
   });
   invite.save(function(err) {
     if (err) console.log(err);
-    res.writeHead(204);
-    res.end();
   });
 };
 
@@ -74,7 +72,6 @@ exports.accept = function(req, res) {
     for (var i = 0; i < playersArr.length; i++) {
       if (playersArr[i].user === userId) {
         invite.set('player' + (i + 2) + '.accepted', 'accepted');
-        console.log("WAITING ON", invite.waitingOn);
         if (invite.waitingOn > 1) {
           invite.set('waitingOn', invite.waitingOn - 1);
           moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
@@ -84,7 +81,7 @@ exports.accept = function(req, res) {
           userIds.push(invite.player2.user);
           userIds.push(invite.player3.user);
           userIds.push(invite.player4.user);
-          createGame(userIds, inviteId, invite.title, res);
+          createGame(userId, userIds, inviteId, invite.title, res);
         }
 
       }
@@ -101,7 +98,7 @@ exports.accept = function(req, res) {
 //Add that game to every user involved in game
 // Remove pending game from every user including game admin except for one who is currently accepting
 //Then clients[userId].emit on each user- in the save callback of that user
-var createGame = function(userIds, inviteId, inviteTitle, res) {
+var createGame = function(userId, userIds, inviteId, inviteTitle, res) {
   var game = new Game();
   game.set('title', inviteTitle);
   game.set('prompt', "Yesterday I took an epic __");
@@ -109,7 +106,7 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
   game.set('numberOfSub', 0);
   var players = {};
   var playerIndex = 0;
-  
+
   //Add players to game
   for (var i = 0; i < userIds.length; i++) {
     User.findById(userIds[i], function(err, user) {
@@ -123,7 +120,7 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
       player.username = user.username;
       player.continued = true;
       player.hand = ['#yolo', '#omg', '#kitty', '#jj_forum', '#jaja'];
-      if (playerIndex ===0) {
+      if (playerIndex === 0) {
         player.isJ = true;
         game.judge = {
           username: user.username,
@@ -133,15 +130,30 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
         player.isJ = false;
       }
       players[user._id] = player;
-      console.log("******player counter*****", playerIndex);
+
+      //Remove invitation from the user that just accepted, which was the last
+ 
+      if (user._id.toString() === userId.toString()) {
+        var newInvites = [];
+        for (var i = 0; i < user.invites.length; i++) {
+          if (!(user.invites[i].invite.toString() === inviteId.toString())) {
+            newInvites.push(user.invites[i])
+          }
+        }
+        user.set('invites', newInvites);
+        user.save(function(err){
+          
+        })
+
+      }
       if (playerIndex === 3) {
         for (var i = 0; i < userIds.length; i++) {
-          addGameToUser(userIds[i], game, inviteId);
+          addGameToUser(userIds[i], game, inviteId, res);
         }
-        game.players = players; 
+        game.players = players;
 
-        game.save(function(err){
-          if(err)console.log(err);
+        game.save(function(err) {
+          if (err) console.log(err);
         });
       }
       playerIndex++;
@@ -149,7 +161,7 @@ var createGame = function(userIds, inviteId, inviteTitle, res) {
   }
 };
 
-var addGameToUser = function(userId, game, inviteId) {
+var addGameToUser = function(userId, game, inviteId, res) {
   User.findById(userId, function(err, user) {
     if (err) console.log(err);
     var userGame = {};
@@ -181,12 +193,13 @@ var addGameToUser = function(userId, game, inviteId) {
 
 
     user.games.push(userGame);
+  
     user.save(function(err) {
       if (err) console.log(err);
-   
+
       if (clients[user._id]) {
-        console.log(user);
         clients[userId].emit('changeInUser');
+ 
       }
     })
   })
@@ -200,7 +213,7 @@ var moveGameToPending = function(userId, inviteId, title, waitingOn, res) {
         user.invites.splice(i, 1);
         user.set('invites', user.invites);
       }
-    };
+    }
     var pendingGames = [];
     pendingGames.push({
       invite: inviteId,
