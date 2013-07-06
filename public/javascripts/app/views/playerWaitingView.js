@@ -6,9 +6,12 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
 
 
   initialize: function() {
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.render();
-    _.bindAll(this, 'playerSubmit');
-    ht.dispatcher.on('playerSubmit', this.playerSubmit);
+  },
+
+  dispatcher_events: {
+    'playerSubmit': 'playerSubmit'
   },
 
   render: function() {

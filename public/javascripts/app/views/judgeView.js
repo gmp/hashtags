@@ -5,14 +5,17 @@ ht.Views.JudgeView = Backbone.View.extend({
   template: ht.Templates.JudgeTemplate,
 
   initialize: function() {
-    _.bindAll(this, 'playerSubmit');
-    ht.dispatcher.on('playerSubmit', this.playerSubmit);
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.render();
   },
 
   events: {
     'click .media-select': 'judgeChoose',
     'click video': 'playVideo'
+  },
+
+  dispatcher_events: {
+    'playerSubmit': 'playerSubmit'
   },
 
   render: function() {

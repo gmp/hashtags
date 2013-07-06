@@ -3,11 +3,14 @@ ht.Views.PlayerView = Backbone.View.extend({
   className: 'player',
 
   initialize: function() {
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.subView = undefined;
     this.hashtagSelected = false;
-    _.bindAll(this, 'hashtagClick');
-    ht.dispatcher.on('hashtagClick', this.hashtagClick);
     this.render();
+  },
+
+  dispatcher_events: {
+    'hashtagClick': 'hashtagClick'
   },
 
   render: function() {
