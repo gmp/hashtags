@@ -15,8 +15,6 @@ exports.updateById = function(req, res){
   var submitted = req.body;
   Game.findById(gameId, function (err, obj){
     obj.set('players.'+submitted.userGlobalId, submitted);
-    console.log("SAVING PLAYER STATE");
-    console.log(obj);
     obj.save( function (err, doc){
       if(err) console.error(err);
       if(submitted.userGlobalId){
