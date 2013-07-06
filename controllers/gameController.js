@@ -15,6 +15,8 @@ exports.updateById = function(req, res){
   var submitted = req.body;
   Game.findById(gameId, function (err, obj){
     obj.set('players.'+submitted.userGlobalId, submitted);
+    console.log("SAVING PLAYER STATE");
+    console.log(obj);
     obj.save( function (err, doc){
       if(err) console.error(err);
       if(submitted.userGlobalId){
@@ -44,8 +46,7 @@ exports.roundChange = function (req, res){
         console.log('how many times');
       }
       if(submitted.previousRound.winner === item.username){
-        var score = item.score++
-        obj.set('players.'+item.userGlobalId+'.score', score);
+        obj.set('players.'+item.userGlobalId+'.score', item.score + 1);
       }
     });
     var currentround = obj.round + 1;
@@ -63,11 +64,15 @@ exports.roundChange = function (req, res){
     obj.set('gameEnd', true);
     obj.set('numberOfSub', 0);
     obj.set('previousRound', submitted.previousRound);
+    console.log("RESTTING PLAYER STATE");
+    console.log(obj);
     obj.save( function (err, doc){
       if(err) console.error(err);
-      clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
+      console.log("SAVED PLAYER STATE");
+      console.log(doc);
       res.writeHead(204);
       res.end();
+      clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
     });
   });
 };
