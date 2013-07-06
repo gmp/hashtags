@@ -5,14 +5,17 @@ ht.Views.JudgeView = Backbone.View.extend({
   template: ht.Templates.JudgeTemplate,
 
   initialize: function() {
-    _.bindAll(this, 'playerSubmit');
-    ht.dispatcher.on('playerSubmit', this.playerSubmit);
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.render();
   },
 
   events: {
-    'click img': 'judgeChoose',
-    'click video': 'judgeChoose'
+    'click .media-select': 'judgeChoose',
+    'click video': 'playVideo'
+  },
+
+  dispatcher_events: {
+    'playerSubmit': 'playerSubmit'
   },
 
   render: function() {
@@ -51,28 +54,23 @@ ht.Views.JudgeView = Backbone.View.extend({
     if(counter === Object.keys(players).length - 1){
       if(confirm("Are you sure about your choice?")){
         var prevRound = {};
-        prevRound.winningSub = e.target.src;
-        prevRound.winner = $(e.target).data('submittedby');
+        prevRound.winningSub = e.target.previousSibling.previousSibling.src;
+        prevRound.winner = $(e.target.previousSibling.previousSibling).data('submittedby');
         var selfie = this;
         prevRound.players = [];
         _.each(players, function(player){
-          prevRound.players.push({username: player.username, submission: player.submission});
+          if(!player.isJ){
+            prevRound.players.push({username: player.username, submission: player.submission});
+          }
         });
         prevRound.prompt = this.model.get('prompt');
         this.model.set('previousRound', prevRound);
-        var selfie = this;
-        this.model.save( prevRound, {
-          patch: true,
-          success: function(obj){
-            selfie.model.fetch({
-              success: function (obj, res){
-                selfie.model = obj;
-                selfie.subView.render();
-              },
-              error: function (){
-                console.log('dude where\'s my subview?');
-              }
-            });
+        this.attributes.myPlayer.continued = false;
+        this.model.save(prevRound, {
+          success: function(){
+            selfie.remove();
+            console.log('success');
+            ht.dispatcher.trigger('judgeSelect');
           },
           error: function(){
             console.error('bummer dude. save failed.');
@@ -80,6 +78,10 @@ ht.Views.JudgeView = Backbone.View.extend({
         });
       }
     }
+  },
+
+  playVideo: function(e) {
+    e.target.play();
   }
 
 });

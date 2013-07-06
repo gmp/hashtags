@@ -29,6 +29,7 @@ module.exports = function (){
       });
     });
     User.findById(invite.player4.user, function (err, obj){
+      if(err) console.log(err);
       if(!obj.invites){
         obj.invites = [];
       }

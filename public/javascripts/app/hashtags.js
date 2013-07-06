@@ -15,7 +15,22 @@ var ht = {
 };
 
 ht.Helpers.getMyPlayer = function(gameModel, userId){
+  debugger;
   return gameModel.get('players')[userId];
+};
+
+ht.Helpers.delegateCustomEvents = function(obj, events, context) {
+  for (var key in events) {
+    var method = events[key];
+    if (!_.isFunction(method)) {
+      method = context[events[key]];
+    }
+    if (!method) {
+      throw new Error('Method "' + events[key] + '" does not exist');
+    }
+    method = _.bind(method, context);
+    obj.on(key, method);
+  }
 };
 
 

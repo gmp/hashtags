@@ -5,9 +5,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
-    console.log(this.model);
-    _.bindAll(this, 'changeInUser');
-    ht.dispatcher.on('changeInUser', this.changeInUser);
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.model.on('change:pendingGames', this.render, this);
     this.model.on('change:invites', this.render, this);
     this.leaveRooms();
@@ -18,6 +16,10 @@ ht.Views.LobbyView = Backbone.View.extend({
     'click #new-game-button': 'modalShow',
     'click #cancel, #mask': 'modalHide',
     'click #start-new-game': 'createGame'
+  },
+
+  dispatcher_events: {
+    'changeInUser': 'changeInUser'
   },
 
   render: function() {
@@ -39,7 +41,6 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   leaveRooms: function(){
-    console.log('i gets called');
     ht.dispatcher.trigger('leaveRooms');
   },
 

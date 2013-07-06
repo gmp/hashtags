@@ -9,13 +9,9 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
     this.render();
   },
 
-  // events: {
-  //   'change:pendingGames': 'render'
-  // },
-
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template({pendingGames: this.model.get('pendingGames')}));
+    this.$el.append(this.template( { pendingGames: this.model.get('pendingGames') } ) );
   }
 
 });

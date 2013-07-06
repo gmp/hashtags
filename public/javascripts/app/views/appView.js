@@ -2,45 +2,39 @@ ht.Views.AppView = Backbone.View.extend({
 
   id: '#hashtags',
 
+  initialize: function() {
+    this.createSockets();
+    ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
+    this.render();
+  },
+
+  render: function() {
+    return this;
+  },
+
+  dispatcher_events: {
+    'joinGame': 'joinGame',
+    'leaveRooms': 'leaveRooms'
+  },
+
   socket_events: {
     "changeInUser" : "changeInUser",
     "joinedRoom" : "joinedRoom",
-    "otherPlayerSubmit" : "otherPlayerSubmit"
+    "otherPlayerSubmit" : "otherPlayerSubmit",
+    "judgeSelect" : "judgeSelect"
   },
 
-  initialize: function() {
-    this.createSockets();
-    _.bindAll(this, 'joinGame','leaveRooms');
-    ht.dispatcher.on('joinGame', this.joinGame);
-    ht.dispatcher.on('leaveRooms', this.leaveRooms);
-    ht.dispatcher.on('mediaSelect', this.mediaSelect);
+  createSockets: function() {
+    this.socket = io.connect();
+    if (this.socket_events && _.size(this.socket_events) > 0) {
+      ht.Helpers.delegateCustomEvents(this.socket, this.socket_events, this);
+    }
   },
 
   leaveRooms: function(){
     if(this.roomId){
       this.socket.emit('leaveGame', this.roomId);
       delete this.roomId;
-    }
-  },
-
-  createSockets: function() {
-    this.socket = io.connect();
-    if (this.socket_events && _.size(this.socket_events) > 0) {
-      this.delegateSocketEvents(this.socket_events);
-    }
-  },
-
-  delegateSocketEvents: function(events) {
-    for (var key in events) {
-      var method = events[key];
-      if (!_.isFunction(method)) {
-        method = this[events[key]];
-      }
-      if (!method) {
-        throw new Error('Method "' + events[key] + '" does not exist');
-      }
-      method = _.bind(method, this);
-      this.socket.on(key, method);
     }
   },
 
@@ -53,12 +47,7 @@ ht.Views.AppView = Backbone.View.extend({
   },
 
   joinedRoom: function(gameId){
-    console.log('made it back with the id: ', gameId);
     this.roomId = gameId;
-  },
-
-  render: function() {
-    $('body').append(this.$el);
   },
 
   login: function() {
@@ -73,13 +62,13 @@ ht.Views.AppView = Backbone.View.extend({
 
   lobby: function(id) {
     var self = this;
+    this.socket.emit('gotUserId', {user: id});
     this.currentGame && this.currentGame.remove();
     this.user = this.user || new ht.Models.UserModel({
       id: id
     });
     this.user.fetch({
       success: function(user) {
-        self.socket.emit('gotUserId', {user: user.get('id')});
         self.$el.empty();
         self.$el.append(
           new ht.Views.LobbyView({
@@ -122,9 +111,12 @@ ht.Views.AppView = Backbone.View.extend({
     });
   },
 
-  otherPlayerSubmit: function(gameId) {
-    console.log('heard the submission');
+  otherPlayerSubmit: function() {
     ht.dispatcher.trigger('playerSubmit');
+  },
+
+  judgeSelect: function() {
+    ht.dispatcher.trigger('judgeSelect');
   }
 
 });

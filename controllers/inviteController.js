@@ -76,7 +76,7 @@ exports.accept = function(req, res) {
         invite.set('player' + (i + 2) + '.accepted', 'accepted');
         console.log("WAITING ON", invite.waitingOn);
         if (invite.waitingOn > 1) {
-          invite.set('waitingOn', --invite.waitingOn);
+          invite.set('waitingOn', invite.waitingOn - 1);
           moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
         } else if (invite.waitingOn === 1) {
           var userIds = [];
@@ -103,20 +103,17 @@ exports.accept = function(req, res) {
 // Remove pending game from every user including game admin except for one who is currently accepting
 //Then clients[userId].emit on each user- in the save callback of that user
 var createGame = function(userIds, inviteId, inviteTitle) {
-  var player = {};
   var game = new Game();
-  game.title = inviteTitle;
-  game.prompt = "When I woke up from a nap my siginificant other had ___";
-  game.round = 1;
-  game.numberOfSub = 0;
-  game.players = {};
-
+  game.set('title', inviteTitle);
+  game.set('prompt', "Yesterday I took an epic __");
+  game.set('round', 1);
+  game.set('numberOfSub', 0);
+  game.set('players', {});
   //Add players to game
   for (var i = 0; i < userIds.length; i++) {
     addPlayerToGame(userIds[i], game, i);
   }
 
-  game.set('players', game.players);
 
   //Save the game
   game.save(function(err) {
@@ -126,7 +123,7 @@ var createGame = function(userIds, inviteId, inviteTitle) {
       addGameToUser(userIds[i], game);
     }
   });
-}
+};
 
 var addPlayerToGame = function(userId, game, index) {
   User.findById(userId, function(err, user) {
@@ -146,19 +143,33 @@ var addPlayerToGame = function(userId, game, index) {
     }
     game.players[userId] = player;
   });
-}
+};
 
   var addGameToUser = function(userId, game) {
     User.findById(userId, function(err, user) {
       if (err) console.log(err);
-      user.games.push(game);
-      console.log("PLAYERS ", game.players)
-      user.set('games', user.games);
- 
+      var userGame = {};
+      var games = [];
+      userGame.gameId = game._id;
+      userGame.judge = game.judge;
+      userGame.prompt = game.prompt;
+      var userPlayers = [];
+      for(var playerId in game.players){
+        var userPlayer = {};
+        console.log("Player!", player)
+        userPlayer.username = user.username;
+        userPlayer.avatarURL = user.avatarURL;
+        userPlayer.score = game.players[playerId].score;
+        userPlayers.push(userPlayer);
 
+      }
+      userGame.players = userPlayers;
+      userGame.title = game.title;
+
+
+      user.games.push(userGame);
       user.save(function(err) {
         if (err) console.log(err);
-        console.log("USER GAMES", user.games);
         if(clients[userId]){
           clients[userId].emit('changeInUser');
         }
@@ -179,8 +190,6 @@ var addPlayerToGame = function(userId, game, index) {
       }
     });
   }
-
-
 
   var moveGameToPending = function(userId, inviteId, title, waitingOn, res) {
     User.findById(userId, function(err, user) {

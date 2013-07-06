@@ -10,7 +10,8 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   events: {
-    'click .media-select': 'submitMedia'
+    'click .media-select': 'submitMedia',
+    'click video': 'playVideo'
   },
 
   render: function() {
@@ -63,7 +64,12 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   submitMedia: function(e) {
+    this.remove();
     ht.dispatcher.trigger('mediaSelect', $(e.target).data('url'), $(e.target).data('type'), this.attributes.hashtag);
+  },
+
+  playVideo: function(e) {
+    e.target.play();
   }
 
 });
