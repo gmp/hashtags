@@ -21,6 +21,7 @@ exports.updateById = function(req, res) {
         if (err) console.log(err);
         for (var i = 0; i < submitted.hand.length; i++) {
           if (submitted.submission.hashtag === submitted.hand[i]) {
+            console.log(gameData);
             submitted.hand[i] = gameData.hashtags.pop();
           }
         }
