@@ -56,5 +56,6 @@ ht.Views.PlayerView = Backbone.View.extend({
   hashtagClick: function(hashtag) {
     this.hashtagSelected = hashtag;
     this.render();
+    console.log("hashtagClick");
   }
 });

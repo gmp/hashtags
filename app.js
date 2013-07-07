@@ -11,7 +11,7 @@ controller(app);
 
 require('./controllers/userDummy.js')();
 
-//require('./controllers/gameDummy.js')();
+require('./controllers/gameDummy.js')();
 
 
 

@@ -68,5 +68,6 @@ module.exports = [
   "gross",
   "macaroniandcheese",
   "foodie",
-  "grills"
+  "grills",
+  "hashtag"
 ];
