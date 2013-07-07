@@ -30,7 +30,6 @@ exports.updateById = function(req, res) {
       });
     }
 
-
     obj.save(function(err, doc) {
       if (err) {
         console.error(err);

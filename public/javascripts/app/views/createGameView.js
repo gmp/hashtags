@@ -34,10 +34,10 @@ ht.Views.CreateGameView = Backbone.View.extend({
     var self = this;
     var obj = {};
     obj.author = this.model.get('username');
-    obj.gameAdmin = this.model.get('_id');
-    obj.player2 = this.player2._id;
-    obj.player3 = this.player3._id;
-    obj.player4 = this.player4._id;
+    obj.gameAdmin = {user: this.model.get('_id'), username: this.model.get('username'), avatarURL: this.model.get('avatarURL')};
+    obj.player2 = {user: this.player2._id, username: this.player2.username, avatarURL: this.player2.avatarURL, accepted: 'waiting'};
+    obj.player3 = {user: this.player3._id, username: this.player3.username, avatarURL: this.player3.avatarURL, accepted: 'waiting'};
+    obj.player4 = {user: this.player4._id, username: this.player4.username, avatarURL: this.player4.avatarURL, accepted: 'waiting'};
     obj.title = $('#gameTitle').val();
     console.log(obj);
     $.ajax({

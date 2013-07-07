@@ -55,8 +55,9 @@ module.exports = function(){
         });
       });
       gameData.save(function(err){
-        if(err)console.log(err);
-      })
+
+        if(err) console.log(err);
+      });
       game.save(function(err){
         if(err) console.log(err);
       });
@@ -105,9 +106,9 @@ module.exports = function(){
         });
       });
 
-    gameData2.save(function(err){
-        if(err)console.log(err);
-      })
+      gameData2.save(function(err){
+        if(err) console.log(err);
+      });
       game2.save(function(err){
         if(err) console.log(err);
       });
