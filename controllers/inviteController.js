@@ -126,6 +126,9 @@ var createGame = function (invite, players, title, userId, res){
   }
   gameData.set('hashtags', tags);
   playersHash[judgeArr[0]].isJ = true;
+  gameData.save(function (err){
+    if(err) console.log(err);
+  });
   game.set('judgingOrder', judgeArr);
   game.set('players', playersHash);
   game.save(function (err, newGame){
