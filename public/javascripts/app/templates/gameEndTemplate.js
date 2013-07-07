@@ -32,7 +32,7 @@ ht.Templates.GameEndTemplate = _.template(''+
   '<% }); %>'+
   '<div class="row">'+
     '<div class="small-9 small-centered columns">'+
-      '<button class="expand" id="continue">Continue</button>'+
+      '<button class="expand success" id="continue">Continue</button>'+
     '</div>'+
   '</div>'+
   '<div class="row">'+

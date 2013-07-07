@@ -1,3 +1,7 @@
+body {
+  background-color: #f7b4d2
+}
+
 .scoreBoard {
   font-size: 14px;
 }
@@ -31,10 +35,12 @@
 
 .lobby-header {
   text-align: center;
+  background-color: #3d3d3d;
   padding-bottom: 1em;
 }
 
 .invites {
+  margin-top: 15px;
   padding-bottom: 1em;
 }
 
@@ -100,7 +106,7 @@
 
 .game-header {
   margin-bottom: 1em;
-  background-color: lightgrey;
+  background-color: #3d3d3d;
   text-align: center;
 }
 
@@ -110,8 +116,4 @@
 
 .media {
   width: 100%;
-}
-
-#continue {
-  background-color: green;
 }
