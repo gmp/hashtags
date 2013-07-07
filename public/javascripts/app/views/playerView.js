@@ -14,9 +14,10 @@ ht.Views.PlayerView = Backbone.View.extend({
   },
 
   render: function() {
+    this.attributes.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     // if player has not submitted image and not selected hashtag
     if (!this.attributes.myPlayer.submitted && !this.hashtagSelected) {
-      this.subView && this.subView.remove();
+      if (this.subView) this.subView.remove();
       this.$el.empty();
       this.subView = new ht.Views.PlayerHashtagSelectView({
         model: this.model,
@@ -28,11 +29,12 @@ ht.Views.PlayerView = Backbone.View.extend({
 
     // if player has not submitted image, but selected hashtag
     } else if (!this.attributes.myPlayer.submitted && this.hashtagSelected) {
-      this.subView && this.subView.remove();
+      if (this.subView) this.subView.remove();
       this.$el.empty();
       this.subView = new ht.Views.PlayerImageSelectView({
         model: this.model,
         attributes: {
+          myPlayer: this.attributes.myPlayer,
           accessToken: this.attributes.user.get('accessToken'),
           hashtag: this.hashtagSelected
         }
@@ -41,7 +43,7 @@ ht.Views.PlayerView = Backbone.View.extend({
 
     // if player has submitted, but game has not ended
     } else if (this.attributes.myPlayer.submitted) {
-      this.subView && this.subView.remove();
+      if (this.subView) this.subView.remove();
       this.$el.empty();
       this.subView = new ht.Views.PlayerWaitingView({
         model: this.model,

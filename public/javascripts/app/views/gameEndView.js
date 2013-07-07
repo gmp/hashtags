@@ -24,6 +24,7 @@ ht.Views.GameEndView = Backbone.View.extend({
   },
 
   goToNextRound: function() {
+    var self = this;
     var players = this.model.get('players');
     var player = players[this.attributes.myPlayer.userGlobalId];
     player.continued = true;
@@ -31,6 +32,7 @@ ht.Views.GameEndView = Backbone.View.extend({
     this.model.save(player, {
       patch: true,
       success: function (){
+        self.model.unsetChanges();
         ht.dispatcher.trigger('continued');
       }
     });

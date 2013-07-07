@@ -10,7 +10,7 @@ ht.Templates.CreateGameTemplate = _.template(''+
   '<form id="game-title-form">'+
     '<div class="row">'+
       '<div class="small-2 columns">'+
-        '<label for="right-label" class="right inline">#Title</label>'+
+        '<label id="gameTitle" for="right-label" class="right inline">#Title</label>'+
       '</div>'+
       '<div class="small-10 columns">'+
         '<input type="text" id="right-label" placeholder="eg. Super Awesome Game Title">'+
