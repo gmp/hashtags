@@ -18,6 +18,7 @@ ht.Views.GameView = Backbone.View.extend({
   render: function() {
     this.$el.empty();
     if(!this.myPlayer.continued){
+      if (this.subView) this.subView.remove();
       this.subView = new ht.Views.GameEndView({
         model: this.model,
         attributes: {
@@ -28,6 +29,7 @@ ht.Views.GameView = Backbone.View.extend({
     } else {
       this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
       if(this.myPlayer.isJ){
+        if (this.subView) this.subView.remove();
         this.subView = new ht.Views.JudgeView({
           model: this.model,
           attributes: {
@@ -36,6 +38,7 @@ ht.Views.GameView = Backbone.View.extend({
         });
         this.$el.append(this.subView.el);
       } else {
+      if (this.subView) this.subView.remove();
         this.subView = new ht.Views.PlayerView({
           model: this.model,
           attributes: {
@@ -52,28 +55,14 @@ ht.Views.GameView = Backbone.View.extend({
     ht.dispatcher.trigger('joinGame', this.model.get('id'));
   },
 
-  mediaSelect: function(submissionUrl, type, hashtag) {
-    var players = this.model.get('players');
-    var player = players[this.attributes.user.id];
-    player.submitted = true;
-    player.submission = {url: submissionUrl, type: type, hashtag: hashtag};
-    this.model.set('players', players);
+  mediaSelect: function() {
     var selfie = this;
-    this.model.save(player, {
-      patch: true,
-      success: function(){
-        selfie.model.fetch({
-          success: function (obj, res){
-            selfie.model = obj;
-            selfie.subView.render();
-          },
-          error: function (){
-            console.log('bummer dude, bad patch');
-          }
-        });
+    this.model.fetch({
+      success: function (model, res){
+        selfie.subView.render();
       },
-      error: function(){
-        console.error('bummer dude, bad save.');
+      error: function (){
+        console.log('what the fuck');
       }
     });
   },
