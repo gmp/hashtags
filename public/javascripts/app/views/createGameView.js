@@ -64,6 +64,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   searchStart: function(e) {
+    
     this.search = new ht.Views.CreateGameSearchView({attributes: {player: e.target.id}});
     this.$el.find('#game-title-form').after(this.search.el);
   }
