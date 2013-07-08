@@ -4,6 +4,10 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   template: ht.Templates.CreateGameTemplate,
 
+
+  searchVisible: false,
+
+
   initialize: function(options) {
     ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.render();
@@ -55,7 +59,8 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   addInvited: function(data, player){
-    this.search.remove();
+    this.searchView.remove();
+    this.searchVisible = false;
     this[player] = data;
     $('#'+player).attr('src', data.avatarURL);
     if(this.player2 && this.player3 && this.player4){
@@ -64,8 +69,14 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   searchStart: function(e) {
-    this.search = new ht.Views.CreateGameSearchView({attributes: {player: e.target.id}});
-    this.$el.find('#game-title-form').after(this.search.el);
+    if(this.searchVisible){
+      this.searchView.remove();
+      this.searchVisible = false;
+    } else {
+      this.searchView = new ht.Views.CreateGameSearchView({attributes: {player: e.target.id}});
+      this.searchVisible = true;
+      this.$el.find('#game-title-form').after(this.searchView.el);
+    }
   }
 
 });
