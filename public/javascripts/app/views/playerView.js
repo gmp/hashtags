@@ -13,6 +13,11 @@ ht.Views.PlayerView = Backbone.View.extend({
     'hashtagClick': 'hashtagClick'
   },
 
+  remove: function(){
+    ht.dispatcher.off('hashtagClick');
+    Backbone.View.prototype.remove.call(this, arguments);
+  },
+
   render: function() {
     ht.Helpers.scrollTop();
     this.attributes.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
