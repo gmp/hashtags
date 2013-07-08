@@ -1,6 +1,6 @@
 body {
   background-color: #f7b4d2;
-  height: 1100px;
+  min-height: 1100px;
 }
 
 .scoreBoard {
