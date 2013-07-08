@@ -15,35 +15,33 @@ exports.updateById = function(req, res) {
   var gameId = req.params.id;
   var submitted = req.body;
   Game.findById(gameId, function(err, obj) {
-    obj.set('players.' + submitted.userGlobalId, submitted);
-    if(submitted.submitted === true) {
-      GameData.findById(obj.gameData, function(err, gameData) {
-        if (err) console.log(err);
+    GameData.findById(obj.gameData, function(err, gameData) {
+      if (err) console.log(err);
+      if (submitted.submitted === true) {
         for (var i = 0; i < submitted.hand.length; i++) {
           if (submitted.submission.hashtag === submitted.hand[i]) {
-            console.log(gameData);
             submitted.hand[i] = gameData.hashtags.pop();
           }
         }
-        gameData.save(function(err) {
-          if (err) console.log(err);
-        });
-      });
-    }
-
-    obj.save(function(err, doc) {
-      if (err) {
-        console.error(err);
-      } else {
-        if (submitted.submitted) {
-          clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
-        }
-        res.writeHead(204);
-        res.end();
       }
+      obj.set('players.' + submitted.userGlobalId, submitted);
+      obj.save(function(err, doc) {
+        if (err) {
+          console.error(err);
+        } else {
+          if (submitted.submitted) {
+            clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+          }
+          res.writeHead(204);
+          res.end();
+        }
+      });
+      gameData.save(function(err) {
+        if (err) console.log(err);
+      });
     });
   });
-};
+}
 
 exports.roundChange = function(req, res) {
   console.log('judge goes here');
