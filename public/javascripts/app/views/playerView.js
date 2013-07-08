@@ -15,7 +15,7 @@ ht.Views.PlayerView = Backbone.View.extend({
 
   remove: function(){
     ht.dispatcher.off('hashtagClick');
-    Backbone.View.prototype.remove.call(this, arguments);
+    Backbone.View.prototype.remove.apply(this, arguments);
   },
 
   render: function() {
