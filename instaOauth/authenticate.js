@@ -10,11 +10,19 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+//LOCAL
 passport.use(new InstagramStrategy({
     clientID: '7b0cfd2414c54f35bf072e4935b27b87',
     clientSecret: 'c5ea71c310c64c45bd415714131f435b',
     callbackURL: "/auth/instagram/callback"
   },
+
+  // //deploy*******
+  // passport.use(new InstagramStrategy({
+  //   clientID: '71b5042b9de24fe7816e9a44cd677912',
+  //   clientSecret: '700d71898ce844fcace04ec958d19980',
+  //   callbackURL: "/auth/instagram/callback"
+  // },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {

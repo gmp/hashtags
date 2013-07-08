@@ -30,7 +30,9 @@ exports.updateById = function(req, res) {
           console.error(err);
         } else {
           if (submitted.submitted) {
-            clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+            if(clients[submitted.userGlobalId]){
+              clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
+            }
           }
           res.writeHead(204);
           res.end();
@@ -48,6 +50,8 @@ exports.roundChange = function(req, res) {
   var gameId = req.params.id;
   var submitted = req.body;
   var oldJudge;
+
+
   Game.findById(gameId, function(err, obj) {
     GameData.findById(obj.gameData, function(err, gameData) {
       console.log(gameData.prompts);
@@ -59,6 +63,7 @@ exports.roundChange = function(req, res) {
       gameData.save(function(err) {
         if (err) console.log(err);
       });
+
     });
     _.each(obj.players, function(item) {
       obj.set('players.' + item.userGlobalId + '.continued', false);
