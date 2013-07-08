@@ -11,7 +11,6 @@ var User = require('../models/userModel.js'),
 exports.create = function(req, res) {
   var obj = req.body;
   var invite = new Invite();
-
   invite.set('title', obj.title);
   invite.set('author', obj.author);
   invite.set('waitingOn', 3);

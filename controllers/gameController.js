@@ -1,6 +1,7 @@
 var Game = require('../models/gameModel.js');
 var GameData = require('../models/gameDataModel.js');
 var clients = require('../config/socketEvents.js').clients;
+var herald = require('./userGameHerald.js');
 var _ = require('underscore');
 
 exports.findById = function(req, res) {
@@ -46,7 +47,6 @@ exports.updateById = function(req, res) {
 }
 
 exports.roundChange = function(req, res) {
-  console.log('judge goes here');
   var gameId = req.params.id;
   var submitted = req.body;
   var oldJudge;
@@ -54,7 +54,6 @@ exports.roundChange = function(req, res) {
 
   Game.findById(gameId, function(err, obj) {
     GameData.findById(obj.gameData, function(err, gameData) {
-      console.log(gameData.prompts);
       var newPrompt = gameData.prompts.pop();
       obj.set('prompt', newPrompt);
       obj.save(function(err) {
@@ -94,11 +93,12 @@ exports.roundChange = function(req, res) {
     obj.set('previousRound', submitted.previousRound);
     obj.save(function(err, doc) {
       if (err) console.error(err);
-      res.writeHead(204);
-      res.end();
       if(clients[oldJudge]){
         clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
       }
+      herald(doc, gameId);
+      res.writeHead(204);
+      res.end();
     });
   });
 };

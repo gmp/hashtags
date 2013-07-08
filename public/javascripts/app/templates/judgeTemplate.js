@@ -9,16 +9,21 @@ ht.Templates.JudgeTemplate = _.template(''+
     '<% if(player.submitted) { %>'+
       '<div class="row text-center">'+
         '<div class="small-11 small-centered columns">'+
+          '<h4>#<%= player.submission.hashtag %></h4>'+
           '<% if(player.submission.type === "image") { %>'+
             '<img class="media" src="<%= player.submission.url %>">'+
+            '<% if(remainingSubs) { %>'+
+              '<button class="media-select expand disabled" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Image</button>'+
+            '<% } else { %>'+
+              '<button class="media-select expand" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Image</button>'+
+            '<% } %>'+
           '<% } else { %>'+
             '<video class="media" src="<%= player.submission.url %>"></video>'+
-          '<% } %>'+
-            '<h4>#<%= player.submission.hashtag %></h4>'+
-          '<% if(remainingSubs) { %>'+
-              '<button class="media-select expand disabled" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Image</button>'+
-          '<% } else { %>'+
-              '<button class="media-select expand" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Image</button>'+
+            '<% if(remainingSubs) { %>'+
+              '<button class="media-select expand disabled" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Video</button>'+
+            '<% } else { %>'+
+              '<button class="media-select expand" data-submittedby="<%= player.username %>" data-submittedUrl="<%= player.submission.url %>">Choose Video</button>'+
+            '<% } %>'+
           '<% } %>'+
         '</div>'+
       '</div>'+
