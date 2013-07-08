@@ -5,9 +5,9 @@ module.exports = [
   "dafuqdidijustread",
   "80sbaby",
   "whitetrash",
-  "crossdress",
+  // "crossdress",
   "chubbybunny",
-  "badcostume",
+  // "badcostume",
   "belike",
   "derp",
   "fail",
@@ -68,5 +68,6 @@ module.exports = [
   "gross",
   "macaroniandcheese",
   "foodie",
-  "grills"
+  "grills",
+  "hashtag"
 ];
