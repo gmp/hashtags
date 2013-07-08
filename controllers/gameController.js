@@ -50,7 +50,6 @@ exports.roundChange = function(req, res) {
   var gameId = req.params.id;
   var submitted = req.body;
   var oldJudge;
-  //need to deal with prompts
   Game.findById(gameId, function(err, obj) {
     GameData.findById(obj.gameData, function(err, gameData) {
       console.log(gameData.prompts);
@@ -64,7 +63,6 @@ exports.roundChange = function(req, res) {
       });
     });
     _.each(obj.players, function(item) {
-      //change players hands
       obj.set('players.' + item.userGlobalId + '.continued', false);
       obj.set('players.' + item.userGlobalId + '.submitted', false);
       obj.set('players.' + item.userGlobalId + '.submission', {});
@@ -91,15 +89,13 @@ exports.roundChange = function(req, res) {
     obj.set('gameEnd', true);
     obj.set('numberOfSub', 0);
     obj.set('previousRound', submitted.previousRound);
-    // console.log("RESTTING PLAYER STATE");
-    // console.log(obj);
     obj.save(function(err, doc) {
       if (err) console.error(err);
-      // console.log("SAVED PLAYER STATE");
-      // console.log(doc);
       res.writeHead(204);
       res.end();
-      clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
+      if(clients[oldJudge]){
+        clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
+      }
     });
   });
 };
