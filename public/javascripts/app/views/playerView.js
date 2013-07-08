@@ -13,7 +13,13 @@ ht.Views.PlayerView = Backbone.View.extend({
     'hashtagClick': 'hashtagClick'
   },
 
+  remove: function(){
+    ht.dispatcher.off('hashtagClick');
+    Backbone.View.prototype.remove.apply(this, arguments);
+  },
+
   render: function() {
+    ht.Helpers.scrollTop();
     this.attributes.myPlayer = ht.Helpers.getMyPlayer(this.model, this.attributes.user.id);
     // if player has not submitted image and not selected hashtag
     if (!this.attributes.myPlayer.submitted && !this.hashtagSelected) {

@@ -1,6 +1,6 @@
 body {
   background-color: #f7b4d2;
-  height: 100%;
+  min-height: 1100px;
 }
 
 .scoreBoard {
@@ -38,6 +38,7 @@ body {
   text-align: center;
   background-color: #3d3d3d;
   padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 .invites {
@@ -117,6 +118,10 @@ body {
   text-align: center;
 }
 
+.newGame {
+  margin: 1em 0;
+}
+
 .text-center {
   text-align: center;
 }
@@ -127,7 +132,7 @@ body {
 
 .games-list {
   width: 97%;
-  margin: auto;
+  margin: 15px auto;
 }
 
 .pending-games-list {
@@ -140,4 +145,8 @@ body {
   text-align: center;
   color: #3d3d3d;
   font-size: 1.5em;
+}
+
+.judge {
+  text-align: center;
 }

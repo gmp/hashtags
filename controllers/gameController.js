@@ -50,9 +50,10 @@ exports.roundChange = function(req, res) {
   var gameId = req.params.id;
   var submitted = req.body;
   var oldJudge;
+
+
   Game.findById(gameId, function(err, obj) {
     GameData.findById(obj.gameData, function(err, gameData) {
-      console.log(gameData.prompts);
       var newPrompt = gameData.prompts.pop();
       obj.set('prompt', newPrompt);
       obj.save(function(err) {
@@ -61,6 +62,7 @@ exports.roundChange = function(req, res) {
       gameData.save(function(err) {
         if (err) console.log(err);
       });
+
     });
     _.each(obj.players, function(item) {
       obj.set('players.' + item.userGlobalId + '.continued', false);

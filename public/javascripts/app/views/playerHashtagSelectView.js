@@ -11,11 +11,13 @@ ht.Views.PlayerHashtagSelectView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.append(this.template({hand: this.attributes.hand}));
   },
 
   hashtagClick: function(e) {
     this.remove();
+    console.log('player hashtag select view was clicked!');
     ht.dispatcher.trigger('hashtagClick', $(e.target).data('hashtag'));
   }
 
