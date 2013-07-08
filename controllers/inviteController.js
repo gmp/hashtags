@@ -7,9 +7,11 @@ var User = require('../models/userModel.js'),
     prompts = require('../data/prompts.js'),
     clients = require('../config/socketEvents.js').clients;
 
-exports.create = function(req, res){
+
+exports.create = function(req, res) {
   var obj = req.body;
   var invite = new Invite();
+
   invite.set('title', obj.title);
   invite.set('author', obj.author);
   invite.set('waitingOn', 3);
@@ -53,10 +55,12 @@ exports.accept = function(req, res){
   var inviteId = req.body.inviteId;
   var userId  = req.body.userId;
   Invite.findById(inviteId, function (err, invite){
+
     var playersArr = [];
     playersArr.push(invite.player2);
     playersArr.push(invite.player3);
     playersArr.push(invite.player4);
+
     for(var i = 0; i < playersArr.length; i ++){
       if(playersArr[i].user === userId){
         if(invite.waitingOn > 1){
@@ -67,13 +71,16 @@ exports.accept = function(req, res){
           playersArr.push(invite.gameAdmin);
           createGame(inviteId, playersArr, invite.title, userId, res);
         }
+
       }
     }
-    invite.save(function (err, invite){
-       if(err) console.log(err);
+    invite.save(function(err, invite) {
+      if (err) console.log(err);
+
     });
   });
 };
+
 
 var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
   User.findById(userId, function (err, user){
@@ -84,15 +91,22 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
       }
     };
     user.set('invites', newInvites);
+
     var pendingGames = [];
-    pendingGames.push({invite: inviteId, title: title, waitingOn: waitingOn});
+    pendingGames.push({
+      invite: inviteId,
+      title: title,
+      waitingOn: waitingOn
+    });
     user.set('pendingGames', pendingGames);
-    user.save(function(err){
-      if(err) console.log(err);
+    user.save(function(err) {
+      if (err) console.log(err);
       res.writeHead(204);
       res.end();
+
     });
   });
+
 };
 
 var createGame = function (invite, players, title, userId, res){

@@ -25,6 +25,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   render: function() {
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
+
     if (this.model.get('invites').length) {
       this.invites = new ht.Views.LobbyInvitesView({model: this.model});
       this.$el.append(this.invites.el);
@@ -56,10 +57,10 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   changeInUser: function (){
-    console.log('made it to the lobby');
     var self = this;
     this.model.fetch({
       success: function(user) {
+
         self.render();
       },
       error: function(user, res) {
