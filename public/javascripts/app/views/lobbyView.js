@@ -5,6 +5,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   template: ht.Templates.LobbyTemplate,
 
   initialize: function() {
+    ht.Helpers.scrollTop();
     ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);
     this.model.on('change:pendingGames', this.render, this);
     this.model.on('change:invites', this.render, this);
@@ -23,6 +24,7 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
 

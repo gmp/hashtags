@@ -19,6 +19,7 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     this.$el.append(this.template({players: this.model.get('players'), myPlayer: this.attributes.myPlayer}));
   },

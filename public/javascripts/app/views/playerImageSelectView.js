@@ -15,6 +15,7 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     this.$el.append(this.template({hashtag: this.attributes.hashtag}));
   },
