@@ -38,6 +38,7 @@ body {
   text-align: center;
   background-color: #3d3d3d;
   padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 .invites {
@@ -115,6 +116,10 @@ body {
   margin-bottom: 1em;
   background-color: #3d3d3d;
   text-align: center;
+}
+
+.newGame {
+  margin: 1em 0;
 }
 
 .text-center {
