@@ -187,8 +187,10 @@ var createGame = function (invite, players, title, userId, res){
           }
           user.set('pendingGames', newArr);
           user.games.push(userGame);
-          user.save(function (err){
-            clients[user._id].emit('changeInUser');
+          user.save(function (err, user){
+            if (clients[user._id]) {
+              clients[user._id].emit('changeInUser');
+            }
           });
         }
       });

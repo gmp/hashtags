@@ -43,61 +43,57 @@ exports.updateById = function(req, res) {
   });
 }
 
-  exports.roundChange = function(req, res) {
-    console.log('judge goes here');
-    var gameId = req.params.id;
-    var submitted = req.body;
-    var oldJudge;
-    //need to deal with prompts
-    Game.findById(gameId, function(err, obj) {
-      GameData.findById(obj.gameData, function(err, gameData) {
-        console.log(gameData.prompts);
-        var newPrompt = gameData.prompts.pop();
-        obj.set('prompt', newPrompt);
-        obj.save(function(err) {
-          if (err) console.log(err);
-        })
-        gameData.save(function(err) {
-          if (err) console.log(err);
-        });
-      });
-      _.each(obj.players, function(item) {
-        //change players hands
-        obj.set('players.' + item.userGlobalId + '.continued', false);
-        obj.set('players.' + item.userGlobalId + '.submitted', false);
-        obj.set('players.' + item.userGlobalId + '.submission', {});
-        if (item.isJ) {
-          obj.set('players.' + item.userGlobalId + '.isJ', false);
-          oldJudge = item.userGlobalId;
-          console.log('how many times');
-        }
-        if (submitted.previousRound.winner === item.username) {
-          obj.set('players.' + item.userGlobalId + '.score', item.score + 1);
-        }
-      });
-      var currentround = obj.round + 1;
-      var nJ = currentround % 4;
-      var newJudge = obj.judgingOrder[nJ];
-      newJudge = newJudge.toString();
-      var judge = {};
-      judge.username = obj.players[newJudge].username;
-      judge.avatarURL = obj.players[newJudge].avatarURL;
-      judge.userGlobalId = newJudge;
-      obj.set('players.' + newJudge + '.isJ', true);
-      obj.set('judge', judge);
-      obj.set('round', currentround);
-      obj.set('gameEnd', true);
-      obj.set('numberOfSub', 0);
-      obj.set('previousRound', submitted.previousRound);
-      // console.log("RESTTING PLAYER STATE");
-      // console.log(obj);
-      obj.save(function(err, doc) {
-        if (err) console.error(err);
-        // console.log("SAVED PLAYER STATE");
-        // console.log(doc);
-        res.writeHead(204);
-        res.end();
-        clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
+exports.roundChange = function(req, res) {
+  console.log('judge goes here');
+  var gameId = req.params.id;
+  var submitted = req.body;
+  var oldJudge;
+  Game.findById(gameId, function(err, obj) {
+    GameData.findById(obj.gameData, function(err, gameData) {
+      console.log(gameData.prompts);
+      var newPrompt = gameData.prompts.pop();
+      obj.set('prompt', newPrompt);
+      obj.save(function(err) {
+        if (err) console.log(err);
+      })
+      gameData.save(function(err) {
+        if (err) console.log(err);
       });
     });
-  };
+    _.each(obj.players, function(item) {
+      obj.set('players.' + item.userGlobalId + '.continued', false);
+      obj.set('players.' + item.userGlobalId + '.submitted', false);
+      obj.set('players.' + item.userGlobalId + '.submission', {});
+      if (item.isJ) {
+        obj.set('players.' + item.userGlobalId + '.isJ', false);
+        oldJudge = item.userGlobalId;
+        console.log('how many times');
+      }
+      if (submitted.previousRound.winner === item.username) {
+        obj.set('players.' + item.userGlobalId + '.score', item.score + 1);
+      }
+    });
+    var currentround = obj.round + 1;
+    var nJ = currentround % 4;
+    var newJudge = obj.judgingOrder[nJ];
+    newJudge = newJudge.toString();
+    var judge = {};
+    judge.username = obj.players[newJudge].username;
+    judge.avatarURL = obj.players[newJudge].avatarURL;
+    judge.userGlobalId = newJudge;
+    obj.set('players.' + newJudge + '.isJ', true);
+    obj.set('judge', judge);
+    obj.set('round', currentround);
+    obj.set('gameEnd', true);
+    obj.set('numberOfSub', 0);
+    obj.set('previousRound', submitted.previousRound);
+    obj.save(function(err, doc) {
+      if (err) console.error(err);
+      res.writeHead(204);
+      res.end();
+      if(clients[oldJudge]){
+        clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
+      }
+    });
+  });
+};
