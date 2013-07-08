@@ -126,6 +126,10 @@ body {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .media {
   width: 100%;
 }
@@ -149,4 +153,52 @@ body {
 
 .judge {
   text-align: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .75em;
+}
+
+table thead {
+  background-color: lightgreen;
+}
+
+.ribbon {
+  position: relative;
+  top: 0.5em;
+  left: -20px;
+  width: 50%;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 6px 20px 6px 70px;
+  color: #555;
+  background-color: lightgreen;
+  text-shadow: 0px 1px 2px #bbb;
+  -webkit-box-shadow: 0px 2px 4px #888;
+  -moz-box-shadow: 0px 2px 4px #888;
+  box-shadow: 0px 2px 4px #888;
+}
+
+.ribbon:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: -2px;
+  top: 0px;
+  border-color: transparent #fff transparent transparent;
+}
+
+.ribbon:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0px;
+  top: 100%;
+  border-width: 5px 10px;
+  border-style: solid;
+  border-color: #666 #666 transparent transparent;
 }
