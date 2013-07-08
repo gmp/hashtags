@@ -14,6 +14,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   events: {
+    'keypress input[name=gameTitle]': 'removeError',
     'click #cancel': 'cancel',
     'click .avatar-contain': 'searchStart',
     'click #start': 'sendInvitations'
@@ -33,7 +34,17 @@ ht.Views.CreateGameView = Backbone.View.extend({
     ht.router.back();
   },
 
+  removeError: function(e) {
+    $('#invalid').remove();
+    this.gameTitle.removeClass('error');
+  },
+
   sendInvitations: function(){
+    this.gameTitle = $('input[name=gameTitle]');
+    if (!this.gameTitle.val()) {
+      this.gameTitle.after('<small id="invalid" class="error">Please add a game title</small>');
+      return this.gameTitle.addClass('error');
+    }
     $('#startGameButton').hide();
     var self = this;
     var obj = {};
@@ -42,7 +53,6 @@ ht.Views.CreateGameView = Backbone.View.extend({
     obj.player2 = {user: this.player2._id, username: this.player2.username, avatarURL: this.player2.avatarURL, accepted: 'waiting'};
     obj.player3 = {user: this.player3._id, username: this.player3.username, avatarURL: this.player3.avatarURL, accepted: 'waiting'};
     obj.player4 = {user: this.player4._id, username: this.player4.username, avatarURL: this.player4.avatarURL, accepted: 'waiting'};
-    obj.title = $('input[name=gameTitle]').val();
     console.log(obj);
     $.ajax({
       url: '/invite/create',
