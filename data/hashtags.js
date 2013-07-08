@@ -7,6 +7,7 @@ module.exports = [
   "whitetrash",
   // "crossdress",
   "chubbybunny",
+  "hyphy",
   // "badcostume",
   "belike",
   "derp",
