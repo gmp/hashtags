@@ -16,6 +16,7 @@ ht.Views.GameView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     if(!this.myPlayer.continued){
       if (this.subView) this.subView.remove();

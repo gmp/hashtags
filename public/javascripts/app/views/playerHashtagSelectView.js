@@ -11,6 +11,7 @@ ht.Views.PlayerHashtagSelectView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.append(this.template({hand: this.attributes.hand}));
   },
 

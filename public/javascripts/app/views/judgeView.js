@@ -19,6 +19,7 @@ ht.Views.JudgeView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     var counter = 0;
     var players = this.model.get('players');

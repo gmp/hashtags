@@ -32,6 +32,10 @@ ht.Helpers.delegateCustomEvents = function(obj, events, context) {
   }
 };
 
+ht.Helpers.scrollTop = function() {
+  window.scrollTo(0,1);
+};
+
 Backbone.Model.prototype.unsetChanges = function() {
   _(this.changed).each(function(val, attr) {
     this.unset(attr, {silent: true});

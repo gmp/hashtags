@@ -14,6 +14,7 @@ ht.Views.GameEndView = Backbone.View.extend({
   },
 
   render: function() {
+    ht.Helpers.scrollTop();
     this.$el.empty();
     this.$el.append(this.template({
       playersWithScore: this.model.get('players'),
