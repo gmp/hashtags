@@ -54,7 +54,6 @@ exports.roundChange = function(req, res) {
 
   Game.findById(gameId, function(err, obj) {
     GameData.findById(obj.gameData, function(err, gameData) {
-      console.log(gameData.prompts);
       var newPrompt = gameData.prompts.pop();
       obj.set('prompt', newPrompt);
       obj.save(function(err) {
