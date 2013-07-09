@@ -33,7 +33,7 @@ exports.findByUsername = function(req, res){
 exports.findByRegex = function(req, res){
   var username = req.params.partial;
   var regex = '^'+username+'.*';
-  User.find({username: {$regex: regex, $options: 'i'}}).limit(5).exec(function (err, obj){
+  User.find({username: {$regex: regex, $options: 'i'}}).sort({username: 1}).limit(10).exec(function (err, obj){
     if(err) console.log(err);
     var sendown = []
     _.each(obj, function (item){
