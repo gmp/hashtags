@@ -210,3 +210,21 @@ table thead {
   border-style: solid;
   border-color: #666 #666 transparent transparent;
 }
+
+.namesList {
+  background-color: whitesmoke;
+}
+
+.name {
+  color: black;
+  padding-left: 10px;
+}
+
+.name:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+.name:active {
+  background-color: lightblue;
+  cursor: pointer;
+}

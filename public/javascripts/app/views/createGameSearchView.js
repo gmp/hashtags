@@ -28,14 +28,16 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
         url: 'users/searching/' + partial,
         type: 'GET',
         success: function(data){
-          // redo this
           if(data.length){
-            console.log(data);
             $('#nameSearchDropDown').empty();
             _.each(data, function(name){
               $('#nameSearchDropDown').append('<li class="name">'+name.username+'</li>');
             });
           }
+        },
+        error: function(){
+          $('#nameSearchDropDown').empty();
+          console.log("error in CreateGameSearchView");
         }
       });
     }, 750);
