@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   username: String,
+  name: Object,
   accessToken: String,
   looking: {type:Boolean, default: false},
   avatarURL: String,

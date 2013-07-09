@@ -17,17 +17,10 @@ passport.use(new InstagramStrategy({
     callbackURL: "/auth/instagram/callback"
   },
 
-  //deploy*******
-  // passport.use(new InstagramStrategy({
-  //   clientID: '71b5042b9de24fe7816e9a44cd677912',
-  //   clientSecret: '700d71898ce844fcace04ec958d19980',
-  //   callbackURL: "/auth/instagram/callback"
-  // },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
       var query = {'username': profile.username};
-      console.log(profile);
       var user;
       User.findOne(query, function(err, obj){
         if(!obj){

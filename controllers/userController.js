@@ -1,4 +1,5 @@
 var User = require('../models/userModel.js');
+var _ = require('underscore');
 
 exports.findById = function(req, res){
 	var id = req.params.id;
@@ -19,7 +20,28 @@ exports.findByUsername = function(req, res){
   var username = req.params.username;
   console.log('Retrieving user: '+ username);
   var query = {'username': username};
-  User.findOne(query, function(err, obj){
-    res.send(obj);
+  User.findOne(query, function (err, obj){
+    if(err){
+      res.writeHead(404);
+      res.end();
+    } else {
+      res.send(obj);
+    }
+  });
+};
+
+exports.findByRegex = function(req, res){
+  var username = req.params.partial;
+  var regex = '^'+username+'.*';
+  User.find({username: {$regex: regex, $options: 'i'}}).sort({username: 1}).limit(10).exec(function (err, obj){
+    if(err) console.log(err);
+    var sendown = []
+    _.each(obj, function (item){
+      var data = {};
+      data.username = item.username;
+      data.name = item.name;
+      sendown.push(data);
+    })
+    res.send(sendown);
   });
 };

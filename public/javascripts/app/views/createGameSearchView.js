@@ -9,11 +9,31 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
   },
 
   events: {
-    'click #search': 'search'
+    'click #search': 'search',
+    'keyup #playerSearch': 'autosearch'
   },
 
   render: function() {
     this.$el.append(this.template());
+  },
+
+  autosearch: function (){
+    var partial = $('#playerSearch').val()
+    if(times){
+      clearTimeout('times');
+    }
+    var times = setTimeout(function (){
+      $.ajax({
+        url: 'users/searching/' + partial,
+        type: 'GET',
+        success: function(data){
+          // redo this
+          if(data.length){
+            console.log(data);
+          }
+        } 
+      });
+    }, 750);
   },
 
   search: function() {

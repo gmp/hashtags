@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.get('/users', user.findAll);
   app.get('/users/:id', user.findById);
   app.get('/users/search/:username', user.findByUsername);
+  app.get('/users/searching/:partial', user.findByRegex);
 
   app.get('/games/:id', game.findById);
   app.patch('/games/:id', game.updateById);
