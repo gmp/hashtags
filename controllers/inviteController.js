@@ -28,7 +28,7 @@ exports.create = function(req, res) {
             if(!obj.pendingGames){
               obj.pendingGames = [];
             }
-            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3});
+            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: false});
           } else {
             if(!obj.invites){
               obj.invites = [];
@@ -49,6 +49,49 @@ exports.create = function(req, res) {
     res.end();
   });
 };
+
+exports.decline = function(req, res){
+  var inviteId = req.body.inviteId;
+  Invite.findById(inviteId, function (err, invite){
+    if(err)console.log(err);
+    var playersArr = [];
+    playersArr.push(invite.gameAdmin);
+    playersArr.push(invite.player2);
+    playersArr.push(invite.player3);
+    playersArr.push(invite.player4);
+    removeGame(inviteId, playersArr);
+  });
+}
+
+var removeGame = function(inviteId, players){
+  for(var i = 0; i < players.length; i ++){
+    User.findById(players[i].user, function (err, user){
+      var newPendingArr = [];
+      console.log('user pending', user);
+      //Set the pending game linked to the invite to declined
+      for(var i = 0; i < user.pendingGames.length; i++){
+        newPendingArr.push(user.pendingGames[i])
+        if(user.pendingGames[i].invite.toString() === inviteId){
+          newPendingArr[newPendingArr.length-1].declined = true;
+        }
+      }
+
+      // var newInviteArr = [];
+      // for(var i = 0; i < user.invites.length; i ++){
+      //   if(user.invites[i].invite.toString() !== inviteId){
+      //       newInviteArr.push(user.invites[i]);
+      //   }
+      // }
+      // user.set('invites', newInviteArr);
+      user.set('pendingGames', newPendingArr);
+      user.save(function (err, user){
+        if (clients[user._id]) {
+          clients[user._id].emit('changeInUser');
+        }
+      });
+    });
+  }
+}
 
 exports.accept = function(req, res){
   var inviteId = req.body.inviteId;
@@ -79,10 +122,6 @@ exports.accept = function(req, res){
     });
   });
 };
-
-exports.decline = function(req, res){
-  console.log("*****INVITE DECLINE******");
-}
 
 
 var moveGameToPending = function (userId, inviteId, title, waitingOn, res){

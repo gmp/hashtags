@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   avatarURL: String,
   games: [{gameId: { type: ObjectId, ref: 'Games' }, judge: Object, prompt: String, players: [{username: String, avatarURL: String, score: Number}], title: String}],
   invites: [{invite: { type: ObjectId, ref: 'Invites' }, author: String}],
-  pendingGames: [{invite: { type: ObjectId, ref: 'Invites' }, title: String, waitingOn: Number}]
+  pendingGames: [{invite: { type: ObjectId, ref: 'Invites' }, title: String, waitingOn: Number, declined: Boolean}]
 });
 
 
