@@ -35,8 +35,10 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   removeError: function(e) {
-    $('#invalid').remove();
-    this.gameTitle.removeClass('error');
+    if (this.gameTitle && this.gameTitle.hasClass('error')) {
+      $('#invalid').remove();
+      this.gameTitle.removeClass('error');
+    }
   },
 
   sendInvitations: function(){
@@ -53,6 +55,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
     obj.player2 = {user: this.player2._id, username: this.player2.username, avatarURL: this.player2.avatarURL, accepted: 'waiting'};
     obj.player3 = {user: this.player3._id, username: this.player3.username, avatarURL: this.player3.avatarURL, accepted: 'waiting'};
     obj.player4 = {user: this.player4._id, username: this.player4.username, avatarURL: this.player4.avatarURL, accepted: 'waiting'};
+    obj.title = this.gameTitle.val();
     console.log(obj);
     $.ajax({
       url: '/invite/create',
