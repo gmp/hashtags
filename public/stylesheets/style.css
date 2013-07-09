@@ -93,6 +93,13 @@ body {
   height: 75px;
 }
 
+.avatar-supersmall {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  margin-left: 3px;
+}
+
 #startGameButton {
   display: none;
 }
@@ -213,4 +220,34 @@ table thead {
   border-width: 5px 10px;
   border-style: solid;
   border-color: #666 #666 transparent transparent;
+}
+
+.namesList {
+  background-color: whitesmoke;
+}
+
+.name {
+  color: black;
+  padding: 3px;
+  padding-left: 0;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+}
+
+.name:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.name:active {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+#playerSearch {
+  margin: 0;
+}
+
+#youDaJudge {
+  color: #ededed;
 }
