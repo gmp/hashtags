@@ -28,6 +28,61 @@ module.exports = function(){
       if(err) console.log(err);
     });
     user = new User();
+    user.username = 'alex';
+    user.looking = false;
+    user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
+    user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
+    user.games = [];
+    user.invites = [];
+    user.pendingGames = [];
+    user.save(function(err){
+      if(err) console.log(err);
+    });
+    user = new User();
+    user.username = 'alex23';
+    user.looking = false;
+    user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
+    user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
+    user.games = [];
+    user.invites = [];
+    user.pendingGames = [];
+    user.save(function(err){
+      if(err) console.log(err);
+    });
+    user = new User();
+    user.username = 'alexis';
+    user.looking = false;
+    user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
+    user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
+    user.games = [];
+    user.invites = [];
+    user.pendingGames = [];
+    user.save(function(err){
+      if(err) console.log(err);
+    });
+    user = new User();
+    user.username = 'alice';
+    user.looking = false;
+    user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
+    user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
+    user.games = [];
+    user.invites = [];
+    user.pendingGames = [];
+    user.save(function(err){
+      if(err) console.log(err);
+    });
+    user = new User();
+    user.username = 'avery';
+    user.looking = false;
+    user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
+    user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
+    user.games = [];
+    user.invites = [];
+    user.pendingGames = [];
+    user.save(function(err){
+      if(err) console.log(err);
+    });
+    user = new User();
     user.username = 'banjolina_jolie';
     user.looking = true;
     user.avatarURL = "http://images.ak.instagram.com/profiles/profile_239326848_75sq_1350608830.jpg"

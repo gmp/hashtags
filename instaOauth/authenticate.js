@@ -27,11 +27,13 @@ passport.use(new InstagramStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
       var query = {'username': profile.username};
+      console.log(profile);
       var user;
       User.findOne(query, function(err, obj){
         if(!obj){
           user = new User();
           user.username = profile.username;
+          user.name = profile.name;
           user.accessToken = accessToken;
           user.looking = false;
           user.avatarURL = profile._json.data.profile_picture;

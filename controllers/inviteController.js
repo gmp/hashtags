@@ -90,8 +90,12 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
       }
     };
     user.set('invites', newInvites);
-
     var pendingGames = [];
+    for(var i = 0; i < user.pendingGames.length; i ++){
+      if(user.pendingGames[i].invite.toString() !== inviteId){
+        pendingGames.push(user.pendingGames[i]);
+      }
+    };
     pendingGames.push({
       invite: inviteId,
       title: title,
@@ -105,7 +109,6 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
 
     });
   });
-
 };
 
 var createGame = function (invite, players, title, userId, res){
