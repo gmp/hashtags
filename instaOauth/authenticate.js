@@ -16,6 +16,7 @@ passport.use(new InstagramStrategy({
     clientSecret: '5e0d4975780a4e36a59d78cb01c74868',
     callbackURL: "/auth/instagram/callback"
   },
+
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {

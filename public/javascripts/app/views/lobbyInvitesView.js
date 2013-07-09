@@ -38,7 +38,21 @@ ht.Views.LobbyInvitesView = Backbone.View.extend({
   },
 
   declineResponse: function(e) {
+    console.log('declined!');
     var inviteId = $(e.target).data('invite-id');
-    console.log('goodBye:', inviteId);
+    var data = {inviteId: inviteId, userId: this.model.id};
+    var self = this;
+    $.ajax({
+      url: '/invites/decline/',
+      type: 'POST',
+      data: data,
+      success: function(data){
+        console.log('post success');
+        self.model.fetch();
+      },
+      error: function(){
+        console.log('error');
+      }
+    });
   }
 });

@@ -17,6 +17,8 @@ module.exports = function (app) {
 
   app.post('/invite/create', invite.create);
   app.post('/invites/accept', invite.accept);
+  app.post('/invites/decline', invite.decline);
+  app.post('/invites/removeDeclinedGame', invite.removeDeclinedGame);
 
   app.get('/random/:userid',  random.join);
 
