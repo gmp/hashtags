@@ -51,7 +51,24 @@ exports.create = function(req, res) {
 };
 
 exports.removeDeclinedGame = function(req, res){
-  console.log("Remove declined pending game")
+  var userId = req.body.userId;
+  var pendingGameId = req.body.pendingGameId;
+  User.findById(userId, function(err, user){
+    var newPendingArr = [];
+    for(var i = 0; i < user.pendingGames.length; i++){
+      if(user.pendingGames[i]._id.toString() !== pendingGameId){
+        newPendingArr.push(user.pendingGames[i]);
+      }
+    }
+
+    user.set('pendingGames', newPendingArr);
+    user.save(function(err){
+      if(err)console.log(err);
+      if (clients[user._id]) {
+        clients[user._id].emit('changeInUser');
+      }
+    });
+  })
 
 }
 
