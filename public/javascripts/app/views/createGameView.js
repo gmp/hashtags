@@ -13,6 +13,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
     this.render();
   },
 
+
   events: {
     'keypress input[name=gameTitle]': 'removeError',
     'click #cancel': 'cancel',
@@ -30,7 +31,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   cancel: function() {
-    this.remove();
+    this.doubleTap('addInvited');
     ht.router.back();
   },
 
@@ -40,6 +41,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   sendInvitations: function(){
+   
     this.gameTitle = $('input[name=gameTitle]');
     if (!this.gameTitle.val()) {
       this.gameTitle.after('<small id="invalid" class="error">Please add a game title</small>');
@@ -59,7 +61,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
       type:'POST',
       data: obj,
       success: function(){
-        self.remove();
+        self.doubleTap('addInvited');
         ht.router.navigate('/lobby/'+self.model.get('_id'), {trigger: true});
       },
       error: function(a, b, err){
@@ -69,6 +71,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   addInvited: function(data, player){
+    console.log("INVITED TRIGGER", data);
     this.searchView.remove();
     this.searchVisible = false;
     this[player] = data;

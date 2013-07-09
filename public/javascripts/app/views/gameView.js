@@ -19,7 +19,7 @@ ht.Views.GameView = Backbone.View.extend({
     ht.Helpers.scrollTop();
     this.$el.empty();
     if(!this.myPlayer.continued){
-      if (this.subView) this.subView.remove();
+      if (this.subView) this.subView.doubleTap('hashtagClick');
       this.subView = new ht.Views.GameEndView({
         model: this.model,
         attributes: {

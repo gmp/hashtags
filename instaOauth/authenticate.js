@@ -12,12 +12,12 @@ passport.deserializeUser(function(obj, done) {
 
 //LOCAL
 passport.use(new InstagramStrategy({
-    clientID: '7b0cfd2414c54f35bf072e4935b27b87',
-    clientSecret: 'c5ea71c310c64c45bd415714131f435b',
+    clientID: 'd37dfbd483674207b72a447e1b63b6bc',
+    clientSecret: '5e0d4975780a4e36a59d78cb01c74868',
     callbackURL: "/auth/instagram/callback"
   },
 
-  // //deploy*******
+  //deploy*******
   // passport.use(new InstagramStrategy({
   //   clientID: '71b5042b9de24fe7816e9a44cd677912',
   //   clientSecret: '700d71898ce844fcace04ec958d19980',
