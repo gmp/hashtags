@@ -1,7 +1,8 @@
 var passport = require('passport'),
     invite = require('../controllers/inviteController.js'),
     user = require('../controllers/userController.js'),
-    game = require('../controllers/gameController.js');
+    game = require('../controllers/gameController.js'),
+    random = require('../controllers/randomGameController.js');
 
 module.exports = function (app) {
 
@@ -16,6 +17,8 @@ module.exports = function (app) {
 
   app.post('/invite/create', invite.create);
   app.post('/invites/accept', invite.accept);
+
+  app.get('/random/:userid',  random.join);
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
