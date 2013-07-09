@@ -32,7 +32,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
           if(data.length){
             console.log(data);
             _.each(data, function(name){
-              $('#nameSearchDropDown').append('<li class="name"><img class="avatar-supersmall" src="'+name.avatarURL+'">'+name.username+'</li>');
+              $('#nameSearchDropDown').append('<li class="name" data-username="'+name.username+'"><img class="avatar-supersmall" src="'+name.avatarURL+'">'+name.username+'</li>');
             });
           }
         }
@@ -42,7 +42,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
 
   search: function(e) {
     var self = this;
-    var playerName = e.target.innerHTML;
+    var playerName = $(e.target).data('username');
     $.ajax({
       url: '/users/search/'+playerName,
       type: 'GET',
