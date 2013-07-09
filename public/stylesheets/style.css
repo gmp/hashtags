@@ -11,6 +11,13 @@ body {
   font-size: 18px;
 }
 
+.inviteAuto{
+  background-color: white;
+  display: inline-block;
+  height: 100%;
+  -webkit-transition: height 2s;
+}
+
 .scoreNumber {
   position: absolute;
   left: 175px;

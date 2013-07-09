@@ -106,5 +106,13 @@ module.exports = function(){
     user.save(function(err){
       if(err) console.log(err);
     });
+    for(var i = 0; i < 50; i ++){
+      user = new User();
+      user.username = 'alex'+i;
+      user.name = {familyName: "Dick", GivenName: 'alex'};
+      user.save(function(err){
+        if(err) console.log(err);
+      });
+    }
   });
 }
