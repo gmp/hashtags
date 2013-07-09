@@ -12,4 +12,7 @@ var UserSchema = new Schema({
   pendingGames: [{invite: { type: ObjectId, ref: 'Invites' }, title: String, waitingOn: Number}]
 });
 
+
+UserSchema.index({username: 1});
+
 module.exports = mongoose.model('Users', UserSchema);
