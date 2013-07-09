@@ -80,6 +80,10 @@ exports.accept = function(req, res){
   });
 };
 
+exports.decline = function(req, res){
+  console.log("*****INVITE DECLINE******");
+}
+
 
 var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
   User.findById(userId, function (err, user){

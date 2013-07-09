@@ -74,7 +74,6 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   addInvited: function(data, player){
-    console.log("INVITED TRIGGER", data);
     this.searchView.remove();
     this.searchVisible = false;
     this[player] = data;
