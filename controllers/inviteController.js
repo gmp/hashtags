@@ -50,6 +50,11 @@ exports.create = function(req, res) {
   });
 };
 
+exports.removeDeclinedGame = function(req, res){
+  console.log("Remove declined pending game")
+
+}
+
 exports.decline = function(req, res){
   var inviteId = req.body.inviteId;
   Invite.findById(inviteId, function (err, invite){
@@ -59,15 +64,14 @@ exports.decline = function(req, res){
     playersArr.push(invite.player2);
     playersArr.push(invite.player3);
     playersArr.push(invite.player4);
-    removeGame(inviteId, playersArr);
+    markRemoveGame(inviteId, playersArr);
   });
 }
 
-var removeGame = function(inviteId, players){
+var markRemoveGame = function(inviteId, players){
   for(var i = 0; i < players.length; i ++){
     User.findById(players[i].user, function (err, user){
       var newPendingArr = [];
-      console.log('user pending', user);
       //Set the pending game linked to the invite to declined
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])

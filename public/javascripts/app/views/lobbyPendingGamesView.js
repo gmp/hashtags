@@ -18,7 +18,20 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
   },
 
   removeMe: function() {
-    this.remove();
+    var self = this;
+    //remove pending game from db
+    var data = {};
+    $.ajax({
+      url: '/invites/removeDeclinedGame',
+      type: 'POST',
+      data: data,
+      success: function(data){
+        self.model.fetch();
+      },
+      error: function(){
+        console.log('error');
+      }
+    });
   }
 
 });
