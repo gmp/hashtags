@@ -4,7 +4,11 @@ ht.Templates.LobbyPendingGamesTemplate = _.template(''+
       '<section class = <%=pendingGames[i].declined %>>'+
         '<p class="title" data-section-title>Pending: <%= pendingGames[i].title %></p>'+
         '<div class="content" data-section-content>'+
-          '</p> Waiting on <%= pendingGames[i].waiting %> more players'+
+          '<% if(pendingGames[i].declined === "declined"){ %>' +
+            '<p>Another invitee has declined this game. Click here to remove from your games queue. </p>' +
+          '<% } else { %>' +
+            '</p> Waiting on <%= pendingGames[i].waiting %> more players'+
+          '<% } %>' +
         '</div>'+
       '</section>'+
     '<% } %>'+

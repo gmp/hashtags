@@ -76,13 +76,13 @@ var removeGame = function(inviteId, players){
         }
       }
 
-      // var newInviteArr = [];
-      // for(var i = 0; i < user.invites.length; i ++){
-      //   if(user.invites[i].invite.toString() !== inviteId){
-      //       newInviteArr.push(user.invites[i]);
-      //   }
-      // }
-      // user.set('invites', newInviteArr);
+      var newInviteArr = [];
+      for(var i = 0; i < user.invites.length; i ++){
+        if(user.invites[i].invite.toString() !== inviteId){
+            newInviteArr.push(user.invites[i]);
+        }
+      }
+      user.set('invites', newInviteArr);
       user.set('pendingGames', newPendingArr);
       user.save(function (err, user){
         if (clients[user._id]) {
