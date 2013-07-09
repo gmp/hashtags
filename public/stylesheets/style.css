@@ -89,6 +89,13 @@ body {
   height: 75px;
 }
 
+.avatar-supersmall {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  margin-left: 3px;
+}
+
 #startGameButton {
   display: none;
 }
@@ -217,14 +224,22 @@ table thead {
 
 .name {
   color: black;
-  padding-left: 10px;
+  padding: 3px;
+  padding-left: 0;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
 }
 
 .name:hover {
   background-color: lightblue;
   cursor: pointer;
 }
+
 .name:active {
   background-color: lightblue;
   cursor: pointer;
+}
+
+#playerSearch {
+  margin: 0;
 }

@@ -30,8 +30,9 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
         success: function(data){
           $('#nameSearchDropDown').empty();
           if(data.length){
+            console.log(data);
             _.each(data, function(name){
-              $('#nameSearchDropDown').append('<li class="name">'+name.username+'</li>');
+              $('#nameSearchDropDown').append('<li class="name"><img class="avatar-supersmall" src="'+name.avatarURL+'">'+name.username+'</li>');
             });
           }
         }
