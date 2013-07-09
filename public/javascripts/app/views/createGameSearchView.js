@@ -9,12 +9,13 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
   },
 
   events: {
-    'click #search': 'search',
-    'keyup #playerSearch': 'autosearch'
+    'keyup #playerSearch': 'autosearch',
+    'click .name': 'search'
   },
 
   render: function() {
-    this.$el.append(this.template());
+    var names = this.autosearch();
+    this.$el.append(this.template({names: names}));
   },
 
   autosearch: function (){
@@ -30,15 +31,19 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
           // redo this
           if(data.length){
             console.log(data);
+            $('#nameSearchDropDown').empty();
+            _.each(data, function(name){
+              $('#nameSearchDropDown').append('<li class="name">'+name.username+'</li>');
+            });
           }
-        } 
+        }
       });
     }, 750);
   },
 
-  search: function() {
+  search: function(e) {
     var self = this;
-    var playerName = $('#playerSearch').val();
+    var playerName = e.target.innerHTML;
     $.ajax({
       url: '/users/search/'+playerName,
       type: 'GET',
