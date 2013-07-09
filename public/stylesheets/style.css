@@ -62,6 +62,10 @@ body {
   margin: 15px auto;
 }
 
+.declined{
+  color: red;
+}
+
 .accordian {
   color: #3d3d3d;
 }

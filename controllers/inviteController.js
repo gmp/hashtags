@@ -28,7 +28,7 @@ exports.create = function(req, res) {
             if(!obj.pendingGames){
               obj.pendingGames = [];
             }
-            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: false});
+            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: "pending"});
           } else {
             if(!obj.invites){
               obj.invites = [];
@@ -72,7 +72,7 @@ var removeGame = function(inviteId, players){
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])
         if(user.pendingGames[i].invite.toString() === inviteId){
-          newPendingArr[newPendingArr.length-1].declined = true;
+          newPendingArr[newPendingArr.length-1].declined = "declined";
         }
       }
 
