@@ -8,7 +8,7 @@ ht.Views.ErrorView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.html('<p>There was a login error</p><p>Please try again:<br><a href="/#login">Login</a></p>');
+    this.$el.html('<p>There was a login error</p><p>Please try again:<br><a href="/auth/instagram" class="instagram-login"></a></p>');
   }
 
 });

@@ -11,7 +11,8 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
 
   events: {
     'click .media-select': 'submitMedia',
-    'click video': 'playVideo'
+    'click video': 'playVideo',
+    'click #tryAgain': 'getMedia'
   },
 
   render: function() {
@@ -34,7 +35,12 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
       },
       error: function(error) {
         console.log('get images error:', error);
-        self.$el.append('<p>There was an error getting images,<br>would you like to try again?</p>');
+        self.$el.append('<div class="text-center media-container row">'+
+                          '<div class="small-11 small-centered columns">'+
+                            '<p>Woops! There was an error getting imagges.<br>Please try again</p>'+
+                            '<button class="expand" id="tryAgain">C\'mon Instagram, gimme some images!</button>'+
+                          '</div>'+
+                        '</div>');
       }
     });
   },

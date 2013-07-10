@@ -64,17 +64,12 @@ exports.removeDeclinedGame = function(req, res){
     user.set('pendingGames', newPendingArr);
     user.save(function(err){
       if(err)console.log(err);
-      if (clients[user._id] && user._id.toString() !== userId) {
-        clients[user._id].emit('changeInUser');
-      }
-      else{
-        res.writeHead(204);
-        res.end();
-      }
+      res.writeHead(204);
+      res.end();
     });
-  })
+  });
 
-}
+};
 
 exports.decline = function(req, res){
   var inviteId = req.body.inviteId;

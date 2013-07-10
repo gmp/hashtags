@@ -1,0 +1,12 @@
+TODO:
+---------
+- instead of long scroll, page height = device height and overflow: auto
+- comments when necessary in code
+
+DONE:
+---------
+- turn off native autocomplete on user search form //DONE
+- error state on sign in //DONE
+- error state on instagram get images //DONE
+- pending games accordian info below title //DONE
+- click button to remove game (declined in pending games and invites) //DONE
