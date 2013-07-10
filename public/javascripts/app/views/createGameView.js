@@ -42,8 +42,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
     }
   },
 
-  sendInvitations: function(){
-   
+  sendInvitations: function() {
     this.gameTitle = $('input[name=gameTitle]');
     if (!this.gameTitle.val()) {
       this.gameTitle.after('<small id="invalid" class="error">Please add a game title</small>');
@@ -58,22 +57,21 @@ ht.Views.CreateGameView = Backbone.View.extend({
     obj.player3 = {user: this.player3._id, username: this.player3.username, avatarURL: this.player3.avatarURL, accepted: 'waiting'};
     obj.player4 = {user: this.player4._id, username: this.player4.username, avatarURL: this.player4.avatarURL, accepted: 'waiting'};
     obj.title = this.gameTitle.val();
-    console.log(obj);
     $.ajax({
       url: '/invite/create',
       type:'POST',
       data: obj,
-      success: function(){
+      success: function() {
         self.doubleTap('addInvited');
         ht.router.navigate('/lobby/'+self.model.get('_id'), {trigger: true});
       },
-      error: function(a, b, err){
+      error: function(a, b, err) {
         console.log(err);
       }
     });
   },
 
-  addInvited: function(data, player){
+  addInvited: function(data, player) {
     this.searchView.remove();
     this.searchVisible = false;
     this[player] = data;
@@ -84,7 +82,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   searchStart: function(e) {
-    if(this.searchVisible){
+    if(this.searchVisible) {
       this.searchView.remove();
       this.searchVisible = false;
     } else {

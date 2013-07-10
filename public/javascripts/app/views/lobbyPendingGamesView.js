@@ -14,7 +14,7 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
 
   render: function() {
     this.$el.empty();
-    this.$el.append(this.template( { pendingGames: this.model.get('pendingGames') } ) );
+    this.$el.append(this.template({ pendingGames: this.model.get('pendingGames') }));
   },
 
   removeGame: function(event) {
@@ -24,10 +24,10 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
       url: '/invites/removeDeclinedGame',
       type: 'POST',
       data: data,
-      success: function(data){
+      success: function(data) {
         self.model.fetch();
       },
-      error: function(){
+      error: function() {
         console.log('error');
       }
     });

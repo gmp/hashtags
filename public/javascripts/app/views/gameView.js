@@ -18,8 +18,8 @@ ht.Views.GameView = Backbone.View.extend({
   render: function() {
     ht.Helpers.scrollTop();
     this.$el.empty();
-    if(!this.myPlayer.continued){
-      if (this.subView) this.subView.doubleTap('hashtagClick');
+    if(!this.myPlayer.continued) {
+      if(this.subView) this.subView.doubleTap('hashtagClick');
       this.subView = new ht.Views.GameEndView({
         model: this.model,
         attributes: {
@@ -29,8 +29,8 @@ ht.Views.GameView = Backbone.View.extend({
       this.$el.append(this.subView.el);
     } else {
       this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
-      if(this.myPlayer.isJ){
-        if (this.subView) this.subView.remove();
+      if(this.myPlayer.isJ) {
+        if(this.subView) this.subView.remove();
         this.subView = new ht.Views.JudgeView({
           model: this.model,
           attributes: {
@@ -39,7 +39,7 @@ ht.Views.GameView = Backbone.View.extend({
         });
         this.$el.append(this.subView.el);
       } else {
-      if (this.subView) this.subView.remove();
+      if(this.subView) this.subView.remove();
         this.subView = new ht.Views.PlayerView({
           model: this.model,
           attributes: {
@@ -52,18 +52,18 @@ ht.Views.GameView = Backbone.View.extend({
     }
   },
 
-  joinGame: function(){
+  joinGame: function() {
     ht.dispatcher.trigger('joinGame', this.model.get('id'));
   },
 
   mediaSelect: function() {
     var selfie = this;
     this.model.fetch({
-      success: function (model, res){
+      success: function (model, res) {
         selfie.subView.render();
       },
       error: function (){
-        console.log('what the fuck');
+        console.log('error');
       }
     });
   },
@@ -71,7 +71,7 @@ ht.Views.GameView = Backbone.View.extend({
   judgeSelect: function() {
     var selfie = this;
     this.model.fetch({
-      success: function(){
+      success: function() {
         selfie.myPlayer = ht.Helpers.getMyPlayer(selfie.model, selfie.attributes.user.id);
         selfie.render();
       }

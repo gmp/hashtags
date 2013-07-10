@@ -55,7 +55,7 @@ passport.use(new InstagramStrategy({
   }
 ));
 
-exports.init = function(app){
+exports.init = function(app) {
 	app.use(passport.initialize());
   app.use(passport.session());
   return app;

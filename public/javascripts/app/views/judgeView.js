@@ -35,10 +35,10 @@ ht.Views.JudgeView = Backbone.View.extend({
   playerSubmit: function() {
     var self = this;
     this.model.fetch({
-      success: function(){
+      success: function() {
         self.render();
       },
-      error: function(){
+      error: function() {
         console.error("error");
       }
     });
@@ -48,17 +48,17 @@ ht.Views.JudgeView = Backbone.View.extend({
     var counter = 0;
     var players = this.model.get('players');
     _.each(players, function (player) {
-      if(player.submitted){
+      if(player.submitted) {
         counter++;
       }
     });
-    if(counter === Object.keys(players).length - 1){
+    if(counter === Object.keys(players).length - 1) {
       var prevRound = {};
       prevRound.winningSub = $(e.target).data('submittedUrl');
       prevRound.winner = $(e.target).data('submittedby');
       var selfie = this;
       prevRound.players = [];
-      _.each(players, function(player){
+      _.each(players, function(player) {
         if(!player.isJ){
           prevRound.players.push({username: player.username, submission: player.submission});
         }
@@ -67,12 +67,11 @@ ht.Views.JudgeView = Backbone.View.extend({
       this.model.set('previousRound', prevRound);
       this.attributes.myPlayer.continued = false;
       this.model.save(prevRound, {
-        success: function(){
+        success: function() {
           selfie.remove();
-          console.log('success');
           ht.dispatcher.trigger('judgeSelect');
         },
-        error: function(){
+        error: function() {
           console.error('bummer dude. save failed.');
         }
       });

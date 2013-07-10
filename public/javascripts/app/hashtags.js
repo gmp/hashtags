@@ -8,13 +8,15 @@ var ht = {
   Data: {},
   Helpers: {},
   init: function() {
-    ht.dispatcher = _.extend({}, Backbone.Events);
-    ht.router = new ht.Routes.Router();
+    this.dispatcher = _.extend({}, Backbone.Events);
+    this.app = new this.Views.AppView();
+    this.router = new this.Routes.Router();
     Backbone.history.start();
+    $('body').append(this.app.$el);
   }
 };
 
-ht.Helpers.getMyPlayer = function(gameModel, userId){
+ht.Helpers.getMyPlayer = function(gameModel, userId) {
   return gameModel.get('players')[userId];
 };
 
@@ -43,11 +45,6 @@ Backbone.Model.prototype.unsetChanges = function() {
 };
 
 Backbone.View.prototype.doubleTap = function(eventToRemove){
-    ht.dispatcher.off(eventToRemove);
-    Backbone.View.prototype.remove.apply(this, arguments);
-}
-
-
-
-
-
+  ht.dispatcher.off(eventToRemove);
+  this.remove.apply(this, arguments);
+};

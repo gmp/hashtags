@@ -23,7 +23,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
     if(times){
       clearTimeout('times');
     }
-    var times = setTimeout(function (){
+    var times = setTimeout(function() {
       $.ajax({
         url: 'users/searching/' + partial,
         type: 'GET',
@@ -46,10 +46,10 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
     $.ajax({
       url: '/users/search/'+playerName,
       type: 'GET',
-      success: function(data){
+      success: function(data) {
         ht.dispatcher.trigger('addInvited', data, self.attributes.player);
       },
-      error: function(){
+      error: function() {
         console.log('error');
       }
     });
