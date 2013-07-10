@@ -28,7 +28,6 @@ Technologies:
 </n>
 <br/>
 
-![Alt text](screenshots/screenshot1.png)
 ![Alt text](screenshots/screenshot2.png)
 
   If you have feedback or want to submit prompt ideas, mosey on down to http://hashtagsfeedback.meteor.com
