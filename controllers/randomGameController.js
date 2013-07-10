@@ -106,7 +106,7 @@ exports.join = function  (req, res){
                 user.games.push(userGame);
                 for(var i = 0; i < user.pendingGames.length; i ++){
                   if(user.pendingGames[i].title !== '#1 Best Random Game'){
-                    newArr.push(user.invites[i]);
+                    newArr.push(user.pendingGames[i]);
                   }
                 }
                 user.set('pendingGames', newArr);
