@@ -18,7 +18,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
     this.$el.append(this.template({names: names}));
   },
 
-  autosearch: function (){
+  autosearch: function () {
     var partial = $('#playerSearch').val()
     if(times){
       clearTimeout('times');

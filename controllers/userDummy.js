@@ -17,7 +17,7 @@ module.exports = function(){
     });
     user = new User();
     user.username = 'ericrius1';
-    user.looking = true;
+    user.looking = false;
     user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
     user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
     user._id = '51cc70e677ee79fcc1000001';
@@ -27,64 +27,9 @@ module.exports = function(){
     user.save(function(err){
       if(err) console.log(err);
     });
-    // user = new User();
-    // user.username = 'alex';
-    // user.looking = false;
-    // user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
-    // user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
-    // user.games = [];
-    // user.invites = [];
-    // user.pendingGames = [];
-    // user.save(function(err){
-    //   if(err) console.log(err);
-    // });
-    // user = new User();
-    // user.username = 'alex23';
-    // user.looking = false;
-    // user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
-    // user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
-    // user.games = [];
-    // user.invites = [];
-    // user.pendingGames = [];
-    // user.save(function(err){
-    //   if(err) console.log(err);
-    // });
-    // user = new User();
-    // user.username = 'alexis';
-    // user.looking = false;
-    // user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
-    // user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
-    // user.games = [];
-    // user.invites = [];
-    // user.pendingGames = [];
-    // user.save(function(err){
-    //   if(err) console.log(err);
-    // });
-    // user = new User();
-    // user.username = 'alice';
-    // user.looking = false;
-    // user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
-    // user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
-    // user.games = [];
-    // user.invites = [];
-    // user.pendingGames = [];
-    // user.save(function(err){
-    //   if(err) console.log(err);
-    // });
-    // user = new User();
-    // user.username = 'avery';
-    // user.looking = false;
-    // user.avatarURL = "http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg"
-    // user.accessToken = "178079200.5a8d22e.749e4e2e281a48569f0ceb764e633bc5"
-    // user.games = [];
-    // user.invites = [];
-    // user.pendingGames = [];
-    // user.save(function(err){
-    //   if(err) console.log(err);
-    // });
     user = new User();
     user.username = 'banjolina_jolie';
-    user.looking = true;
+    user.looking = false;
     user.avatarURL = "http://images.ak.instagram.com/profiles/profile_239326848_75sq_1350608830.jpg"
     user.accessToken = "239326848.5a8d22e.d3b499bcf9044621b0b6dd2f76d7c751"
     user._id = '51cc710577ee79fcc1000002';
@@ -106,13 +51,5 @@ module.exports = function(){
     user.save(function(err){
       if(err) console.log(err);
     });
-    // for(var i = 0; i < 50; i ++){
-    //   user = new User();
-    //   user.username = 'alex'+i;
-    //   user.name = {familyName: "Dick", GivenName: 'alex'};
-    //   user.save(function(err){
-    //     if(err) console.log(err);
-    //   });
-    // }
   });
 }
