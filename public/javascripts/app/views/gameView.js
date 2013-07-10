@@ -63,7 +63,7 @@ ht.Views.GameView = Backbone.View.extend({
         selfie.subView.render();
       },
       error: function (){
-        console.log('what the fuck');
+        console.log('error');
       }
     });
   },
