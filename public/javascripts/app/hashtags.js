@@ -36,18 +36,17 @@ ht.Helpers.scrollTop = function() {
   window.scrollTo(0,1);
 };
 
-Backbone.Model.prototype.unsetChanges = function() {
-  _(this.changed).each(function(val, attr) {
-    this.unset(attr, {silent: true});
-  }, this);
-};
+_.extend(Backbone.Model, {
+  unsetChanges: function() {
+    _(this.changed).each(function(val, attr) {
+      this.unset(attr, {silent: true});
+    });
+  }
+});
 
-Backbone.View.prototype.doubleTap = function(eventToRemove){
+_.extend(Backbone.View, {
+  doubleTap: function(eventToRemove){
     ht.dispatcher.off(eventToRemove);
-    Backbone.View.prototype.remove.apply(this, arguments);
-}
-
-
-
-
-
+    this.remove.apply(this, arguments);
+  }
+});
