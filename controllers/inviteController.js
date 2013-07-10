@@ -98,7 +98,7 @@ var markRemoveGame = function(inviteId, players, res, userId){
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])
         if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId){
-          newPendingArr[newPendingArr.length-1].declined = "declined";
+          newPendingArr[newPendingArr.length-1].declined = true;
         }
       }
 
