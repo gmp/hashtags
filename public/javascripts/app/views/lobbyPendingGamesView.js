@@ -9,7 +9,7 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
   },
 
    events: {
-    'click .declined': 'removeMe',
+    'click .declined': 'removeGame',
   },
 
   render: function() {
@@ -17,7 +17,7 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
     this.$el.append(this.template( { pendingGames: this.model.get('pendingGames') } ) );
   },
 
-  removeMe: function(event) {
+  removeGame: function(event) {
     var self = this;
     //remove pending game from db
     var data = {userId: this.model.attributes.id, pendingGameId: event.target.id };
