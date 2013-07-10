@@ -1,7 +1,7 @@
 hashtags
 ========
 
-Hashtags is a game like Apples to Apples and Cards Against Humanity.
+Hashtags is a game like Apples to Apples and Cards Against Humanity.  It is designed for phones so it may look a little weird on a full screen browser window.
 
 1) Create a game and invite friends.
 2) Players and Judge get a prompt.
@@ -20,6 +20,5 @@ Technologies:
   MongoDB with Mongoose
   Backbone.js
 
-  designed for phone
-  screenshots
-  iframe?
+
+  If you have feedback or want to submit prompt ideas, mosey on down to http://hashtagsfeedback.meteor.com
