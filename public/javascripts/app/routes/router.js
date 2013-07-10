@@ -10,8 +10,6 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   initialize: function() {
-    this.app = new ht.Views.AppView();
-    $('body').append(this.app.$el);
   },
 
   checkState: function() {
@@ -26,23 +24,23 @@ ht.Routes.Router = Backbone.Router.extend({
   },
 
   login: function() {
-    this.app.login();
+    ht.app.login();
   },
 
   error: function() {
-    this.app.error();
+    ht.app.error();
   },
 
   lobby: function(id) {
-    this.app.lobby(id);
+    ht.app.lobby(id);
   },
 
   createGame: function() {
-    this.app.createGame();
+    ht.app.createGame();
   },
 
   game: function(gameId) {
-    this.app.game(gameId);
+    ht.app.game(gameId);
   }
 
 });

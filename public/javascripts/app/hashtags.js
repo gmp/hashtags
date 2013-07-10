@@ -8,9 +8,11 @@ var ht = {
   Data: {},
   Helpers: {},
   init: function() {
-    ht.dispatcher = _.extend({}, Backbone.Events);
-    ht.router = new ht.Routes.Router();
+    this.dispatcher = _.extend({}, Backbone.Events);
+    this.app = new this.Views.AppView();
+    this.router = new this.Routes.Router();
     Backbone.history.start();
+    $('body').append(this.app.$el);
   }
 };
 
@@ -36,17 +38,13 @@ ht.Helpers.scrollTop = function() {
   window.scrollTo(0,1);
 };
 
-_.extend(Backbone.Model, {
-  unsetChanges: function() {
-    _(this.changed).each(function(val, attr) {
-      this.unset(attr, {silent: true});
-    });
-  }
-});
+Backbone.Model.prototype.unsetChanges = function() {
+  _(this.changed).each(function(val, attr) {
+    this.unset(attr, {silent: true});
+  }, this);
+};
 
-_.extend(Backbone.View, {
-  doubleTap: function(eventToRemove){
-    ht.dispatcher.off(eventToRemove);
-    this.remove.apply(this, arguments);
-  }
-});
+Backbone.View.prototype.doubleTap = function(eventToRemove){
+  ht.dispatcher.off(eventToRemove);
+  this.remove.apply(this, arguments);
+};
