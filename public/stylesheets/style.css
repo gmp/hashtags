@@ -255,3 +255,7 @@ table thead {
 .red {
   color: red;
 }
+
+.strike {
+  text-decoration: line-through;
+}
