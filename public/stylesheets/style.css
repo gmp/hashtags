@@ -18,6 +18,10 @@ body {
   -webkit-transition: height 2s;
 }
 
+.declineMessage{
+  background-color: white;
+}
+
 .scoreNumber {
   position: absolute;
   left: 175px;

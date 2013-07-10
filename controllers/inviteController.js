@@ -28,7 +28,7 @@ exports.create = function(req, res){
             if(!obj.pendingGames){
               obj.pendingGames = [];
             }
-            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: "pending"});
+            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: false});
           } else {
             if(!obj.invites){
               obj.invites = [];
@@ -64,8 +64,12 @@ exports.removeDeclinedGame = function(req, res){
     user.set('pendingGames', newPendingArr);
     user.save(function(err){
       if(err)console.log(err);
-      if (clients[user._id]) {
+      if (clients[user._id] && user._id.toString() !== userId) {
         clients[user._id].emit('changeInUser');
+      }
+      else{
+        res.writeHead(204);
+        res.end();
       }
     });
   })
@@ -74,6 +78,7 @@ exports.removeDeclinedGame = function(req, res){
 
 exports.decline = function(req, res){
   var inviteId = req.body.inviteId;
+  var userId = req.body.userId;
   Invite.findById(inviteId, function (err, invite){
     if(err)console.log(err);
     var playersArr = [];
@@ -81,11 +86,11 @@ exports.decline = function(req, res){
     playersArr.push(invite.player2);
     playersArr.push(invite.player3);
     playersArr.push(invite.player4);
-    markRemoveGame(inviteId, playersArr);
+    markRemoveGame(inviteId, playersArr, res, userId);
   });
 }
 
-var markRemoveGame = function(inviteId, players){
+var markRemoveGame = function(inviteId, players, res, userId){
   for(var i = 0; i < players.length; i ++){
     User.findById(players[i].user, function (err, user){
       var newPendingArr = [];
@@ -93,7 +98,7 @@ var markRemoveGame = function(inviteId, players){
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])
         if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId){
-          newPendingArr[newPendingArr.length-1].declined = "declined";
+          newPendingArr[newPendingArr.length-1].declined = true;
         }
       }
 
@@ -106,8 +111,12 @@ var markRemoveGame = function(inviteId, players){
       user.set('invites', newInviteArr);
       user.set('pendingGames', newPendingArr);
       user.save(function (err, user){
-        if (clients[user._id]) {
+        if (clients[user._id] && user._id.toString() !== userId) {
           clients[user._id].emit('changeInUser');
+        }
+        else{
+          res.writeHead(204);
+          res.end();
         }
       });
     });

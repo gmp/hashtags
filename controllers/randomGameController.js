@@ -18,7 +18,7 @@ exports.join = function  (req, res){
       var looking = obj.get('looking');
       if (!looking) {
         obj.set('looking', true);
-        obj.pendingGames.push({title: '#1 Best Random Game', declined: 'pending'});
+        obj.pendingGames.push({title: '#1 Best Random Game'});
       }
       obj.save(function (err){
         if (err) { 
@@ -34,7 +34,7 @@ exports.join = function  (req, res){
     if(err){
       console.log(err);
     } else {
-      if(obj.length%4 === 0){
+      if(obj.length === 4){
         createGame(obj);
       } else {
         res.send(userId);
