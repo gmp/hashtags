@@ -90,25 +90,29 @@ ht.Views.AppView = Backbone.View.extend({
   },
 
   game: function(gameId) {
-    var self = this;
-    var game = new ht.Models.GameModel({
-      id: gameId
-    });
-    game.fetch({
-      success: function(game, res) {
-        self.$el.empty();
-        self.currentGame = new ht.Views.GameView({
-            model: game,
-            attributes: {
-              user: self.user
-            }
-        });
-        self.$el.append(self.currentGame.el);
-      },
-      error: function(game, res) {
-        console.log("error: ", res);
-      }
-    });
+    if (!this.user) {
+      ht.router.navigate('/login', {trigger: true});
+    } else {
+      var self = this;
+      var game = new ht.Models.GameModel({
+        id: gameId
+      });
+      game.fetch({
+        success: function(game, res) {
+          self.$el.empty();
+          self.currentGame = new ht.Views.GameView({
+              model: game,
+              attributes: {
+                user: self.user
+              }
+          });
+          self.$el.append(self.currentGame.el);
+        },
+        error: function(game, res) {
+          console.log("error: ", res);
+        }
+      });
+    }
   },
 
   otherPlayerSubmit: function() {
