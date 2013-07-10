@@ -8,8 +8,8 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
     this.render();
   },
 
-   events: {
-    'click .declined': 'removeMe',
+  events: {
+    'click .declined': 'removeMe'
   },
 
   render: function() {
@@ -19,7 +19,7 @@ ht.Views.LobbyPendingGamesView = Backbone.View.extend({
 
   removeMe: function(event) {
     var self = this;
-    //remove pending game from db
+    debugger;
     var data = {userId: this.model.attributes.id, pendingGameId: event.target.id };
     $.ajax({
       url: '/invites/removeDeclinedGame',

@@ -62,10 +62,6 @@ body {
   margin: 15px auto;
 }
 
-.declined{
-  color: red;
-}
-
 .accordian {
   color: #3d3d3d;
 }
@@ -250,4 +246,8 @@ table thead {
 
 #youDaJudge {
   color: #ededed;
+}
+
+.red {
+  color: red;
 }

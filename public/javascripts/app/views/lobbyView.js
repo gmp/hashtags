@@ -63,7 +63,6 @@ ht.Views.LobbyView = Backbone.View.extend({
     var self = this;
     this.model.fetch({
       success: function(user) {
-
         self.render();
       },
       error: function(user, res) {
@@ -78,12 +77,12 @@ ht.Views.LobbyView = Backbone.View.extend({
   },
 
   joinrandom: function (){
+    this.modalHide();
     var self = this;
     $.ajax({
       url: '/random/' + this.model.id,
       type: 'GET',
       success: function(){
-        self.modalHide();
         self.model.fetch({
           success: function(){
             self.render();
