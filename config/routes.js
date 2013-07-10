@@ -18,7 +18,7 @@ module.exports = function (app) {
   app.post('/invite/create', invite.create);
   app.post('/invites/accept', invite.accept);
 
-  app.get('/random/:userid',  random.join);
+  app.get('/random/:id',  random.join);
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
