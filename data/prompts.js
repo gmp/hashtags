@@ -1,4 +1,5 @@
 module.exports = [
+  "A priest, a rabbi, and a ______ walk into a bar...",
   "Take two ______ and call me in the morning.",
   "As long as none of my friends ever found out, I would totally ______ .",
   "The reason I sweat at night...",
