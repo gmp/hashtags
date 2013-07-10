@@ -251,7 +251,7 @@ var createGame = function (invite, players, title, userId, res){
           } else {
             for(var i = 0; i < user.pendingGames.length; i ++){
               if(!user.pendingGames[i].invite || user.pendingGames[i].invite.toString() !== invite){
-                newArr.push(user.invites[i]);
+                newArr.push(user.pendingGames[i]);
               }
             }
             user.set('pendingGames', newArr);
