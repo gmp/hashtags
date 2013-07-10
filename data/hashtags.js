@@ -17,7 +17,7 @@ module.exports = [
   "dafuq",
   "hater",
   "fart",
-  "yourteam",
+  // "yourteam",
   "epic",
   "photobomb",
   "funkyfresh",

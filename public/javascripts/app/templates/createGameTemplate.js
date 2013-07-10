@@ -7,7 +7,7 @@ ht.Templates.CreateGameTemplate = _.template(''+
       '<h3>#CreateNewGame</h2>'+
     '</div>'+
   '</div>'+
-  '<form id="game-title-form">'+
+  '<form id="game-title-form" onsubmit="return false">'+
     '<div class="row">'+
       '<div class="small-2 columns">'+
         '<label for="right-label" class="right inline">#Title</label>'+
