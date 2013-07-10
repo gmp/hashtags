@@ -97,7 +97,7 @@ var markRemoveGame = function(inviteId, players, res, userId){
       //Set the pending game linked to the invite to declined
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])
-        if(!user.pendingGames.invite || user.pendingGames[i].invite.toString() === inviteId){
+        if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId){
           newPendingArr[newPendingArr.length-1].declined = "declined";
         }
       }
