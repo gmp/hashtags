@@ -34,7 +34,7 @@ exports.join = function  (req, res){
     if(err){
       console.log(err);
     } else {
-      if(obj.length%4 === 0){
+      if(obj.length === 4){
         createGame(obj);
       } else {
         res.send(userId);
