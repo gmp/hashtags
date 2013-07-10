@@ -56,7 +56,7 @@ exports.removeDeclinedGame = function(req, res){
   User.findById(userId, function(err, user){
     var newPendingArr = [];
     for(var i = 0; i < user.pendingGames.length; i++){
-      if(user.pendingGames[i]._id.toString() !== pendingGameId){
+      if(!user.pendingGames.invite || user.pendingGames[i]._id.toString() !== pendingGameId){
         newPendingArr.push(user.pendingGames[i]);
       }
     }
@@ -92,7 +92,7 @@ var markRemoveGame = function(inviteId, players){
       //Set the pending game linked to the invite to declined
       for(var i = 0; i < user.pendingGames.length; i++){
         newPendingArr.push(user.pendingGames[i])
-        if(user.pendingGames[i].invite.toString() === inviteId){
+        if(!user.pendingGames.invite || user.pendingGames[i].invite.toString() === inviteId){
           newPendingArr[newPendingArr.length-1].declined = "declined";
         }
       }
@@ -156,7 +156,7 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
     user.set('invites', newInvites);
     var pendingGames = [];
     for(var i = 0; i < user.pendingGames.length; i ++){
-      if(user.pendingGames[i].invite.toString() !== inviteId){
+      if(!user.pendingGames.invite || user.pendingGames[i].invite.toString() !== inviteId){
         pendingGames.push(user.pendingGames[i]);
       }
     };
@@ -233,7 +233,7 @@ var createGame = function (invite, players, title, userId, res){
           if(err) console.log(err);
           var newArr = [];
           user.games.push(userGame);
-          if(user._id.toString() === userId){
+          if(!user.pendingGames.invite || user._id.toString() === userId){
             for(var i = 0; i < user.invites.length; i ++){
               if(user.invites[i].invite.toString() !== invite){
                 newArr.push(user.invites[i]);
@@ -246,7 +246,7 @@ var createGame = function (invite, players, title, userId, res){
             });
           } else {
             for(var i = 0; i < user.pendingGames.length; i ++){
-              if(user.pendingGames[i].invite.toString() !== invite){
+              if(!user.pendingGames.invite || user.pendingGames[i].invite.toString() !== invite){
                 newArr.push(user.invites[i]);
               }
             }
