@@ -35,7 +35,6 @@ exports.join = function  (req, res){
       console.log(err);
     } else {
       if(obj.length%4 === 0){
-        console.log('I should create a game now with: ', obj);
         createGame(obj);
       } else {
         res.send(userId);
