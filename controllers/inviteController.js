@@ -8,7 +8,7 @@ var User = require('../models/userModel.js'),
     clients = require('../config/socketEvents.js').clients;
 
 
-exports.create = function(req, res) {
+exports.create = function(req, res){
   var obj = req.body;
   var invite = new Invite();
   invite.set('title', obj.title);
