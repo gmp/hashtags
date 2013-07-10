@@ -17,7 +17,6 @@ ht.Views.PlayerHashtagSelectView = Backbone.View.extend({
 
   hashtagClick: function(e) {
     this.remove();
-    console.log('player hashtag select view was clicked!');
     ht.dispatcher.trigger('hashtagClick', $(e.target).data('hashtag'));
   }
 

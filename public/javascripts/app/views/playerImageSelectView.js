@@ -25,7 +25,6 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     var self = this;
     var hashtagQuery = this.attributes.hashtag;
     var accessToken = this.attributes.accessToken;
-    console.log(hashtagQuery);
     $.ajax({
       url: 'https://api.instagram.com/v1/tags/'+hashtagQuery+'/media/recent?access_token='+accessToken+'',
       dataType: 'jsonp',
@@ -81,12 +80,12 @@ ht.Views.PlayerImageSelectView = Backbone.View.extend({
     this.model.set('players', players);
     this.model.save(player, {
       patch: true,
-      success: function(model, res){
+      success: function(model, res) {
         selfie.model.unsetChanges();
         ht.dispatcher.trigger('mediaSelect', model);
         selfie.remove();
       },
-      error: function(){
+      error: function() {
         console.error('bummer dude');
       }
     });

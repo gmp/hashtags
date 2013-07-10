@@ -12,8 +12,8 @@ passport.deserializeUser(function(obj, done) {
 
 //LOCAL
 passport.use(new InstagramStrategy({
-    clientID: 'd37dfbd483674207b72a447e1b63b6bc',
-    clientSecret: '5e0d4975780a4e36a59d78cb01c74868',
+    clientID: '7b0cfd2414c54f35bf072e4935b27b87',
+    clientSecret: 'c5ea71c310c64c45bd415714131f435b',
     callbackURL: "/auth/instagram/callback"
   },
 
@@ -55,7 +55,7 @@ passport.use(new InstagramStrategy({
   }
 ));
 
-exports.init = function(app){
+exports.init = function(app) {
 	app.use(passport.initialize());
   app.use(passport.session());
   return app;

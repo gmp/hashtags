@@ -30,7 +30,7 @@ ht.Views.PlayerWaitingView = Backbone.View.extend({
       success: function(){
         self.render();
       },
-      error: function(){
+      error: function() {
         console.error("error");
       }
     });

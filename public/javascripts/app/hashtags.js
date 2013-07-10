@@ -14,7 +14,7 @@ var ht = {
   }
 };
 
-ht.Helpers.getMyPlayer = function(gameModel, userId){
+ht.Helpers.getMyPlayer = function(gameModel, userId) {
   return gameModel.get('players')[userId];
 };
 
@@ -42,12 +42,7 @@ Backbone.Model.prototype.unsetChanges = function() {
   }, this);
 };
 
-Backbone.View.prototype.doubleTap = function(eventToRemove){
+Backbone.View.prototype.doubleTap = function(eventToRemove) {
     ht.dispatcher.off(eventToRemove);
     Backbone.View.prototype.remove.apply(this, arguments);
-}
-
-
-
-
-
+};

@@ -70,5 +70,8 @@ module.exports = [
   "macaroniandcheese",
   "foodie",
   "grills",
-  "hashtag"
+  "hashtag",
+  "owling",
+  "stormtrooper",
+  "dogs"
 ];
