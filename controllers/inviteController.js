@@ -64,7 +64,7 @@ exports.removeDeclinedGame = function(req, res){
     user.set('pendingGames', newPendingArr);
     user.save(function(err){
       if(err)console.log(err);
-      if (clients[user._id] && user._id !== userId) {
+      if (clients[user._id] && user._id.toString() !== userId) {
         clients[user._id].emit('changeInUser');
       }
       else{
@@ -111,7 +111,7 @@ var markRemoveGame = function(inviteId, players, res, userId){
       user.set('invites', newInviteArr);
       user.set('pendingGames', newPendingArr);
       user.save(function (err, user){
-        if (clients[user._id] && user._id !== userId) {
+        if (clients[user._id] && user._id.toString() !== userId) {
           clients[user._id].emit('changeInUser');
         }
         else{
