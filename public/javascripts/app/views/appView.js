@@ -31,22 +31,22 @@ ht.Views.AppView = Backbone.View.extend({
     }
   },
 
-  leaveRooms: function(){
+  leaveRooms: function() {
     if(this.roomId){
       this.socket.emit('leaveGame', this.roomId);
       delete this.roomId;
     }
   },
 
-  changeInUser: function(){
+  changeInUser: function() {
     ht.dispatcher.trigger('changeInUser');
   },
 
-  joinGame: function(gameId){
+  joinGame: function(gameId) {
     this.socket.emit('joinGame', gameId);
   },
 
-  joinedRoom: function(gameId){
+  joinedRoom: function(gameId) {
     this.roomId = gameId;
   },
 

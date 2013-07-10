@@ -32,7 +32,7 @@ ht.Views.GameEndView = Backbone.View.extend({
     this.model.set('players', players);
     this.model.save(player, {
       patch: true,
-      success: function (){
+      success: function() {
         self.model.unsetChanges();
         ht.dispatcher.trigger('continued');
       }

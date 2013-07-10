@@ -24,7 +24,7 @@ ht.Views.LobbyView = Backbone.View.extend({
     'changeInUser': 'changeInUser'
   },
 
-  render: function (){
+  render: function() {
     ht.Helpers.scrollTop();
     this.$el.empty();
     this.$el.append(this.template(this.model.attributes));
@@ -43,23 +43,23 @@ ht.Views.LobbyView = Backbone.View.extend({
     }
   },
 
-  leaveRooms: function (){
+  leaveRooms: function() {
     ht.dispatcher.trigger('leaveRooms');
   },
 
-  modalShow: function (event){
+  modalShow: function(event) {
     $('#new-game-modal').fadeIn(300);
     this.$el.append('<div id="mask" class="mask"></div>');
     $('#mask').fadeIn(300);
   },
 
-  modalHide: function (){
+  modalHide: function() {
     $('#mask, #new-game-modal, #invite-game-modal').fadeOut(300, function() {
       $('#mask').remove();
     });
   },
 
-  changeInUser: function (){
+  changeInUser: function() {
     var self = this;
     this.model.fetch({
       success: function(user) {
@@ -71,25 +71,25 @@ ht.Views.LobbyView = Backbone.View.extend({
     });
   },
 
-  createGame: function (){
+  createGame: function() {
     this.modalHide();
     ht.router.navigate('/lobby/'+this.model.id+'/new', {trigger: true});
   },
 
-  joinrandom: function (){
+  joinrandom: function() {
     this.modalHide();
     var self = this;
     $.ajax({
       url: '/random/' + this.model.id,
       type: 'GET',
-      success: function(){
+      success: function() {
         self.model.fetch({
-          success: function(){
+          success: function() {
             self.render();
           }
         });
       },
-      error: function(){
+      error: function() {
         console.log('error');
       }
     });

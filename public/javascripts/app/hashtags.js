@@ -16,7 +16,7 @@ var ht = {
   }
 };
 
-ht.Helpers.getMyPlayer = function(gameModel, userId){
+ht.Helpers.getMyPlayer = function(gameModel, userId) {
   return gameModel.get('players')[userId];
 };
 

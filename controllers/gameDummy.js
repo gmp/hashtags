@@ -6,10 +6,10 @@ var User = require('../models/userModel.js'),
     _ = require('underscore');
 
 
-module.exports = function(){
+module.exports = function() {
   var player, game, game1, game2, game3, query, gameData, promptList, prompt, hand;
   var flag;
-  Game.remove({}, function(){
+  Game.remove({}, function() {
 
     game = new Game();
     gameData = new GameData();
@@ -19,14 +19,14 @@ module.exports = function(){
     gameData.prompts = promptList;
     gameData.gameId = game._id;
     game.gameData = gameData._id;
-    User.find({}, function(err, obj){
+    User.find({}, function(err, obj) {
       flag = true;
-      _.each(obj, function(item){
+      _.each(obj, function(item) {
         player = {};
         player.userGlobalId = item._id;
         hand = gameData.hashtags.splice(0, 5);
         player.hand = hand;
-        if(flag){
+        if(flag) {
           player.isJ = true;
           game.judge = {username: item.username, avatarURL:item.avatarURL};
           flag = false;
@@ -47,18 +47,18 @@ module.exports = function(){
         game.numberOfSub = 0;
         game.prompt = gameData.prompts.pop();
         game.round = 1;
-        User.findById(item._id, function(err, obj){
+        User.findById(item._id, function(err, obj) {
           obj.games.push({gameId: game._id, judge: game.judge, prompt: game.prompt, players:[{username: "hifelight", avatarURL:"http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg", score: 0}, {username: "ericrius1", avatarURL:"http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg", score: 0}, {username: "gmp5", avatarURL:"http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg", score: 0}, {username: "banjolina_jolie", avatarURL:"http://images.ak.instagram.com/profiles/profile_178079200_75sq_1372354431.jpg", score: 0}], title: game.title});
-          obj.save(function(err){
+          obj.save(function(err) {
             if(err) console.log(err);
           });
         });
       });
-      gameData.save(function(err){
+      gameData.save(function(err) {
 
         if(err) console.log(err);
       });
-      game.save(function(err){
+      game.save(function(err) {
         if(err) console.log(err);
       });
     });
@@ -70,7 +70,7 @@ module.exports = function(){
     gameData2.prompts = promptList;
     gameData2.gameId = game._id;
     game2.gameData = gameData2._id;
-    User.find({}, function(err, obj){
+    User.find({}, function(err, obj) {
       flag = true;
       _.each(obj, function(item){
         player = {};

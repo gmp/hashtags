@@ -8,7 +8,7 @@ var User = require('../models/userModel.js'),
     clients = require('../config/socketEvents.js').clients;
 
 
-exports.create = function(req, res){
+exports.create = function(req, res) {
   var obj = req.body;
   var invite = new Invite();
   invite.set('title', obj.title);
@@ -18,27 +18,27 @@ exports.create = function(req, res){
   invite.set('player2', obj.player2);
   invite.set('player3', obj.player3);
   invite.set('player4', obj.player4);
-  invite.save(function (err){
+  invite.save(function (err) {
     if(err) console.log(err);
-    _.each(obj, function(value, key){
-      if(key !== 'title'  && key !== 'author' && key !== 'waitingOn'){
-        User.findById(value.user, function(err, obj){
+    _.each(obj, function(value, key) {
+      if(key !== 'title'  && key !== 'author' && key !== 'waitingOn') {
+        User.findById(value.user, function(err, obj) {
           if(err) console.log(err);
-          if(key === 'gameAdmin'){
-            if(!obj.pendingGames){
+          if(key === 'gameAdmin') {
+            if(!obj.pendingGames) {
               obj.pendingGames = [];
             }
             obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3, declined: false});
           } else {
-            if(!obj.invites){
+            if(!obj.invites) {
               obj.invites = [];
             }
             obj.invites.push({invite: invite._id, author: invite.author});
           }
-          obj.save(function(err){
+          obj.save(function(err) {
             if(err){
               console.log(err);
-            }  else if(clients[obj._id]){
+            } else if(clients[obj._id]) {
               clients[obj._id].emit('changeInUser');
             }
           });
@@ -50,19 +50,19 @@ exports.create = function(req, res){
   });
 };
 
-exports.removeDeclinedGame = function(req, res){
+exports.removeDeclinedGame = function(req, res) {
   var userId = req.body.userId;
   var pendingGameId = req.body.pendingGameId;
   User.findById(userId, function(err, user){
     var newPendingArr = [];
-    for(var i = 0; i < user.pendingGames.length; i++){
-      if(!user.pendingGames[i].invite || user.pendingGames[i]._id.toString() !== pendingGameId){
+    for(var i = 0; i < user.pendingGames.length; i++) {
+      if(!user.pendingGames[i].invite || user.pendingGames[i]._id.toString() !== pendingGameId) {
         newPendingArr.push(user.pendingGames[i]);
       }
     }
 
     user.set('pendingGames', newPendingArr);
-    user.save(function(err){
+    user.save(function(err) {
       if(err)console.log(err);
       res.writeHead(204);
       res.end();
@@ -71,10 +71,10 @@ exports.removeDeclinedGame = function(req, res){
 
 };
 
-exports.decline = function(req, res){
+exports.decline = function(req, res) {
   var inviteId = req.body.inviteId;
   var userId = req.body.userId;
-  Invite.findById(inviteId, function (err, invite){
+  Invite.findById(inviteId, function (err, invite) {
     if(err)console.log(err);
     var playersArr = [];
     playersArr.push(invite.gameAdmin);
@@ -85,21 +85,21 @@ exports.decline = function(req, res){
   });
 }
 
-var markRemoveGame = function(inviteId, players, res, userId){
-  for(var i = 0; i < players.length; i ++){
-    User.findById(players[i].user, function (err, user){
+var markRemoveGame = function(inviteId, players, res, userId) {
+  for(var i = 0; i < players.length; i ++) {
+    User.findById(players[i].user, function (err, user) {
       var newPendingArr = [];
       //Set the pending game linked to the invite to declined
-      for(var i = 0; i < user.pendingGames.length; i++){
+      for(var i = 0; i < user.pendingGames.length; i++) {
         newPendingArr.push(user.pendingGames[i])
-        if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId){
+        if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId) {
           newPendingArr[newPendingArr.length-1].declined = true;
         }
       }
 
       var newInviteArr = [];
-      for(var i = 0; i < user.invites.length; i ++){
-        if(user.invites[i].invite.toString() !== inviteId){
+      for(var i = 0; i < user.invites.length; i ++) {
+        if(user.invites[i].invite.toString() !== inviteId) {
             newInviteArr.push(user.invites[i]);
         }
       }
@@ -108,8 +108,7 @@ var markRemoveGame = function(inviteId, players, res, userId){
       user.save(function (err, user){
         if (clients[user._id] && user._id.toString() !== userId) {
           clients[user._id].emit('changeInUser');
-        }
-        else{
+        } else {
           res.writeHead(204);
           res.end();
         }
@@ -118,19 +117,19 @@ var markRemoveGame = function(inviteId, players, res, userId){
   }
 }
 
-exports.accept = function(req, res){
+exports.accept = function(req, res) {
   var inviteId = req.body.inviteId;
   var userId  = req.body.userId;
-  Invite.findById(inviteId, function (err, invite){
+  Invite.findById(inviteId, function (err, invite) {
 
     var playersArr = [];
     playersArr.push(invite.player2);
     playersArr.push(invite.player3);
     playersArr.push(invite.player4);
 
-    for(var i = 0; i < playersArr.length; i ++){
-      if(playersArr[i].user === userId){
-        if(invite.waitingOn > 1){
+    for(var i = 0; i < playersArr.length; i ++) {
+      if(playersArr[i].user === userId) {
+        if(invite.waitingOn > 1) {
           invite.set('player' + (i+2) +'.accepted', 'accepted');
           invite.set('waitingOn', invite.waitingOn - 1);
           moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
@@ -142,25 +141,24 @@ exports.accept = function(req, res){
       }
     }
     invite.save(function(err, invite) {
-      if (err) console.log(err);
-
+      if(err) console.log(err);
     });
   });
 };
 
 
-var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
-  User.findById(userId, function (err, user){
+var moveGameToPending = function (userId, inviteId, title, waitingOn, res) {
+  User.findById(userId, function (err, user) {
     var newInvites = [];
-    for(var i = 0; i < user.invites.length; i ++){
-      if(user.invites[i].invite.toString() !== inviteId){
+    for(var i = 0; i < user.invites.length; i ++) {
+      if(user.invites[i].invite.toString() !== inviteId) {
         newInvites.push(user.invites[i]);
       }
     };
     user.set('invites', newInvites);
     var pendingGames = [];
-    for(var i = 0; i < user.pendingGames.length; i ++){
-      if(!user.pendingGames[i].invite || user.pendingGames[i].invite.toString() !== inviteId){
+    for(var i = 0; i < user.pendingGames.length; i ++) {
+      if(!user.pendingGames[i].invite || user.pendingGames[i].invite.toString() !== inviteId) {
         pendingGames.push(user.pendingGames[i]);
       }
     };
@@ -171,15 +169,14 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res){
     });
     user.set('pendingGames', pendingGames);
     user.save(function(err) {
-      if (err) console.log(err);
+      if(err) console.log(err);
       res.writeHead(204);
       res.end();
-
     });
   });
 };
 
-var createGame = function (invite, players, title, userId, res){
+var createGame = function (invite, players, title, userId, res) {
   var game = new Game();
   var gameData = new GameData();
   var allPrompt = _.shuffle(prompts);
@@ -195,7 +192,7 @@ var createGame = function (invite, players, title, userId, res){
   game.set('numberOfSub', 0);
   game.set('judge', {username: players[0].username, avatarURL: players[0].avatarURL, userGlobalId: players[0].user});
   var playersHash = {};
-  for(var i = 0; i < players.length; i ++){
+  for(var i = 0; i < players.length; i ++) {
     judgeArr.push(players[i].user);
     playersHash[players[i].user] = {};
     playersHash[players[i].user].username = players[i].username;
@@ -210,11 +207,11 @@ var createGame = function (invite, players, title, userId, res){
   }
   gameData.set('hashtags', tags);
   playersHash[judgeArr[0]].isJ = true;
-  gameData.save(function (err){
+  gameData.save(function (err) {
     if(err) console.log(err);
     game.set('judgingOrder', judgeArr);
     game.set('players', playersHash);
-    game.save(function (err, newGame){
+    game.save(function (err, newGame) {
       var keys = newGame.judgingOrder;
       var userGame = {};
       console.log(keys);
@@ -232,31 +229,31 @@ var createGame = function (invite, players, title, userId, res){
         player.score = 0;
         userGame.players.push(player);
       });
-      for(var i = 0; i < keys.length; i ++){
-        User.findById(keys[i], function (err, user){
+      for(var i = 0; i < keys.length; i ++) {
+        User.findById(keys[i], function (err, user) {
           if(err) console.log(err);
           var newArr = [];
           user.games.push(userGame);
-          if(user._id.toString() === userId){
-            for(var i = 0; i < user.invites.length; i ++){
-              if(user.invites[i].invite.toString() !== invite){
+          if(user._id.toString() === userId) {
+            for(var i = 0; i < user.invites.length; i ++) {
+              if(user.invites[i].invite.toString() !== invite) {
                 newArr.push(user.invites[i]);
               }
             }
             user.set('invites', newArr);
-            user.save(function (err){
+            user.save(function (err) {
               res.writeHead(204);
               res.end();
             });
           } else {
-            for(var i = 0; i < user.pendingGames.length; i ++){
-              if(!user.pendingGames[i].invite || user.pendingGames[i].invite.toString() !== invite){
-                newArr.push(user.invites[i]);
+            for(var i = 0; i < user.pendingGames.length; i ++) {
+              if(!user.pendingGames[i].invite || user.pendingGames[i].invite.toString() !== invite) {
+                newArr.push(user.pendingGames[i]);
               }
             }
             user.set('pendingGames', newArr);
-            user.save(function (err, user){
-              if (clients[user._id]) {
+            user.save(function (err, user) {
+              if(clients[user._id]) {
                 clients[user._id].emit('changeInUser');
               }
             });

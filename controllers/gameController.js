@@ -31,7 +31,7 @@ exports.updateById = function(req, res) {
           console.error(err);
         } else {
           if (submitted.submitted) {
-            if(clients[submitted.userGlobalId]){
+            if(clients[submitted.userGlobalId]) {
               clients[submitted.userGlobalId].broadcast.to(gameId).emit('otherPlayerSubmit');
             }
           }
@@ -93,7 +93,7 @@ exports.roundChange = function(req, res) {
     obj.set('previousRound', submitted.previousRound);
     obj.save(function(err, doc) {
       if (err) console.error(err);
-      if(clients[oldJudge]){
+      if(clients[oldJudge]) {
         clients[oldJudge].broadcast.to(gameId).emit('judgeSelect');
       }
       herald(doc, gameId);

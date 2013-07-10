@@ -6,22 +6,21 @@ var prompts = require('../data/prompts.js');
 var clients = require('../config/socketEvents.js').clients;
 var _ = require('underscore');
 
-exports.join = function  (req, res){
+exports.join = function(req, res) {
   var userId = req.params.id;
-  console.log(userId);
 
-  var switchLooking = function (err, obj){
-    if (err){
+  var switchLooking = function (err, obj) {
+    if(err) {
       console.log(err);
       return;
     } else {
       var looking = obj.get('looking');
-      if (!looking) {
+      if(!looking) {
         obj.set('looking', true);
         obj.pendingGames.push({title: '#1 Best Random Game'});
       }
-      obj.save(function (err){
-        if (err) { 
+      obj.save(function (err) {
+        if(err) {
           console.log(err)
         } else {
           User.find({}).where('looking', 'true').exec(makeGame);
@@ -30,11 +29,11 @@ exports.join = function  (req, res){
     }
   };
 
-  var makeGame = function (err, obj){
-    if(err){
+  var makeGame = function(err, obj) {
+    if(err) {
       console.log(err);
     } else {
-      if(obj.length === 4){
+      if(obj.length === 4) {
         createGame(obj);
       } else {
         res.send(userId);
@@ -42,7 +41,7 @@ exports.join = function  (req, res){
     };
   };
 
-  var createGame = function (players){
+  var createGame = function(players) {
     var game = new Game();
     var gameData = new GameData();
     var allPrompt = _.shuffle(prompts);
@@ -58,7 +57,7 @@ exports.join = function  (req, res){
     game.set('numberOfSub', 0);
     game.set('judge', {username: players[0].username, avatarURL: players[0].avatarURL, userGlobalId: players[0].user});
     var playersHash = {};
-    for(var i = 0; i < players.length; i ++){
+    for(var i = 0; i < players.length; i ++) {
       judgeArr.push(players[i]._id);
       playersHash[players[i]._id] = {};
       playersHash[players[i]._id].username = players[i].username;
@@ -75,11 +74,11 @@ exports.join = function  (req, res){
     playersHash[judgeArr[0]].isJ = true;
     game.set('judgingOrder', judgeArr);
     game.set('players', playersHash);
-    gameData.save(function (err){
-      if (err){
+    gameData.save(function (err) {
+      if(err) {
         console.log(err);
       } else {
-        game.save(function (err, newGame){
+        game.save(function (err, newGame) {
           var keys = newGame.judgingOrder;
           var userGame = {};
           console.log(keys);
@@ -90,33 +89,33 @@ exports.join = function  (req, res){
           userGame.prompt = newGame.prompt;
           userGame.title = newGame.title;
           userGame.players = [];
-          _.each(keys, function (pId){
+          _.each(keys, function (pId) {
             var player = {};
             player.username = newGame.players[pId].username;
             player.avatarURL = newGame.players[pId].avatarURL;
             player.score = 0;
             userGame.players.push(player);
           });
-          for(var i = 0; i < keys.length; i ++){
-            User.findById(keys[i], function (err, user){
-              if(err){
+          for(var i = 0; i < keys.length; i ++) {
+            User.findById(keys[i], function (err, user) {
+              if(err) {
                 console.log(err);
               } else {
                 var newArr = [];
                 user.games.push(userGame);
-                for(var i = 0; i < user.pendingGames.length; i ++){
-                  if(user.pendingGames[i].title !== '#1 Best Random Game'){
+                for(var i = 0; i < user.pendingGames.length; i ++) {
+                  if(user.pendingGames[i].title !== '#1 Best Random Game') {
                     newArr.push(user.pendingGames[i]);
                   }
                 }
                 user.set('pendingGames', newArr);
                 user.set('looking', false);
-                user.save(function (err, user){
+                user.save(function (err, user) {
                   if(err) console.log(err);
-                  if(user._id === userId){
+                  if(user._id === userId) {
                     res.send(userId);
                   } else {
-                    if (clients[user._id]){
+                    if (clients[user._id]) {
                       clients[user._id].emit('changeInUser');
                     }
                   }
@@ -128,6 +127,5 @@ exports.join = function  (req, res){
       }
     });
   };
-
   User.findById(userId).exec(switchLooking);
 }

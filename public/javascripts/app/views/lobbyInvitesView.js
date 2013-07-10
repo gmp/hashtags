@@ -27,18 +27,17 @@ ht.Views.LobbyInvitesView = Backbone.View.extend({
       url: '/invites/accept/',
       type: 'POST',
       data: data,
-      success: function(data){
+      success: function(data) {
         console.log('post success');
         self.model.fetch();
       },
-      error: function(){
+      error: function() {
         console.log('error');
       }
     });
   },
 
   declineResponse: function(e) {
-    console.log('declined!');
     var inviteId = $(e.target).data('invite-id');
     var data = {inviteId: inviteId, userId: this.model.id};
     var self = this;
@@ -46,11 +45,11 @@ ht.Views.LobbyInvitesView = Backbone.View.extend({
       url: '/invites/decline/',
       type: 'POST',
       data: data,
-      success: function(data){
+      success: function(data) {
         console.log('post success');
         self.model.fetch();
       },
-      error: function(){
+      error: function() {
         console.log('error');
       }
     });
