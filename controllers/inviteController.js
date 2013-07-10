@@ -56,7 +56,8 @@ exports.removeDeclinedGame = function(req, res){
   User.findById(userId, function(err, user){
     var newPendingArr = [];
     for(var i = 0; i < user.pendingGames.length; i++){
-      if(!user.pendingGames.invite || user.pendingGames[i]._id.toString() !== pendingGameId){
+      if(!user.pendingGames[i].invite || user.pendingGames[i]._id.toString() !== pendingGameId){
+        console.log('im here in the remove if statement');
         newPendingArr.push(user.pendingGames[i]);
       }
     }
@@ -64,17 +65,12 @@ exports.removeDeclinedGame = function(req, res){
     user.set('pendingGames', newPendingArr);
     user.save(function(err){
       if(err)console.log(err);
-      if (clients[user._id] && user._id.toString() !== userId) {
-        clients[user._id].emit('changeInUser');
-      }
-      else{
-        res.writeHead(204);
-        res.end();
-      }
+      res.writeHead(204);
+      res.end();
     });
-  })
+  });
 
-}
+};
 
 exports.decline = function(req, res){
   var inviteId = req.body.inviteId;
