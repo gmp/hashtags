@@ -9,7 +9,7 @@ Hashtags is a game like Apples to Apples and Cards Against Humanity.  It is desi
 <li>Players anonymously submit to the judge an image/video to answer the prompt.</li>
 <li>When all submissions are in, the judge selects the best answer and the player that submitted it gets a point.</li>
 <li>Judge switches and the next round commences.</li>
-</ol></br>
+</ol></n>
 
 
 Technologies:
@@ -21,6 +21,6 @@ Technologies:
   <li>MongoDB with Mongoose</li>
   <li>Backbone.js</li>
 </ul>
-
+</n>
 
   If you have feedback or want to submit prompt ideas, mosey on down to http://hashtagsfeedback.meteor.com
