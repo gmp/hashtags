@@ -208,59 +208,58 @@ var createGame = function (invite, players, title, userId, res){
   playersHash[judgeArr[0]].isJ = true;
   gameData.save(function (err){
     if(err) console.log(err);
-  });
-  game.set('judgingOrder', judgeArr);
-  game.set('players', playersHash);
-  game.save(function (err, newGame){
-    var keys = newGame.judgingOrder;
-    var userGame = {};
-    console.log(keys);
-    userGame.gameId = newGame._id;
-    userGame.judge = {};
-    userGame.judge.username = newGame.judge.username;
-    userGame.judge.avatarURL = newGame.judge.avatarURL;
-    userGame.prompt = newGame.prompt;
-    userGame.title = newGame.title;
-    userGame.players = [];
-    _.each(keys, function (pId){
-      var player = {};
-      player.username = newGame.players[pId].username;
-      player.avatarURL = newGame.players[pId].avatarURL;
-      player.score = 0;
-      userGame.players.push(player);
-    });
-    for(var i = 0; i < keys.length; i ++){
-      User.findById(keys[i], function (err, user){
-        if(err) console.log(err);
-        var newArr = [];
-        if(user._id.toString() === userId){
-          for(var i = 0; i < user.invites.length; i ++){
-            if(user.invites[i].invite.toString() !== invite){
-              newArr.push(user.invites[i]);
-            }
-          }
-          user.set('invites', newArr);
-          user.games.push(userGame);
-          user.save(function (err){
-            res.writeHead(204);
-            res.end();
-          });
-        } else {
-          for(var i = 0; i < user.pendingGames.length; i ++){
-            if(user.pendingGames[i].invite.toString() !== invite){
-              newArr.push(user.invites[i]);
-            }
-          }
-          user.set('pendingGames', newArr);
-          user.games.push(userGame);
-          user.save(function (err, user){
-            if (clients[user._id]) {
-              clients[user._id].emit('changeInUser');
-            }
-          });
-        }
+    game.set('judgingOrder', judgeArr);
+    game.set('players', playersHash);
+    game.save(function (err, newGame){
+      var keys = newGame.judgingOrder;
+      var userGame = {};
+      console.log(keys);
+      userGame.gameId = newGame._id;
+      userGame.judge = {};
+      userGame.judge.username = newGame.judge.username;
+      userGame.judge.avatarURL = newGame.judge.avatarURL;
+      userGame.prompt = newGame.prompt;
+      userGame.title = newGame.title;
+      userGame.players = [];
+      _.each(keys, function (pId){
+        var player = {};
+        player.username = newGame.players[pId].username;
+        player.avatarURL = newGame.players[pId].avatarURL;
+        player.score = 0;
+        userGame.players.push(player);
       });
-    }
+      for(var i = 0; i < keys.length; i ++){
+        User.findById(keys[i], function (err, user){
+          if(err) console.log(err);
+          var newArr = [];
+          user.games.push(userGame);
+          if(user._id.toString() === userId){
+            for(var i = 0; i < user.invites.length; i ++){
+              if(user.invites[i].invite.toString() !== invite){
+                newArr.push(user.invites[i]);
+              }
+            }
+            user.set('invites', newArr);
+            user.save(function (err){
+              res.writeHead(204);
+              res.end();
+            });
+          } else {
+            for(var i = 0; i < user.pendingGames.length; i ++){
+              if(user.pendingGames[i].invite.toString() !== invite){
+                newArr.push(user.invites[i]);
+              }
+            }
+            user.set('pendingGames', newArr);
+            user.save(function (err, user){
+              if (clients[user._id]) {
+                clients[user._id].emit('changeInUser');
+              }
+            });
+          }
+        });
+      }
+    });
   });
 };
 

@@ -20,7 +20,7 @@ module.exports = function (app) {
   app.post('/invites/decline', invite.decline);
   app.post('/invites/removeDeclinedGame', invite.removeDeclinedGame);
 
-  app.get('/random/:userid',  random.join);
+  app.get('/random/:id',  random.join);
 
   app.get('/auth/instagram',
     passport.authenticate('instagram'),
