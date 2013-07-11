@@ -1,6 +1,6 @@
 ht.Views.GameView = Backbone.View.extend({
 
-  className: 'game',
+  className: 'gameView',
 
   initialize: function() {
     ht.Helpers.delegateCustomEvents(ht.dispatcher, this.dispatcher_events, this);

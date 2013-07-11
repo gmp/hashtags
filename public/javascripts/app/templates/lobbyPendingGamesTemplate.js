@@ -3,9 +3,9 @@ ht.Templates.LobbyPendingGamesTemplate = _.template(''+
     '<% for(var i = 0; i < pendingGames.length; i++) { %>'+
       '<section>'+
         '<% if (pendingGames[i].declined) { %>'+
-          '<p class="title strike" data-section-title>Pending game: <%= pendingGames[i].title %></p>'+
+          '<p class="title pending game strike" data-section-title>Pending game: <%= pendingGames[i].title %></p>'+
           '<% } else { %>' +
-          '<p class="title" data-section-title>Pending game: <%= pendingGames[i].title %></p>'+
+          '<p class="title pending game" data-section-title>Pending game: <%= pendingGames[i].title %></p>'+
           '<% } %>' +
           '<div class="content" data-section-content>'+
         '<% if (pendingGames[i].declined) { %>'+
