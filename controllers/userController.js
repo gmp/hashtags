@@ -5,6 +5,9 @@ exports.findById = function(req, res) {
 	var id = req.params.id;
   console.log('Retrieving user by ID: ' + id);
   User.findById(id, function (err, obj) {
+    for(key in obj){
+      console.log(key);
+    }
     if(err) console.log(err);
     res.send(obj);
   });
