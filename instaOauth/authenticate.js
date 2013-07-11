@@ -12,8 +12,8 @@ passport.deserializeUser(function(obj, done) {
 
 //LOCAL
 passport.use(new InstagramStrategy({
-    clientID: process.env.INSTAGRAM_CLIENT_ID,
-    clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+    clientID: process.env.HASHTAGS_CLIENT_ID,
+    clientSecret: process.env.HASHTAGS_CLIENT_SECRET,
     callbackURL: "/auth/instagram/callback"
   },
 
