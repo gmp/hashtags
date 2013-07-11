@@ -1,6 +1,36 @@
-body {
+html, body {
+  height: 100%;
   background-color: #f7b4d2;
-  min-height: 1100px;
+}
+
+p {
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}
+
+h4 {
+  color: #3d3d3d;
+}
+
+.gameEnd {
+  height: 100%;
+}
+
+.winning-subs {
+  overflow: auto;
+}
+
+.pending {
+  padding-left: 0.5em;
+}
+
+.game {
+  background-color: #3d3d3d !important;
+  border-color: #595656 !important;
+  color: whitesmoke;
+  font-size: 1em;
+  padding-top: .5em;
+  padding-bottom: 0.5em;
 }
 
 .scoreBoard {
@@ -50,28 +80,30 @@ body {
   background-color: #3d3d3d;
   padding-bottom: 1em;
   padding-top: 1em;
+  -webkit-box-shadow: rgba(0,0,0,0.3) 3px 3px;
 }
 
 .invites {
   margin-top: 15px;
-  padding-bottom: 1em;
 }
 
 .invite {
   text-align: center;
   border: 1px solid black;
-  border-radius: 13px;
   background-color: lightgreen;
   color: #3d3d3d;
   margin: 15px auto;
+  -webkit-box-shadow: rgba(0,0,0,0.3) 3px 3px;
 }
 
 .accordian {
   color: #3d3d3d;
+  border: #3d3d3d solid 0;
 }
 
-.game {
-  font-size: 1.5em;
+.gameView {
+  font-size: 1em;
+  padding-top: 6em;
 }
 
 .menu-icon {
@@ -133,8 +165,9 @@ body {
 
 .game-header {
   margin-bottom: 1em;
-  background-color: #3d3d3d;
+  background-color: rgba(61, 61, 61, 0.95);
   text-align: center;
+  -webkit-box-shadow: rgba(0,0,0,0.4) 3px 3px;
 }
 
 .newGame {
@@ -156,11 +189,13 @@ body {
 .games-list {
   width: 97%;
   margin: 15px auto;
+  -webkit-box-shadow: rgba(0,0,0,0.3) 3px 3px;
 }
 
 .pending-games-list {
   width: 97%;
   margin: 15px auto;
+  -webkit-box-shadow: rgba(0,0,0,0.3) 3px 3px;
 }
 
 .noGames {
