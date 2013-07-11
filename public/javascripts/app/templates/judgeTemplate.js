@@ -1,7 +1,7 @@
 ht.Templates.JudgeTemplate = _.template(''+
   '<div><h4>You\'re the judge<h4></div>'+
   '<% if(remainingSubs) { %>'+
-    '<h6>Awaiting <%= remainingSubs %> submissions</h6>'+
+    '<h4>Awaiting <%= remainingSubs %> submissions</h4>'+
   '<% } else { %>'+
     '<h4>Ready to vote!</h4>'+
   '<% } %>'+

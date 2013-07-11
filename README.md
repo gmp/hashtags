@@ -28,6 +28,9 @@ Technologies:
 </n>
 <br/>
 
-![Alt text](screenshots/screenshot2.png)
+![Hashtags lobby](screenshots/lobby.png)
+![Create a new game](screenshots/create_game.png)
+![Submission](screenshots/hug_submission.png)
+![Multiple submissions](screenshots/gameplay.png)
 
   If you have feedback or want to submit prompt ideas, mosey on down to http://hashtagsfeedback.meteor.com
