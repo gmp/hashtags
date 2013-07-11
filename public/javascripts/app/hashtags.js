@@ -8,9 +8,11 @@ var ht = {
   Data: {},
   Helpers: {},
   init: function() {
-    ht.dispatcher = _.extend({}, Backbone.Events);
-    ht.router = new ht.Routes.Router();
+    this.dispatcher = _.extend({}, Backbone.Events);
+    this.app = new this.Views.AppView();
+    this.router = new this.Routes.Router();
     Backbone.history.start();
+    $('body').append(this.app.$el);
   }
 };
 
@@ -42,7 +44,7 @@ Backbone.Model.prototype.unsetChanges = function() {
   }, this);
 };
 
-Backbone.View.prototype.doubleTap = function(eventToRemove) {
-    ht.dispatcher.off(eventToRemove);
-    Backbone.View.prototype.remove.apply(this, arguments);
+Backbone.View.prototype.doubleTap = function(eventToRemove){
+  ht.dispatcher.off(eventToRemove);
+  this.remove.apply(this, arguments);
 };

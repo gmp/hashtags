@@ -1,5 +1,5 @@
 ht.Templates.GameEndTemplate = _.template(''+
-  '<div class="game-header row text-center">'+
+  '<div class="game-header row text-center fixed">'+
     '<div class="small-11 small-centered columns">'+
       '<h6><%= prompt %><h6>'+
       '<p id="winner">Winner: <%= winner %></p>'+

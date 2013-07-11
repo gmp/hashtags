@@ -1,6 +1,6 @@
 ht.Views.GameHeaderView = Backbone.View.extend({
 
-  className: 'game-header row',
+  className: 'game-header row fixed',
 
   template: ht.Templates.GameHeaderTemplate,
 
