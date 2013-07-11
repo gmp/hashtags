@@ -1,7 +1,7 @@
 Hashtags
 ========
 
-hashtags.nodejitsu.com
+http://hashtags.nodejitsu.com
 
 Hashtags is a game like Apples to Apples and Cards Against Humanity.  It is designed for phones so it may look a little weird on a full screen browser window.
 <br/>
