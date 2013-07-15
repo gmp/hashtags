@@ -31,7 +31,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   cancel: function() {
-    this.doubleTap('addInvited');
+    this.doubleTap(this.dispatcher_events);
     ht.router.back();
   },
 
@@ -63,7 +63,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
       data: obj,
       success: function() {
         //Destroy the invite view and navigate back to lobby
-        self.doubleTap('addInvited');
+        self.doubleTap(this.dispatcher_events);
         ht.router.navigate('/lobby/'+self.model.get('_id'), {trigger: true});
       },
       error: function(a, b, err) {

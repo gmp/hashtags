@@ -49,7 +49,10 @@ Backbone.Model.prototype.unsetChanges = function() {
 
 // Destroys event listeners which would otherwise not be destoryed 
 //since thet are not directly attached to a backbone view.
-Backbone.View.prototype.doubleTap = function(eventToRemove){
-  ht.dispatcher.off(eventToRemove);
+Backbone.View.prototype.doubleTap = function(eventsToRemove){
+  for(var eventToRemove in eventsToRemove){
+    ht.dispatcher.off(eventToRemove);
+  }
   this.remove.apply(this, arguments);
+  
 };
