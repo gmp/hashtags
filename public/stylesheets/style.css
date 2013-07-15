@@ -1,4 +1,11 @@
+* {
+    max-width: 600px;
+}
+
 html, body {
+
+  margin-left: auto;
+  margin-right: auto;
   height: 100%;
   background-color: #f7b4d2;
 }
@@ -168,6 +175,12 @@ h4 {
   background-color: rgba(61, 61, 61, 0.95);
   text-align: center;
   -webkit-box-shadow: rgba(0,0,0,0.4) 3px 3px;
+}
+
+@media (min-width: 800px) {
+  .fixed{
+    position: absolute;
+  }
 }
 
 .newGame {
