@@ -58,6 +58,7 @@ exports.join = function(req, res) {
     game.set('judge', {username: players[0].username, avatarURL: players[0].avatarURL, userGlobalId: players[0].user});
     var playersHash = {};
     for(var i = 0; i < players.length; i ++) {
+      //Set up status for each player in game
       judgeArr.push(players[i]._id);
       playersHash[players[i]._id] = {};
       playersHash[players[i]._id].username = players[i].username;
@@ -98,6 +99,7 @@ exports.join = function(req, res) {
           });
           for(var i = 0; i < keys.length; i ++) {
             User.findById(keys[i], function (err, user) {
+              //Add newly saved game to each user's game array
               if(err) {
                 console.log(err);
               } else {

@@ -21,6 +21,7 @@ exports.updateById = function(req, res) {
       if (submitted.submitted === true) {
         for (var i = 0; i < submitted.hand.length; i++) {
           if (submitted.submission.hashtag === submitted.hand[i]) {
+            //Override the hashtag the player chose in the previous round with a new one
             submitted.hand[i] = gameData.hashtags.pop();
           }
         }
@@ -46,6 +47,7 @@ exports.updateById = function(req, res) {
   });
 }
 
+//Create a new round with a new prompt and judge
 exports.roundChange = function(req, res) {
   var gameId = req.params.id;
   var submitted = req.body;
@@ -65,6 +67,7 @@ exports.roundChange = function(req, res) {
 
     });
     _.each(obj.players, function(item) {
+      //Reset player info which relates to round status
       obj.set('players.' + item.userGlobalId + '.continued', false);
       obj.set('players.' + item.userGlobalId + '.submitted', false);
       obj.set('players.' + item.userGlobalId + '.submission', {});

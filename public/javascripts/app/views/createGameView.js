@@ -62,6 +62,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
       type:'POST',
       data: obj,
       success: function() {
+        //Destroy the invite view and navigate back to lobby
         self.doubleTap('addInvited');
         ht.router.navigate('/lobby/'+self.model.get('_id'), {trigger: true});
       },
@@ -83,6 +84,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   searchStart: function(e) {
     if(this.searchVisible) {
+      //Ensures only one search bar visible at once
       this.searchView.remove();
       this.searchVisible = false;
     } else {

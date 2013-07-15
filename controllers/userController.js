@@ -31,6 +31,7 @@ exports.findByUsername = function(req, res) {
 };
 
 exports.findByRegex = function(req, res) {
+  //For autocompletion while searching for players to invite to a game
   var username = req.params.partial;
   var regex = '^'+username+'.*';
   User.find({username: {$regex: regex, $options: 'i'}})
