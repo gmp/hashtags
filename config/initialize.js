@@ -3,6 +3,7 @@ var express = require('express'),
     path = require('path'),
     instaG = require('../instaOauth/authenticate.js');
 
+//Express configuration
 module.exports = function(){
   var app = express();
 	app.set('port', process.env.PORT || 3000);

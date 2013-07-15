@@ -5,6 +5,6 @@ var config = {
     mongoDb: process.env.HASH_MONGO_URI,
 };
 
-
+//Configutes mongoose as mongo's object modeler 
 mongoose.connect(config.mongoDb);
 

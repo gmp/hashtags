@@ -31,6 +31,7 @@ ht.Views.CreateGameSearchView = Backbone.View.extend({
           $('#nameSearchDropDown').empty();
           if(data.length){
             console.log(data);
+            //Displays all possible users whose usernames match with what the current user has typed so far.
             _.each(data, function(name){
               $('#nameSearchDropDown').append('<li class="name" data-username="'+name.username+'"><img class="avatar-supersmall" src="'+name.avatarURL+'">'+name.username+'</li>');
             });

@@ -19,7 +19,7 @@ ht.Views.GameView = Backbone.View.extend({
     ht.Helpers.scrollTop();
     this.$el.empty();
     if(!this.myPlayer.continued) {
-      if(this.subView) this.subView.doubleTap('hashtagClick');
+      if(this.subView) this.subView.doubleTap(this.subView.dispatcher_events);
       this.subView = new ht.Views.GameEndView({
         model: this.model,
         attributes: {
@@ -30,7 +30,7 @@ ht.Views.GameView = Backbone.View.extend({
     } else {
       this.$el.append(new ht.Views.GameHeaderView({ model: this.model }).el);
       if(this.myPlayer.isJ) {
-        if(this.subView) this.subView.remove();
+        if(this.subView) this.subView.doubleTap(this.subView.dispatcher_events);
         this.subView = new ht.Views.JudgeView({
           model: this.model,
           attributes: {
@@ -39,7 +39,7 @@ ht.Views.GameView = Backbone.View.extend({
         });
         this.$el.append(this.subView.el);
       } else {
-      if(this.subView) this.subView.remove();
+      if(this.subView) this.subView.doubleTap(this.subView.dispatcher_events);
         this.subView = new ht.Views.PlayerView({
           model: this.model,
           attributes: {
@@ -60,7 +60,7 @@ ht.Views.GameView = Backbone.View.extend({
     var selfie = this;
     this.model.fetch({
       success: function (model, res) {
-        selfie.subView.render();
+        selfie.subView.doubleTap(this.dispatcher_events);
       },
       error: function (){
         console.log('error');
