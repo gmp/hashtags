@@ -6,9 +6,9 @@ var controller = require('./config/routes.js'),
 
 controller(app);
 
+// require('./controllers/userDummy.js')();
 // require('./controllers/inviteDummy.js')();
 
-// require('./controllers/userDummy.js')();
 
 // require('./controllers/gameDummy.js')();
 

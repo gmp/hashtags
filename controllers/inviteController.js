@@ -76,46 +76,50 @@ exports.decline = function(req, res) {
   var userId = req.body.userId;
   Invite.findById(inviteId, function (err, invite) {
     if(err)console.log(err);
-    var playersArr = [];
-    playersArr.push(invite.gameAdmin);
-    playersArr.push(invite.player2);
-    playersArr.push(invite.player3);
-    playersArr.push(invite.player4);
-    markRemoveGame(inviteId, playersArr, res, userId);
-  });
-}
-
-var markRemoveGame = function(inviteId, players, res, userId) {
-  for(var i = 0; i < players.length; i ++) {
-    User.findById(players[i].user, function (err, user) {
-      var newPendingArr = [];
-      //Set the pending game linked to the invite to declined
-      for(var i = 0; i < user.pendingGames.length; i++) {
-        newPendingArr.push(user.pendingGames[i])
-        if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId) {
-          newPendingArr[newPendingArr.length-1].declined = true;
-        }
+    var players = [];
+    players.push(invite.gameAdmin);
+    players.push(invite.player2);
+    players.push(invite.player3);
+    players.push(invite.player4);
+    for(var i = 0; i < players.length; i ++){
+      if(players[i].user === userId){
+        invite.set('player' + (i+2) + '.accepted', 'declined');
       }
+    }
+    invite.save(function (err){
+      if(err) console.log(err);
+      for(var i = 0; i < players.length; i ++) {
+        User.findById(players[i].user, function (err, user) {
+          var newPendingArr = [];
+          //Set the pending game linked to the invite to declined
+          for(var i = 0; i < user.pendingGames.length; i++) {
+            newPendingArr.push(user.pendingGames[i])
+            if(user.pendingGames[i].invite && user.pendingGames[i].invite.toString() === inviteId) {
+              newPendingArr[newPendingArr.length-1].declined = true;
+            }
+          }
 
-      var newInviteArr = [];
-      for(var i = 0; i < user.invites.length; i ++) {
-        if(user.invites[i].invite.toString() !== inviteId) {
-            newInviteArr.push(user.invites[i]);
-        }
+          var newInviteArr = [];
+          for(var i = 0; i < user.invites.length; i ++) {
+            if(user.invites[i].invite.toString() !== inviteId) {
+                newInviteArr.push(user.invites[i]);
+            }
+          }
+          user.set('invites', newInviteArr);
+          user.set('pendingGames', newPendingArr);
+          user.save(function (err, user){
+            if (user._id.toString() === userId) {
+              res.writeHead(204);
+              res.end();
+            } else if (clients[user._id]) {
+              clients[user._id].emit('changeInUser');
+            }
+          });
+        });
       }
-      user.set('invites', newInviteArr);
-      user.set('pendingGames', newPendingArr);
-      user.save(function (err, user){
-        if (clients[user._id] && user._id.toString() !== userId) {
-          clients[user._id].emit('changeInUser');
-        } else {
-          res.writeHead(204);
-          res.end();
-        }
-      });
     });
-  }
-}
+  });
+};
 
 exports.accept = function(req, res) {
   var inviteId = req.body.inviteId;
@@ -126,13 +130,16 @@ exports.accept = function(req, res) {
     playersArr.push(invite.player2);
     playersArr.push(invite.player3);
     playersArr.push(invite.player4);
+    var anydecline = _.some(playersArr, function(item){
+      return item.accepted === 'declined';
+    })
 
     for(var i = 0; i < playersArr.length; i ++) {
       if(playersArr[i].user === userId) {
         if(invite.waitingOn > 1) {
           invite.set('player' + (i+2) +'.accepted', 'accepted');
           invite.set('waitingOn', invite.waitingOn - 1);
-          moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, res);
+          moveGameToPending(playersArr[i].user, inviteId, invite.title, invite.waitingOn, anydecline, res);
         } else {
           playersArr.push(invite.gameAdmin);
           createGame(inviteId, playersArr, invite.title, userId, res);
@@ -147,7 +154,7 @@ exports.accept = function(req, res) {
 };
 
 
-var moveGameToPending = function (userId, inviteId, title, waitingOn, res) {
+var moveGameToPending = function (userId, inviteId, title, waitingOn, isDecl, res) {
   User.findById(userId, function (err, user) {
     var newInvites = [];
     for(var i = 0; i < user.invites.length; i ++) {
@@ -162,11 +169,15 @@ var moveGameToPending = function (userId, inviteId, title, waitingOn, res) {
         pendingGames.push(user.pendingGames[i]);
       }
     };
-    pendingGames.push({
+    var newPend = {
       invite: inviteId,
       title: title,
       waitingOn: waitingOn
-    });
+    };
+    if(isDecl){
+      newPend.declined = true;
+    }
+    pendingGames.push(newPend);
     user.set('pendingGames', pendingGames);
     user.save(function(err) {
       if(err) console.log(err);
