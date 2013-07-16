@@ -73,5 +73,6 @@ module.exports = [
   "hashtag",
   "owling",
   "stormtrooper",
-  "dogs"
+  "dogs",
+  "horsemanning"
 ];
