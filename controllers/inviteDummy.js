@@ -13,24 +13,19 @@ module.exports = function (){
           invite.author = users[i].username;
           invite.gameAdmin = {user: users[i]._id, username: users[i].username, avatarURL: users[i].avatarURL};
           flag = false;
-          User.findById(users[i]._id, function (err, obj){
-            obj.pendingGames.push({invite: invite._id, title: invite.title, waitingOn: 3});
-            obj.save(function(err){
-              if(err) console.log(err);
-            });
+          User.update({'username' : users[i].username}, {$push: {pendingGames: {invite: invite._id, title: invite.title, waitingOn: 3}}}, function(err){
+            if(err) console.log(err);
           });
         } else {
           invite['player' + (i+1)] = {user: users[i]._id, username: users[i].username, avatarURL: users[i].avatarURL, accepted: 'waiting'};
-          User.findById(users[i]._id, function (err, obj){
-            obj.invites.push({invite: invite._id, author: invite.author});
-            obj.save(function(err){
-              if(err) console.log(err);
-            });
+          User.update({'username' : users[i].username}, {$push: {invites: {invite: invite._id, author: invite.author}}}, function (err){
+            if(err)console.log(err);
           });
-        }  
+        }
       }
+      invite.set('player3.accepted', 'declined');
       invite.save(function (err, invite){
-        if(err){ 
+        if(err){
           console.log(err);
         }
       });
