@@ -10,7 +10,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-//LOCAL
+
 passport.use(new InstagramStrategy({
     clientID: "d37dfbd483674207b72a447e1b63b6bc",
     clientSecret: "5e0d4975780a4e36a59d78cb01c74868",

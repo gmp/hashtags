@@ -31,7 +31,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
   },
 
   cancel: function() {
-    this.doubleTap('addInvited');
+    this.doubleTap(this.dispatcher_events);
     ht.router.back();
   },
 
@@ -62,7 +62,8 @@ ht.Views.CreateGameView = Backbone.View.extend({
       type:'POST',
       data: obj,
       success: function() {
-        self.doubleTap('addInvited');
+        //Destroy the invite view and navigate back to lobby
+        self.doubleTap(this.dispatcher_events);
         ht.router.navigate('/lobby/'+self.model.get('_id'), {trigger: true});
       },
       error: function(a, b, err) {
@@ -83,6 +84,7 @@ ht.Views.CreateGameView = Backbone.View.extend({
 
   searchStart: function(e) {
     if(this.searchVisible) {
+      //Ensures only one search bar visible at once
       this.searchView.remove();
       this.searchVisible = false;
     } else {

@@ -7,7 +7,7 @@ var User = require('../models/userModel.js'),
     prompts = require('../data/prompts.js'),
     clients = require('../config/socketEvents.js').clients;
 
-
+//Create an invite and add add it to each user's invites array
 exports.create = function(req, res) {
   var obj = req.body;
   var invite = new Invite();
