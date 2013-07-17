@@ -69,7 +69,7 @@ ht.Views.JudgeView = Backbone.View.extend({
       this.model.save(prevRound, {
         success: function() {
           ht.dispatcher.trigger('judgeSelect');
-          selfie.doubletap(this.dispatcher_events);
+          selfie.doubleTap(this.dispatcher_events);
         },
         error: function() {
           console.error('bummer dude. save failed.');
