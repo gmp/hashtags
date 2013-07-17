@@ -61,6 +61,7 @@ ht.Views.GameView = Backbone.View.extend({
     this.model.fetch({
       success: function (model, res) {
         selfie.subView.doubleTap(this.dispatcher_events);
+        selfie.render();
       },
       error: function (){
         console.log('error');
