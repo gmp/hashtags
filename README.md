@@ -14,6 +14,7 @@ How to play:
 <li>Players anonymously submit to the judge an image/video to answer the prompt.</li>
 <li>When all submissions are in, the judge selects the best answer and the player that submitted it gets a point.</li>
 <li>Judge switches and the next round commences.</li>
+<li>Good times had by all.</li>
 </ol>
 <br/>
 
