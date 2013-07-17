@@ -63,5 +63,6 @@ module.exports = [
   "You stay classy Instagram.",
   "Your team.",
   "Did you hear? Dennis Rodman is now dating ______ .",
-  "Look honey!  Doesn't that cloud look like a big ______?"
+  "Look honey!  Doesn't that cloud look like a big ______?",
+  "Hi, I'm ______ and I'm an alcoholic."
 ];
